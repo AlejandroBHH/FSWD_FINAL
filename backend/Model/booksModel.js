@@ -1,4 +1,3 @@
-const bson = require("bson");
 const { default: mongoose } = require("mongoose");
 const eventSchema = new mongoose.Schema({
   href: {
