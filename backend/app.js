@@ -23,7 +23,7 @@ app.use(cors());
 mongoose
   .connect(process.env.DATABASE_URL, {
     //Para evitar arnings con la URL de conexión, aplica el nuevo motor de análisis de URL
-    useNewUrlParse: true,
+    useNewUrlParser: true,
     //para evitar warnigs con la topología de la BBDD aplica el nuevo motor de detección
     //y monitoreo de servidores
     useUnifiedTopology: true,
