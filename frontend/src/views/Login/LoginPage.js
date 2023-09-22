@@ -105,12 +105,17 @@ function LoginPage() {
         <Modal visible={visible} onLogin={handleVisibility} data={loginInfo} />,
         document.querySelector("#modal")
       )}
+
       <div className={classes.container}>
         <div className={classes.formContainer}>
           <div className={classes.formWrapper}>
             <h1>
               {" "}
-              <FontAwesomeIcon icon={faHouseUser} size="xl" />
+              <FontAwesomeIcon
+                icon={faHouseUser}
+                size="xl"
+                className={classes.line}
+              />
               Welcome Back!
             </h1>
             <p>Login to have access.</p>
@@ -122,7 +127,6 @@ function LoginPage() {
             </div>
             <LoginForm onLogin={handleVisibility} />
           </div>
-          .
         </div>
       </div>
     </>
