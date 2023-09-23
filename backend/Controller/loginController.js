@@ -214,7 +214,9 @@ const updateUserData = async (req, res) => {
     }
     // Actualizar la contraseña si se proporciona en el cuerpo de la solicitud
     if (req.body.newPassword) {
-      user.password = req.body.newPassword;
+      // Generar el hash de la nueva contraseña utilizando bcrypt
+      const newPasswordHash = await bcrypt.hash(req.body.newPassword, 10);
+      user.password = newPasswordHash;
     }
 
     // Guardar los cambios en la base de datos
