@@ -36,7 +36,7 @@ function SignupPage() {
 
       rememberMe: SignupData.rememberMe,
       loginHeader: "register successfull",
-      loginMessage: "you may be redirected to calendar",
+      loginMessage: "you may be redirected to login",
     };
     if (
       SignupData.email === "" ||

@@ -21,10 +21,8 @@ const register = async (req, res) => {
       name,
       email,
       password: passwordHash,
-      registerAt,
       role,
       isActive: false,
-      lastLogin,
     });
 
     // Guardar el nuevo usuario en la base de datos
@@ -91,11 +89,6 @@ const login = async (req, res) => {
     // Generar el token de refresco
     const refreshToken = generateTokens(payload, true);
 
-    //obtener la fecha de lastLogin para generar una posterior
-    const lastLoginYear = parseInt(user.lastLogin.toISOString().slice(0, 4));
-    console.log(lastLoginYear);
-    //actualizar la fecha del último login
-    user.lastLogin = getFutureDate(lastLoginYear + 6, +lastLoginYear + 1);
     await user.save();
 
     //enviar el token
