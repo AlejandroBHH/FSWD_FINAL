@@ -1,0 +1,152 @@
+import classes from "../Table/Table.module.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faArrowDownWideShort,
+  faStar,
+} from "@fortawesome/free-solid-svg-icons";
+import TaskInput from "../Task/TaskInput";
+import { useState, useEffect } from "react";
+
+function Table(props) {
+  const [filterSource, setFilterSource] = useState(""); // Estado para filtrar por source
+  const [favoriteStories, setFavoriteStories] = useState([]);
+
+  // Función para manejar el filtro por source
+  const handleFilterSource = (source) => {
+    setFilterSource(source);
+  };
+
+  // Función para manejar el agregado a favoritos
+  const handleAddToFavorites = async (storyId, userEmail) => {
+    // Realizar solicitud POST para agregar la historia a favoritos
+    try {
+      const response = await fetch("http://localhost:8000/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": localStorage.getItem("accessToken"),
+        },
+        body: JSON.stringify({
+          story_id: storyId._id,
+          title: storyId.title,
+          href: storyId.href,
+          user_email: userEmail,
+        }),
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        // Éxito: puedes manejarlo aquí
+        // console.log(data);
+        // Llamar a la función para obtener las historias favoritas después de agregar una nueva
+        fetchFavoriteStories();
+      } else {
+        // Error: puedes mostrar un mensaje de error o realizar otras acciones
+        console.log(response.status);
+      }
+    } catch (error) {
+      // Error en la solicitud
+      console.error("Error:", error);
+    }
+
+    // Llamar a la función onStoryAdded para indicar que se ha agregado una historia
+    props.onStoryAdded();
+  };
+
+  // Función para obtener las historias favoritas
+  const fetchFavoriteStories = async () => {
+    try {
+      const userEmail = localStorage.getItem("email");
+      const authToken = localStorage.getItem("accessToken");
+
+      const response = await fetch(
+        `http://localhost:8000/get-favorites?user_email=${userEmail}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "auth-token": authToken,
+          },
+        }
+      );
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setFavoriteStories(data.data);
+      } else {
+        console.log("Error:", data.error);
+      }
+    } catch (error) {
+      console.error("Error fetching favorite stories:", error);
+    }
+  };
+
+  useEffect(() => {
+    // Obtener las historias favoritas al cargar el componente
+    fetchFavoriteStories();
+  }, []);
+
+  // Accedemos al email que guardamos en login
+  const storedEmail = localStorage.getItem("email");
+
+  // Filtrar los datos según el filtro por source
+  const filteredData = filterSource
+    ? props.data.filter((component) => component.source === filterSource)
+    : props.data;
+
+  // Verificar si un componente está en favoritos
+  const isComponentInFavorites = (component) => {
+    return (
+      favoriteStories.find((favorite) => favorite.href === component.href) !==
+      undefined
+    );
+  };
+
+  return (
+    <>
+      <table className={classes.TableContainer}>
+        <tbody>
+          <TaskInput
+            onEnteredValueChange={props.onEnteredValueChange}
+            handleFilterSource={handleFilterSource} // Pasa la función al componente TaskInput
+          />
+        </tbody>
+        <tbody>
+          <tr className={classes.Sorters}>
+            {/* Agrega lógica de ordenamiento aquí */}
+          </tr>
+
+          {filteredData.map((component, idx) => (
+            <tr key={idx}>
+              <td>{component.date}</td>
+              <td>
+                <a href={component.href}>
+                  <p>{component.title}</p>{" "}
+                </a>
+                by {component.author}
+              </td>
+              <td>{component.words}</td>
+              {console.log(favoriteStories)}
+              <td>
+                <button
+                  className={classes.AddButton}
+                  onClick={() => handleAddToFavorites(component, storedEmail)}
+                  style={
+                    isComponentInFavorites(component)
+                      ? { backgroundColor: "green" }
+                      : { backgroundColor: "grey" }
+                  }
+                >
+                  <FontAwesomeIcon icon={faStar} />
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </>
+  );
+}
+
+export default Table;

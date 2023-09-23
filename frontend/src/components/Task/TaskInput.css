@@ -1,0 +1,56 @@
+.FilterPage {
+    border: 1px solid #ddd;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 9fr 1fr 1fr;
+  }
+  
+  .FilterPage td {
+    border-radius: 0;
+  }
+  
+  .FilterPage-controls {
+    display: flex;
+  }
+  
+  .FilterPage-button {
+    padding: 0;
+    border-radius: 0;
+    background-color: #b4aaaa1a;
+    color: black;
+    margin-right: 10px;
+    transition: background-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+  
+  .FilterPage-button:hover {
+    background-color: #d1d1d1;
+  }
+  
+  .FilterPage-input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    transition: box-shadow ease-in-out 0.15s;
+  
+  }
+  
+  .FilterPage-input:focus {
+    box-shadow: 0px 0px 24px rgba(70, 35, 184, 0.3);
+  }
+  
+  .FilterPage-words{
+    display: flex;
+    overflow: hidden;
+  }
+
+    
+  .form-control {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    width: 20px;
+
+  }
+  
