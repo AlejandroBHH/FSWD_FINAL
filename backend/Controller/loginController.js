@@ -142,8 +142,103 @@ const refreshToken = async (req, res) => {
   }
 };
 
+//generar un token temporal para el cambio de contraseña en el caso de tener el email en la BBDD para el forgetPassword
+const generateTemporaryToken = async (req, res) => {
+  const { email } = req.body;
+  console.log(email);
+  try {
+    const user = await Login.findOne({ email });
+
+    if (!user) {
+      return res.status(404).json({ error: "Usuario no encontrado" });
+    }
+
+    // Genera un token temporal con un tiempo de expiración corto
+    const token = generateTokens({ email }, false); // Cambia a isRefreshToken a false
+
+    res.status(200).json({ token });
+  } catch (error) {
+    console.error("Error al generar el token temporal back:", error);
+    res.status(500).json({
+      error: "Ha ocurrido un error al generar el token temporal back 500",
+    });
+  }
+};
+
+// Controlador para el endpoint PUT /auth/update-user-data
+const updateUserData = async (req, res) => {
+  try {
+    // Obtener el ID del usuario autenticado desde el token
+    const userId = req.user.id;
+    const userEmail = req.user.email;
+    console.log(userId);
+    console.log(userEmail);
+    let user;
+
+    if (userId) {
+      // Buscar al usuario en la base de datos por su ID
+      user = await Login.findById(userId);
+
+      if (!user) {
+        return res.status(404).json({
+          status: "failed",
+          data: null,
+          error: "User not found",
+        });
+      }
+    } else if (userEmail) {
+      // Buscar al usuario en la base de datos por su email
+      user = await Login.findOne({ email: userEmail });
+
+      if (!user) {
+        return res.status(404).json({
+          status: "failed",
+          data: null,
+          error: "User not found",
+        });
+      }
+    } else {
+      return res.status(400).json({
+        status: "failed",
+        data: null,
+        error: "Email or ID is required",
+      });
+    }
+
+    // Actualizar los datos del usuario con los valores proporcionados en el cuerpo de la solicitud
+    if (req.body.name) {
+      user.name = req.body.name;
+    }
+    if (req.body.email) {
+      user.email = req.body.email;
+    }
+    // Actualizar la contraseña si se proporciona en el cuerpo de la solicitud
+    if (req.body.newPassword) {
+      user.password = req.body.newPassword;
+    }
+
+    // Guardar los cambios en la base de datos
+    await user.save();
+
+    // Responder con los datos actualizados del usuario
+    res.status(200).json({
+      status: "succeeded",
+      data: { user },
+      error: null,
+    });
+  } catch (err) {
+    res.status(500).json({
+      status: "failed",
+      data: null,
+      error: err.message,
+    });
+  }
+};
+
 module.exports = {
   register,
   login,
   refreshToken,
+  generateTemporaryToken,
+  updateUserData,
 };

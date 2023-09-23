@@ -12,4 +12,10 @@ router.post("/login", loginController.login);
 // Endpoint para refrescar el token
 router.post("/refresh", verifyToken, loginController.refreshToken);
 
+// Ruta para token temporal para cambio de contraseña
+router.post("/resetpassword", loginController.generateTemporaryToken);
+
+// Endpoint para actualizar los datos del usuario
+router.put("/update-user-data", verifyToken, loginController.updateUserData);
+
 module.exports = router;
