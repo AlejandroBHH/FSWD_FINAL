@@ -1,0 +1,84 @@
+
+ 
+  main {
+    background-color: #494b49;
+    padding: 1em;
+  }
+  
+ 
+  h2 {
+    color: #000000;
+  }
+  
+  section {
+    color:white
+  }
+  aside h1 {
+    min-width: 30vw;
+  }
+  
+  main {
+    display: flex;
+    align-items: flex-start;
+
+    flex-wrap: wrap;
+  }
+  aside {
+    margin-right: 2em;
+  }
+  
+  
+  main .container {
+    flex-direction: column;
+  }
+  
+  main a, aside li a {
+    margin-right: 1em;
+    color: #a6c017;
+    text-decoration: underline;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  
+  /* //el active lo usa automático el navlink */
+  .active {
+    color: #fff;
+    background-color: #30a72a;
+    border-radius: .3rem;
+    padding: .7em 1em;
+    transition: all 0.3s ease-in-out;
+  }
+
+   /* //el active lo usa automático el navlink */
+
+  div.Container {
+
+     background-color: white;
+     padding: 40px;
+  
+     margin: 0 auto; /* Margen automático en los lados para centrar horizontalmente */
+      }
+
+  /* Aplicar estilos a un botón deshabilitado */
+button[disabled] {
+  background-color: #0455ab;
+  color: #ccc;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+
+/* Media Query para dispositivos pequeños (max-width 768px) */
+@media (max-width: 768px) {
+  main {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  aside {
+    margin-right: 0;
+    margin-bottom: 1em;
+  }
+}
+
+ 

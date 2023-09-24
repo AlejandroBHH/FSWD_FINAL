@@ -114,7 +114,55 @@ function Table(props) {
         </tbody>
         <tbody>
           <tr className={classes.Sorters}>
-            {/* Agrega lógica de ordenamiento aquí */}
+            <td onClick={() => props.handleSort("title")}>
+              Update
+              {/* con esto cambiamos el codigo según sortBy, el && para condicional si se cumple lo primero */}
+              {props.sortBy === "title" && (
+                <FontAwesomeIcon
+                  icon={
+                    props.sortOrder === "asc"
+                      ? faArrowDownWideShort
+                      : faArrowDownWideShort
+                  }
+                  style={{
+                    transform: `rotate(${props.sort === "asc" ? 0 : 180}deg)`,
+                  }}
+                />
+              )}
+            </td>
+            <td onClick={() => props.handleSort("href")}>
+              Title
+              {props.sortBy === "href" && (
+                <FontAwesomeIcon
+                  icon={faArrowDownWideShort}
+                  style={{
+                    transform: `rotate(${props.sort === "asc" ? 0 : 180}deg)`,
+                  }}
+                />
+              )}
+            </td>
+            <td onClick={() => props.handleSort("words")}>
+              Words
+              {props.sortBy === "words" && (
+                <FontAwesomeIcon
+                  icon={faArrowDownWideShort}
+                  style={{
+                    transform: `rotate(${props.sort === "asc" ? 0 : 180}deg)`,
+                  }}
+                />
+              )}
+            </td>
+            <td onClick={() => props.handleSort("Created")}>
+              Created
+              {props.sortBy === "Created" && (
+                <FontAwesomeIcon
+                  icon={faArrowDownWideShort}
+                  style={{
+                    transform: `rotate(${props.sort === "asc" ? 0 : 180}deg)`,
+                  }}
+                />
+              )}
+            </td>
           </tr>
 
           {filteredData.map((component, idx) => (

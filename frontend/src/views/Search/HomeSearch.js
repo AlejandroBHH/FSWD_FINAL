@@ -6,8 +6,6 @@ import Table from "../../components/Table/Table";
 import SubmitButton from "../../UI/Button/SubmitButton";
 //modal para el stayloggedin
 
-import ReactDOM from "react-dom";
-
 function Index() {
   const [components, setComponents] = useState([]);
   const [totalPages, setTotalPages] = useState(1);
