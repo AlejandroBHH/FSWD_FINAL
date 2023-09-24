@@ -7,6 +7,8 @@ import Table from "../../components/Table/Table";
 import SubmitButton from "../../UI/Button/SubmitButton";
 //modal para el stayloggedin
 
+import Footer from "../../utils/Footer/Footer";
+
 function Index() {
   const [components, setComponents] = useState([]);
   const [totalPages, setTotalPages] = useState(1);
@@ -149,6 +151,7 @@ function Index() {
           onPageChange={handlePageChange}
         ></SubmitButton>
       </div>
+      <Footer></Footer>
     </div>
   );
 }
