@@ -1,3 +1,4 @@
+import Navbar from "../../utils/Navigation/Navbar";
 import { useState, useEffect } from "react";
 import classes from "../Search/HomeSearch.module.css";
 import { useNavigate, useParams } from "react-router-dom";
@@ -125,6 +126,7 @@ function Index() {
       )}*/}
       <header>
         <h1>Index Search</h1>
+        <Navbar></Navbar>
       </header>
 
       {/*end of navbar */}

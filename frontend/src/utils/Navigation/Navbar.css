@@ -1,0 +1,45 @@
+header nav ul li a.active {
+    background-color: #d1d1d1;
+    padding: 1em;
+    color: rgb(0, 0, 0);
+   
+  }
+
+  li { list-style: none;}
+
+  header {
+    background-color: #e3e3e3;
+    color: #0a0b0a;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  
+  header, header nav ul{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em;
+  }
+  header nav ul li:not(:last-child){
+   margin-right: 1em;
+  }
+  
+  header nav ul li a {
+    background-color: #fff;
+    padding: 0.5em;
+    border-radius: 0.5em;
+    color: #000000;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+  }
+  
+ 
+
+  header nav ul li:hover {
+ 
+    transform: scale(1.2); /* Aumenta el tamaño en un 5% */  
+  }
+   
+  .nav-link {
+    text-decoration: none; /* Quital la línea horizontal */
+  }
+  
