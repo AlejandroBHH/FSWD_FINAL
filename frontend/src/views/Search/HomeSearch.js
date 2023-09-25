@@ -8,6 +8,7 @@ import SubmitButton from "../../UI/Button/SubmitButton";
 //modal para el stayloggedin
 
 import Footer from "../../utils/Footer/Footer";
+import FavHistory from "../../components/History/FavHistory";
 
 function Index() {
   const [components, setComponents] = useState([]);
@@ -150,6 +151,8 @@ function Index() {
           total={totalPages}
           onPageChange={handlePageChange}
         ></SubmitButton>
+        {/*pasamos por props el counter del numero de historias para el fetch de FavHistory */}
+        <FavHistory Count={addedStoriesCount}></FavHistory>
       </div>
       <Footer></Footer>
     </div>

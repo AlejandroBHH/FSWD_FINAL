@@ -10,6 +10,7 @@ const cors = require("cors");
 //importar las rutas
 const logins = require("../backend/routes/loginRoutes");
 const books = require("./routes/booksRoutes");
+const favorites = require("../backend/routes/favoriteRoutes");
 
 // Leer las variables de entorno
 dotenv.config();
@@ -38,6 +39,7 @@ mongoose.connection.on("error", (err) => {
 //habilitar las rutas
 app.use("/auth", logins);
 app.use("/library", books);
+app.use("/", favorites);
 
 // Levantar el servidor
 // Escucha las conexiones para el puerto (y host) especificado
