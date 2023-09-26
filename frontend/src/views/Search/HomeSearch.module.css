@@ -11,7 +11,10 @@
   }
   
   section {
-    color:white
+    color:white;
+    position: relative;
+    top: -120px;
+    z-index: -1;
   }
   aside h1 {
     min-width: 30vw;
@@ -53,7 +56,7 @@
 
   div.Container {
 
-     background-color: white;
+    
      padding: 40px;
   
      margin: 0 auto; /* Margen automático en los lados para centrar horizontalmente */
@@ -81,4 +84,53 @@ button[disabled] {
   }
 }
 
+.line {
+  border-bottom: #06a7e4 solid 2px;
+width: 50%;
+margin: auto;
+margin-top: -100px;
+
+}
+
+/*clases para la imagen de portada*/
+
  
+.images {
+  position: relative;
+  height: 500px; /* Establece la altura deseada */
+  width: 100%;
+  overflow: hidden;
+}
+
+.backimages {
+  background-size: cover;
+  border-radius: 0 0 60px 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* Coloca la imagen detrás del contenido */
+}
+
+.thinContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Centra el contenido vertical y horizontalmente */
+  text-align: center;
+  color: white; /* Cambia el color del texto */
+  padding: 1rem; /* Agrega un relleno al contenido */
+ 
+}
+
+.thinContainer h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.thinContainer h2 {
+  font-size: 1rem;
+}
+

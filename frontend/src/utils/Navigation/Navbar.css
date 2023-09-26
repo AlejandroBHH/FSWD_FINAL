@@ -1,45 +1,78 @@
 header nav ul li a.active {
-    background-color: #d1d1d1;
-    padding: 1em;
-    color: rgb(0, 0, 0);
    
+    padding: 1em;
+    color: #06a7e4;
+    border-bottom: 4px solid yellow;
   }
 
   li { list-style: none;}
 
   header {
-    background-color: #e3e3e3;
-    color: #0a0b0a;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+   
   }
   
   header, header nav ul{
+    list-style: none;
+    padding: 0;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1em;
+    gap: 20px; /* Espacio entre elementos de la lista */
   }
   header nav ul li:not(:last-child){
    margin-right: 1em;
   }
   
   header nav ul li a {
-    background-color: #fff;
     padding: 0.5em;
-    border-radius: 0.5em;
-    color: #000000;
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    color: #06a7e4;
     transition: transform 0.3s;
   }
   
- 
+  
 
   header nav ul li:hover {
- 
     transform: scale(1.2); /* Aumenta el tamaño en un 5% */  
   }
    
   .nav-link {
-    text-decoration: none; /* Quital la línea horizontal */
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease; /* Transición suave para el cambio de color al pasar el mouse */
+  }
+
+  .nav-link:hover {
+    color: #4c9aee;
   }
   
+  nav {
+    display: flex; /* Hace que los elementos dentro del nav se coloquen en línea */
+    justify-content: space-between; /* Distribuye los elementos horizontalmente */
+    align-items: center; /* Centra verticalmente los elementos */
+    padding: 10px 20px; /* Espaciado interno para el nav */
+    width:100%;
+    color: #06a7e4; /* Color de texto de la barra de navegación */
+  }
+
+.scrolled {
+  background-color:rgb(241 245 249);
+  
+}
+
+.scrolledoff {
+  background-color: transparent;
+  transition: 0.4s ease-in-out;
+}
+
+.scrolledoff::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0.6;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.4486169468) 40%, black 100%);
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+}
