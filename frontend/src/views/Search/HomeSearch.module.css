@@ -7,7 +7,9 @@
   
  
   h2 {
-    color: #000000;
+    color: #000000; 
+    font-family: "gilroy-semibold","Helvetica Neue Light","Helvetica Neue","Helvetica","Arial",sans-serif;
+    font-size: 18px;
   }
   
   section {
@@ -54,11 +56,9 @@
 
    /* //el active lo usa automático el navlink */
 
-  div.Container {
-
-    
+  div.Container {    
      padding: 40px;
-  
+     padding-top: 80px;
      margin: 0 auto; /* Margen automático en los lados para centrar horizontalmente */
       }
 
@@ -92,28 +92,60 @@ margin-top: -100px;
 
 }
 
+.lineTable {
+  border-bottom: #06a7e4 solid 2px;
+  width: 50%;
+  margin: auto;
+  top: 60px;
+  position: relative;
+  opacity: 0.5;
+  z-index: -2;
+}
+
+
+
+.card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 80px;
+}
 /*imagenes */
 .sectionContainer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  
   padding: 20px; /* Espaciado interno del contenedor */
-  margin-left: 50px;
+ 
 }
 
 .imageContainer {
   margin-right: 50px; /* Margen derecho para separar la imagen del texto */
-  
 }
 
 .select {
   max-width: 100%; /* Asegura que la imagen no se extienda más allá de su tamaño original */
   display: block; /* Elimina el espacio debajo de la imagen */
   border-radius: 22% 0% 25% 0% / 25% 25% 25% 25%;
+  cursor: pointer;
+  width: auto;
+  height: 580px;
+}
+
+.select::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0.6;
+  background: black;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
 }
 
 .textContainer {
-  flex: 1; /* Hace que este div ocupe todo el espacio disponible restante */
+  
+  width: 500px;
 }
 
 h1 {
@@ -121,6 +153,4 @@ h1 {
   margin-bottom: 10px;
 }
 
-h2 {
-  font-size: 18px;
-}
+ 

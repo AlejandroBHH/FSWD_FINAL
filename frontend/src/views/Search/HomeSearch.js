@@ -1,5 +1,5 @@
 import Navbar from "../../utils/Navigation/Navbar";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import classes from "../Search/HomeSearch.module.css";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -28,6 +28,7 @@ function Index() {
   const [addedStoriesCount, setAddedStoriesCount] = useState(0);
   //para hacer visible el modal de stayloggedin
   const [visible, setVisible] = useState(false);
+  const tableRef = useRef(null); // Crear una referencia para la tabla
 
   useEffect(() => {
     // Aquí deberías obtener el token de autenticación, ya sea de una cookie,
@@ -115,10 +116,22 @@ function Index() {
     setAddedStoriesCount(addedStoriesCount + 1);
   };
 
-  const handleRefreshToken = () => {
+  /*const handleRefreshToken = () => {
     // Aquí debes enviar el refreshToken al servidor para renovar el token
     // Luego, cerrar el modal.
     setVisible(false);
+  };*/
+
+  const handleImageClick = () => {
+    // Hacer focus en la tabla cuando se haga clic en la imagen
+
+    tableRef.current.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+      inline: "nearest",
+    });
+
+    // Realizar el fetch aquí si es necesario
   };
 
   return (
@@ -134,21 +147,34 @@ function Index() {
       <div className={classes.line}></div>
 
       <div className={classes.sectionContainer}>
-        <div className={classes.imageContainer}>
-          <img
-            className={classes.select}
-            src="/images/worm.jpg"
-            alt="Mi Imagen"
-          />
-        </div>
-        <div className={classes.textContainer}>
-          <h1>Título</h1>
-          <h2>Subtítulo</h2>
+        <div className={classes.card}>
+          <div className={classes.imageContainer}>
+            <img
+              className={classes.select}
+              src="/images/worm.jpg"
+              alt="Mi Imagen"
+              onClick={handleImageClick}
+            />
+          </div>
+          <div className={classes.textContainer}>
+            <article>
+              <h2>WORM</h2>
+              <p>
+                An introverted teenage girl with an unconventional superpower,
+                Taylor goes out in costume to find escape from a deeply unhappy
+                and frustrated civilian life. Her first attempt at taking down a
+                supervillain sees her mistaken for one, thrusting her into the
+                midst of the local ‘cape’ scene’s politics, unwritten rules, and
+                ambiguous morals. As she risks life and limb, Taylor faces the
+                dilemma of having to do the wrong things for the right reasons.
+              </p>
+            </article>
+          </div>
         </div>
       </div>
-
+      <div className={classes.lineTable}></div>
       {/*empieza la tabla */}
-      <div className={classes.Container}>
+      <div className={classes.Container} ref={tableRef}>
         <Table
           data={components}
           handleSort={handleSortUpdate}
@@ -165,6 +191,7 @@ function Index() {
           current={currentPage}
           total={totalPages}
           onPageChange={handlePageChange}
+          onImageClick={handleImageClick}
         ></SubmitButton>
         {/*pasamos por props el counter del numero de historias para el fetch de FavHistory */}
         <FavHistory Count={addedStoriesCount}></FavHistory>

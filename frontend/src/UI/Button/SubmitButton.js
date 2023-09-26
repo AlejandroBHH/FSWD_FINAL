@@ -7,15 +7,21 @@ const SubmitButton = (props) => {
     <div className={classes.paginationContainer}>
       <button
         className={classes.paginationButton}
-        onClick={() => props.onPageChange(1)}
-        disabled={props.current === 1} // Deshabilitar el botón si está en la primera página
+        onClick={() => {
+          props.onPageChange(1);
+          props.onImageClick(); // Llamar a la función onImageClick
+        }}
+        disabled={props.current === 1}
       >
         <FontAwesomeIcon icon={faAnglesLeft} size="lg" />
       </button>
       <button
         className={classes.paginationButton}
-        onClick={() => props.onPageChange(props.current - 1)}
-        disabled={props.current === 1} // Deshabilitar el botón si está en la primera página
+        onClick={() => {
+          props.onPageChange(props.current - 1);
+          props.onImageClick(); // Llamar a la función onImageClick
+        }}
+        disabled={props.current === 1}
       >
         Previous
       </button>
@@ -24,15 +30,21 @@ const SubmitButton = (props) => {
       </span>
       <button
         className={classes.paginationButton}
-        onClick={() => props.onPageChange(props.current + 1)}
-        disabled={props.current === props.total} // Deshabilitar el botón si está en la última página
+        onClick={() => {
+          props.onPageChange(props.current + 1);
+          props.onImageClick(); // Llamar a la función onImageClick
+        }}
+        disabled={props.current === props.total}
       >
         Next
       </button>
       <button
         className={classes.paginationButton}
-        onClick={() => props.onPageChange(props.total)}
-        disabled={props.current === props.total} // Deshabilitar el botón si está en la primera página
+        onClick={() => {
+          props.onPageChange(props.total);
+          props.onImageClick(); // Llamar a la función onImageClick
+        }}
+        disabled={props.current === props.total}
       >
         <FontAwesomeIcon
           icon={faAnglesLeft}
