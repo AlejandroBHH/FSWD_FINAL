@@ -133,7 +133,21 @@ function Index() {
       <HeaderSection></HeaderSection>
       <div className={classes.line}></div>
 
-      {/*end of navbar */}
+      <div className={classes.sectionContainer}>
+        <div className={classes.imageContainer}>
+          <img
+            className={classes.select}
+            src="/images/worm.jpg"
+            alt="Mi Imagen"
+          />
+        </div>
+        <div className={classes.textContainer}>
+          <h1>Título</h1>
+          <h2>Subtítulo</h2>
+        </div>
+      </div>
+
+      {/*empieza la tabla */}
       <div className={classes.Container}>
         <Table
           data={components}

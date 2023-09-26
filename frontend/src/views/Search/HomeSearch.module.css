@@ -92,4 +92,35 @@ margin-top: -100px;
 
 }
 
+/*imagenes */
+.sectionContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px; /* Espaciado interno del contenedor */
+  margin-left: 50px;
+}
 
+.imageContainer {
+  margin-right: 50px; /* Margen derecho para separar la imagen del texto */
+  
+}
+
+.select {
+  max-width: 100%; /* Asegura que la imagen no se extienda más allá de su tamaño original */
+  display: block; /* Elimina el espacio debajo de la imagen */
+  border-radius: 22% 0% 25% 0% / 25% 25% 25% 25%;
+}
+
+.textContainer {
+  flex: 1; /* Hace que este div ocupe todo el espacio disponible restante */
+}
+
+h1 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+h2 {
+  font-size: 18px;
+}

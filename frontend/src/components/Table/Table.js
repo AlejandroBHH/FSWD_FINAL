@@ -1,15 +1,18 @@
 import classes from "../Table/Table.module.css";
+import { useState, useEffect } from "react";
+import Spinner from "../../utils/Spinner/Spinner"; // Asegúrate de ajustar la ruta correcta
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowDownWideShort,
   faStar,
 } from "@fortawesome/free-solid-svg-icons";
 import TaskInput from "../Task/TaskInput";
-import { useState, useEffect } from "react";
 
 function Table(props) {
   const [filterSource, setFilterSource] = useState(""); // Estado para filtrar por source
   const [favoriteStories, setFavoriteStories] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   // Función para manejar el filtro por source
   const handleFilterSource = (source) => {
@@ -79,6 +82,8 @@ function Table(props) {
       }
     } catch (error) {
       console.error("Error fetching favorite stories:", error);
+    } finally {
+      setIsLoading(false); // Una vez que se completó la carga de datos, establecemos isLoading en false
     }
   };
 
@@ -105,94 +110,98 @@ function Table(props) {
 
   return (
     <>
-      <table className={classes.TableContainer}>
-        <tbody>
-          <TaskInput
-            onEnteredValueChange={props.onEnteredValueChange}
-            handleFilterSource={handleFilterSource} // Pasa la función al componente TaskInput
-          />
-        </tbody>
-        <tbody>
-          <tr className={classes.Sorters}>
-            <td onClick={() => props.handleSort("title")}>
-              Update
-              {/* con esto cambiamos el codigo según sortBy, el && para condicional si se cumple lo primero */}
-              {props.sortBy === "title" && (
-                <FontAwesomeIcon
-                  icon={
-                    props.sortOrder === "asc"
-                      ? faArrowDownWideShort
-                      : faArrowDownWideShort
-                  }
-                  style={{
-                    transform: `rotate(${props.sort === "asc" ? 0 : 180}deg)`,
-                  }}
-                />
-              )}
-            </td>
-            <td onClick={() => props.handleSort("href")}>
-              Title
-              {props.sortBy === "href" && (
-                <FontAwesomeIcon
-                  icon={faArrowDownWideShort}
-                  style={{
-                    transform: `rotate(${props.sort === "asc" ? 0 : 180}deg)`,
-                  }}
-                />
-              )}
-            </td>
-            <td onClick={() => props.handleSort("words")}>
-              Words
-              {props.sortBy === "words" && (
-                <FontAwesomeIcon
-                  icon={faArrowDownWideShort}
-                  style={{
-                    transform: `rotate(${props.sort === "asc" ? 0 : 180}deg)`,
-                  }}
-                />
-              )}
-            </td>
-            <td onClick={() => props.handleSort("Created")}>
-              Created
-              {props.sortBy === "Created" && (
-                <FontAwesomeIcon
-                  icon={faArrowDownWideShort}
-                  style={{
-                    transform: `rotate(${props.sort === "asc" ? 0 : 180}deg)`,
-                  }}
-                />
-              )}
-            </td>
-          </tr>
-
-          {filteredData.map((component, idx) => (
-            <tr key={idx}>
-              <td>{component.date}</td>
-              <td>
-                <a href={component.href}>
-                  <p>{component.title}</p>{" "}
-                </a>
-                by {component.author}
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        <table className={classes.TableContainer}>
+          <tbody>
+            <TaskInput
+              onEnteredValueChange={props.onEnteredValueChange}
+              handleFilterSource={handleFilterSource} // Pasa la función al componente TaskInput
+            />
+          </tbody>
+          <tbody>
+            <tr className={classes.Sorters}>
+              <td onClick={() => props.handleSort("title")}>
+                Update
+                {/* con esto cambiamos el codigo según sortBy, el && para condicional si se cumple lo primero */}
+                {props.sortBy === "title" && (
+                  <FontAwesomeIcon
+                    icon={
+                      props.sortOrder === "asc"
+                        ? faArrowDownWideShort
+                        : faArrowDownWideShort
+                    }
+                    style={{
+                      transform: `rotate(${props.sort === "asc" ? 0 : 180}deg)`,
+                    }}
+                  />
+                )}
               </td>
-              <td>{component.words}</td>
-              {console.log(favoriteStories)}
-              <td>
-                <button
-                  className={classes.AddButton}
-                  onClick={() => handleAddToFavorites(component, storedEmail)}
-                  style={
-                    isComponentInFavorites(component)
-                      ? { backgroundColor: "green" }
-                      : { backgroundColor: "grey" }
-                  }
-                >
-                  <FontAwesomeIcon icon={faStar} />
-                </button>
+              <td onClick={() => props.handleSort("href")}>
+                Title
+                {props.sortBy === "href" && (
+                  <FontAwesomeIcon
+                    icon={faArrowDownWideShort}
+                    style={{
+                      transform: `rotate(${props.sort === "asc" ? 0 : 180}deg)`,
+                    }}
+                  />
+                )}
+              </td>
+              <td onClick={() => props.handleSort("words")}>
+                Words
+                {props.sortBy === "words" && (
+                  <FontAwesomeIcon
+                    icon={faArrowDownWideShort}
+                    style={{
+                      transform: `rotate(${props.sort === "asc" ? 0 : 180}deg)`,
+                    }}
+                  />
+                )}
+              </td>
+              <td onClick={() => props.handleSort("Created")}>
+                Created
+                {props.sortBy === "Created" && (
+                  <FontAwesomeIcon
+                    icon={faArrowDownWideShort}
+                    style={{
+                      transform: `rotate(${props.sort === "asc" ? 0 : 180}deg)`,
+                    }}
+                  />
+                )}
               </td>
             </tr>
-          ))}
-        </tbody>
-      </table>
+
+            {filteredData.map((component, idx) => (
+              <tr key={idx}>
+                <td>{component.date}</td>
+                <td>
+                  <a href={component.href}>
+                    <p>{component.title}</p>{" "}
+                  </a>
+                  by {component.author}
+                </td>
+                <td>{component.words}</td>
+                {console.log(favoriteStories)}
+                <td>
+                  <button
+                    className={classes.AddButton}
+                    onClick={() => handleAddToFavorites(component, storedEmail)}
+                    style={
+                      isComponentInFavorites(component)
+                        ? { backgroundColor: "green" }
+                        : { backgroundColor: "grey" }
+                    }
+                  >
+                    <FontAwesomeIcon icon={faStar} />
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
     </>
   );
 }
