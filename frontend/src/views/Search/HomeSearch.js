@@ -147,8 +147,8 @@ function Index() {
       <div className={classes.line}></div>
 
       <div className={classes.sectionContainer}>
-        <div className={classes.card}>
-          <div className={classes.imageContainer}>
+        <div className={classes.card1}>
+          <div className={classes.imageContainer1}>
             <img
               className={classes.select}
               src="/images/worm.jpg"
@@ -171,6 +171,30 @@ function Index() {
             </article>
           </div>
         </div>
+        <div className={classes.card2}>
+          <div className={classes.imageContainer2}>
+            <img
+              className={classes.select}
+              src="/images/harry.jpg"
+              alt="Mi Imagen"
+              onClick={handleImageClick}
+            />
+          </div>
+          <div className={classes.textContainer}>
+            <article>
+              <h2>HARRY POTTER</h2>
+              <p>
+                An introverted teenage girl with an unconventional superpower,
+                Taylor goes out in costume to find escape from a deeply unhappy
+                and frustrated civilian life. Her first attempt at taking down a
+                supervillain sees her mistaken for one, thrusting her into the
+                midst of the local ‘cape’ scene’s politics, unwritten rules, and
+                ambiguous morals. As she risks life and limb, Taylor faces the
+                dilemma of having to do the wrong things for the right reasons.
+              </p>
+            </article>
+          </div>
+        </div>{" "}
       </div>
       <div className={classes.lineTable}></div>
       {/*empieza la tabla */}
