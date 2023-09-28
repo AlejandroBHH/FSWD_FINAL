@@ -1,5 +1,6 @@
 const ObjectId = require("bson").ObjectId;
 const Book = require("../Model/booksModel");
+const HarryP = require("../Model/harryPModel");
 
 const getBooks = async (req, res) => {
   try {
@@ -7,8 +8,23 @@ const getBooks = async (req, res) => {
     const eventsPerPage = 15;
     const sortField = req.query.sortField || "title"; // Campo por defecto para ordenar
     const sortOrder = req.query.sortOrder || "asc"; // Dirección por defecto de ordenación
+    const modelName = req.query.modelToQuery || "HarryP"; // Nombre del modelo dinámico
+    console.log(modelName);
+    let History;
+    if (modelName === "Book") {
+      History = Book;
+    } else if (modelName === "HarryP") {
+      History = HarryP;
+    } else {
+      // Manejo de un modelo no válido (puedes agregar una respuesta de error apropiada aquí)
+      return res.status(400).json({
+        status: "failed",
+        data: null,
+        error: "Invalid model name",
+      });
+    }
 
-    const totalEvents = await Book.countDocuments();
+    const totalEvents = await History.countDocuments();
     const totalPages = Math.ceil(totalEvents / eventsPerPage);
 
     const skip = (page - 1) * eventsPerPage;
@@ -24,7 +40,7 @@ const getBooks = async (req, res) => {
     }
 
     //si no hay req.query.filterValue entonces  se hace el Book.find() obteniendo todos los valores
-    const data = await Book.find(filterOption)
+    const data = await History.find(filterOption)
       .sort(sortOption) // Ordenar según el campo y dirección especificados
       .skip(skip)
       .limit(eventsPerPage)

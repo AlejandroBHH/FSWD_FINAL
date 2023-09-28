@@ -9,7 +9,6 @@ import SubmitButton from "../../UI/Button/SubmitButton";
 //modal para el stayloggedin
 
 import Footer from "../../utils/Footer/Footer";
-import FavHistory from "../../components/History/FavHistory";
 
 function Index() {
   const [components, setComponents] = useState([]);
@@ -27,6 +26,8 @@ function Index() {
   //para hacer visible el modal de stayloggedin
   const [visible, setVisible] = useState(false);
   const tableRef = useRef(null); // Crear una referencia para la tabla
+  //Fanfiction selección
+  const [modelToQuery, setModelToQuery] = useState("Book");
 
   useEffect(() => {
     // Aquí deberías obtener el token de autenticación, ya sea de una cookie,
@@ -37,7 +38,7 @@ function Index() {
 
     // Realizar la llamada a la API solo si tienes un token válido
     if (storedToken) {
-      let apiUrl = `http://localhost:8000/library/?page=${currentPage}&perPage=${itemsPerPage}&sortField=${sortBy}&sortOrder=${sortOrder}`;
+      let apiUrl = `http://localhost:8000/library/?page=${currentPage}&perPage=${itemsPerPage}&sortField=${sortBy}&sortOrder=${sortOrder}&modelToQuery=${modelToQuery}`;
 
       // Agregar el filtro solo si enteredValue tiene un valor
       if (enteredValue) {
@@ -72,7 +73,7 @@ function Index() {
     } else {
       navigate(`/login`); // Redirigir a la página de inicio de sesión si no hay un token
     }
-  }, [currentPage, sortBy, sortOrder, enteredValue]);
+  }, [currentPage, sortBy, sortOrder, enteredValue, modelToQuery]);
   //console.log(components);
 
   const handlePageChange = (newPage) => {
@@ -117,14 +118,11 @@ function Index() {
 
   const handleImageClick = () => {
     // Hacer focus en la tabla cuando se haga clic en la imagen
-
     tableRef.current.scrollIntoView({
       behavior: "smooth",
       block: "start",
       inline: "nearest",
     });
-
-    // Realizar el fetch aquí si es necesario
   };
 
   return (
@@ -146,7 +144,10 @@ function Index() {
               className={classes.select}
               src="/images/worm.jpg"
               alt="Mi Imagen"
-              onClick={handleImageClick}
+              onClick={() => {
+                handleImageClick(); // Llama a la función existente
+                setModelToQuery("Book"); // Llama a la nueva función que deseas ejecutar
+              }}
             />
           </div>
           <div className={classes.textContainer}>
@@ -170,7 +171,10 @@ function Index() {
               className={classes.select}
               src="/images/harry.jpg"
               alt="Mi Imagen"
-              onClick={handleImageClick}
+              onClick={() => {
+                handleImageClick(); // Llama a la función existente
+                setModelToQuery("HarryP"); // Llama a la nueva función que deseas ejecutar
+              }}
             />
           </div>
           <div className={classes.textContainer}>

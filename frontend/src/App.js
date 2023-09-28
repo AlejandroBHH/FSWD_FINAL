@@ -1,27 +1,69 @@
+import React, { lazy, Suspense } from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 import "./App.css";
-import LoginPage from "./views/Login/LoginPage";
-import SignupPage from "./views/signup/SignupPage";
-import ForgotPassword from "./views/ForgotPassword/ForgotPassword";
-import ChangePassword from "./views/ForgotPassword/NewPassword";
-import Search from "./views/Search/HomeSearch";
 import { useParams } from "react-router-dom"; // Importar useParams
-import { useState } from "react";
-import UserPage from "../src/views/User/UserPage";
+
+const LoginPage = lazy(() => import("./views/Login/LoginPage"));
+const SignupPage = lazy(() => import("./views/signup/SignupPage"));
+const ForgotPassword = lazy(() =>
+  import("./views/ForgotPassword/ForgotPassword")
+);
+const ChangePassword = lazy(() => import("./views/ForgotPassword/NewPassword"));
+const Search = lazy(() => import("./views/Search/HomeSearch"));
+const UserPage = lazy(() => import("../src/views/User/UserPage"));
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<Navigate to="/login" />} />
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/register" element={<SignupPage />} />
-      <Route path="/ForgotPassword" element={<ForgotPassword />} />
-      <Route path="/reset-password/:token" element={<ChangePassword />} />
+      <Route
+        path="/login"
+        element={
+          <Suspense fallback={<div>Loading...</div>}>
+            <LoginPage />
+          </Suspense>
+        }
+      />
+      <Route
+        path="/register"
+        element={
+          <Suspense fallback={<div>Loading...</div>}>
+            <SignupPage />
+          </Suspense>
+        }
+      />
+      <Route
+        path="/ForgotPassword"
+        element={
+          <Suspense fallback={<div>Loading...</div>}>
+            <ForgotPassword />
+          </Suspense>
+        }
+      />
+      <Route
+        path="/reset-password/:token"
+        element={
+          <Suspense fallback={<div>Loading...</div>}>
+            <ChangePassword />
+          </Suspense>
+        }
+      />
       <Route
         path={`/index/Page/:id.html`}
-        element={<ComponentWithPagination />}
+        element={
+          <Suspense fallback={<div>Loading...</div>}>
+            <ComponentWithPagination />
+          </Suspense>
+        }
       />
-      <Route path="/user" element={<UserPage />} />
+      <Route
+        path="/user"
+        element={
+          <Suspense fallback={<div>Loading...</div>}>
+            <UserPage />
+          </Suspense>
+        }
+      />
     </Routes>
   );
 }

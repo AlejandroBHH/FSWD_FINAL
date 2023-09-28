@@ -12,9 +12,9 @@ const UserPage = () => {
   const [editing, setEditing] = useState(false);
   const [user, setUser] = useState(null); // Inicialmente, el usuario es null hasta que se carguen los datos
   const navigate = useNavigate();
-  const addCount = 0;
+
   const token = localStorage.getItem("accessToken");
-  console.log(token);
+  //console.log(token);
   useEffect(() => {
     const fetchUserData = async () => {
       try {
