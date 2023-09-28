@@ -18,4 +18,7 @@ router.post("/resetpassword", loginController.generateTemporaryToken);
 // Endpoint para actualizar los datos del usuario
 router.put("/update-user-data", verifyToken, loginController.updateUserData);
 
+// Endpoint para obtener los datos del usuario
+router.get("/get-user-data", verifyToken, loginController.getUserData);
+
 module.exports = router;

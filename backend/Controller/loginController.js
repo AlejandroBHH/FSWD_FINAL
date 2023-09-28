@@ -237,10 +237,43 @@ const updateUserData = async (req, res) => {
   }
 };
 
+// Controlador para el endpoint GET /auth/get-user-data
+const getUserData = async (req, res) => {
+  try {
+    // Obtener el ID del usuario autenticado desde el token
+    const userId = req.user.id;
+
+    // Buscar al usuario en la base de datos por su ID
+    const user = await Login.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({
+        status: "failed",
+        data: null,
+        error: "User not found",
+      });
+    }
+
+    // Responder con los datos del usuario
+    res.status(200).json({
+      status: "succeeded",
+      data: { user },
+      error: null,
+    });
+  } catch (err) {
+    res.status(500).json({
+      status: "failed",
+      data: null,
+      error: err.message,
+    });
+  }
+};
+
 module.exports = {
   register,
   login,
   refreshToken,
   generateTemporaryToken,
   updateUserData,
+  getUserData,
 };

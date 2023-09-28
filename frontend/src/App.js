@@ -7,6 +7,7 @@ import ChangePassword from "./views/ForgotPassword/NewPassword";
 import Search from "./views/Search/HomeSearch";
 import { useParams } from "react-router-dom"; // Importar useParams
 import { Navigate } from "react-router-dom";
+import UserPage from "../src/views/User/UserPage";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         path={`/index/Page/:id.html`}
         element={<ComponentWithPagination />}
       />
+      <Route path="/user" element={<UserPage />} />
     </Routes>
   );
 }
