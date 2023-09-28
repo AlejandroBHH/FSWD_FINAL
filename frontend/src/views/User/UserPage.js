@@ -5,13 +5,14 @@ import EditProfileForm from "./EditProfileForm";
 import { useNavigate } from "react-router-dom";
 import "../User/UserPage.css";
 
+import FavHistory from "../../components/History/FavHistory";
 import Footer from "../../utils/Footer/Footer";
 
 const UserPage = () => {
   const [editing, setEditing] = useState(false);
   const [user, setUser] = useState(null); // Inicialmente, el usuario es null hasta que se carguen los datos
   const navigate = useNavigate();
-
+  const addCount = 0;
   const token = localStorage.getItem("accessToken");
   console.log(token);
   useEffect(() => {
@@ -119,7 +120,7 @@ const UserPage = () => {
           )}
         </div>
       </div>
-
+      <FavHistory></FavHistory>
       <Footer></Footer>
     </>
   );

@@ -24,8 +24,6 @@ function Index() {
   const [sortBy, setSortBy] = useState("");
   //manejar el filter
   const [enteredValue, setEnteredValue] = useState(""); // Nuevo estado
-  //para pasar el props del numero de historias favoritas para las dependencias de Favhistory
-  const [addedStoriesCount, setAddedStoriesCount] = useState(0);
   //para hacer visible el modal de stayloggedin
   const [visible, setVisible] = useState(false);
   const tableRef = useRef(null); // Crear una referencia para la tabla
@@ -109,11 +107,6 @@ function Index() {
   const handleEnteredValueChange = (value) => {
     setEnteredValue(value); // Actualizar el estado de enteredValue
     //console.log(enteredValue);
-  };
-
-  const handleAddToFavorites = () => {
-    // Incrementar el contador de historias agregadas
-    setAddedStoriesCount(addedStoriesCount + 1);
   };
 
   /*const handleRefreshToken = () => {
@@ -205,11 +198,7 @@ function Index() {
           sort={sortOrder}
           sortBy={sortBy}
           //proviene del filter del taskinput qque le pasa a table y ahora a index para tener el get
-          onEnteredValueChange={
-            handleEnteredValueChange
-          } /* Pasar la función del componente Table */
-          onStoryAdded={handleAddToFavorites}
-          //para marcar el boton de favoritos
+          onEnteredValueChange={handleEnteredValueChange}
         ></Table>
         <SubmitButton
           current={currentPage}
@@ -218,7 +207,6 @@ function Index() {
           onImageClick={handleImageClick}
         ></SubmitButton>
         {/*pasamos por props el counter del numero de historias para el fetch de FavHistory */}
-        <FavHistory Count={addedStoriesCount}></FavHistory>
       </div>
       <Footer></Footer>
     </div>

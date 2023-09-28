@@ -51,7 +51,7 @@ function FavHistory(props) {
     };
 
     fetchData();
-  }, [props.Count]);
+  }, []);
 
   return (
     <div>

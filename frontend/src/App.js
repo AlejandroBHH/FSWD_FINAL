@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import "./App.css";
 import LoginPage from "./views/Login/LoginPage";
 import SignupPage from "./views/signup/SignupPage";
@@ -6,7 +6,7 @@ import ForgotPassword from "./views/ForgotPassword/ForgotPassword";
 import ChangePassword from "./views/ForgotPassword/NewPassword";
 import Search from "./views/Search/HomeSearch";
 import { useParams } from "react-router-dom"; // Importar useParams
-import { Navigate } from "react-router-dom";
+import { useState } from "react";
 import UserPage from "../src/views/User/UserPage";
 
 function App() {

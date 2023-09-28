@@ -51,9 +51,6 @@ function Table(props) {
       // Error en la solicitud
       console.error("Error:", error);
     }
-
-    // Llamar a la función onStoryAdded para indicar que se ha agregado una historia
-    props.onStoryAdded();
   };
 
   // Función para obtener las historias favoritas
@@ -183,7 +180,7 @@ function Table(props) {
                   by {component.author}
                 </td>
                 <td>{component.words}</td>
-                {console.log(favoriteStories)}
+
                 <td>
                   <button
                     className={classes.AddButton}
