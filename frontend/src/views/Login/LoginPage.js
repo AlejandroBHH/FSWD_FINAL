@@ -1,4 +1,4 @@
-import classes from "./LoginPage.module.css";
+import classes from "./css/LoginPage.module.css";
 import LoginForm from "./LoginForm";
 import Modal from "../Modal/Modal";
 

@@ -25,7 +25,7 @@ function Navbar() {
   return (
     <header className={scrolled ? "scrolled" : "scrolledoff"}>
       <nav>
-        <h1>Index Search</h1>
+        <h1>FanFicVerse</h1>
         <ul>
           <li>
             <NavLink

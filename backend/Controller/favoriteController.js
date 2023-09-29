@@ -1,6 +1,7 @@
 const Favorite = require("../Model/favoriteModel");
 const User = require("../Model/loginModel");
 const Book = require("../Model/booksModel");
+const HarryP = require("../Model/harryPModel"); // Importar el modelo HarryP
 
 const markOrUnmarkFavorite = async (req, res) => {
   try {
@@ -75,23 +76,41 @@ const getFavoriteStories = async (req, res) => {
       });
     }
 
-    // Buscar todas las historias marcadas como favoritas por el usuario
-    const favoriteStories = await Favorite.find({
+    // Buscar todas las historias marcadas como favoritas por el usuario en ambas colecciones
+    const favoriteStoriesHarryP = await Favorite.find({
       user_email: user_email,
+      story_id: { $in: await HarryP.find({}).distinct("_id") }, // Usar el modelo HarryP
     });
 
-    // Obtener los detalles completos de las historias usando los IDs almacenados en los favoritos, agregamos el promise.all para obtener los datos de todo el array
-    const favoriteStoriesWithDetails = await Promise.all(
-      favoriteStories.map(async (favorite) => {
-        const story = await Book.findById(favorite.story_id);
-        return {
-          _id: story._id,
-          title: story.title,
-          href: story.href,
-          // Otros campos de la historia que quieras incluir
-        };
-      })
-    );
+    const favoriteStoriesBook = await Favorite.find({
+      user_email: user_email,
+      story_id: { $in: await Book.find({}).distinct("_id") },
+    });
+
+    // Obtener los detalles completos de las historias usando los IDs almacenados en los favoritos
+    const favoriteStoriesWithDetails = [];
+
+    const getDetails = async (collection, storyId) => {
+      const story = await collection.findById(storyId);
+      return {
+        _id: story._id,
+        title: story.title,
+        href: story.href,
+        // Otros campos de la historia que quieras incluir
+      };
+    };
+
+    for (const favorite of favoriteStoriesHarryP) {
+      favoriteStoriesWithDetails.push(
+        await getDetails(HarryP, favorite.story_id)
+      );
+    }
+
+    for (const favorite of favoriteStoriesBook) {
+      favoriteStoriesWithDetails.push(
+        await getDetails(Book, favorite.story_id)
+      );
+    }
 
     return res.status(200).json({
       status: "succeeded",
