@@ -1,3 +1,11 @@
+
+*, *::before, *::after {
+  box-sizing: border-box; /* Todos los elementos usan el modelo de caja con borde */
+  margin: 0;
+  padding: 0;
+}
+
+
 .container {
     display: flex;
     align-items: center;
@@ -56,6 +64,12 @@
       margin: 0 auto;
       color: #fff;
       font-family: "Lato", sans-serif;
+
+      .title{
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
   
       h2 {
         line-height: 1.2;
@@ -68,7 +82,7 @@
         line-height: 1.1;
         font-weight: 300;
         font-size: 1.5rem;
-        margin-bottom: 1.2em;
+        margin: 1.3em;
       }
     }
   

@@ -67,14 +67,13 @@ const register = async (req, res) => {
   }
 };
 
-//POST /auth/login
 const login = async (req, res) => {
   try {
-    //obtener los datos del body
+    // Obtener los datos del body
     const { email, password } = req.body;
-    //buscar al usuario en la base de datos
+    // Buscar al usuario en la base de datos
     const user = await Login.findOne({ email });
-    //si no existe enviar error
+    // Si no existe, enviar error
     if (!user) {
       return res.status(404).json({
         status: "failed",
@@ -82,7 +81,36 @@ const login = async (req, res) => {
         error: "Wrong email or password, please try again",
       });
     }
-    //si la contraseña es correcta generamos el token
+    // Obtener el hash de la contraseña almacenada en la base de datos
+    const storedPasswordHash = user.password;
+    console.log(storedPasswordHash);
+    console.log(password);
+
+    // Verificar si la contraseña proporcionada coincide con el hash almacenado
+    const isPasswordValid = await bcrypt
+      .compare(password, storedPasswordHash)
+      .then((isMatch) => {
+        if (isMatch) {
+          console.log("Contraseña válida. El usuario puede iniciar sesión.");
+        } else {
+          console.log(
+            "Contraseña incorrecta. El usuario no puede iniciar sesión."
+          );
+        }
+      })
+      .catch((err) => {
+        console.error("Error al comparar contraseñas:", err);
+      });
+
+    if (!isPasswordValid) {
+      return res.status(401).json({
+        status: "failed",
+        data: null,
+        error: "Incorrect password, please try again",
+      });
+    }
+
+    // Si la contraseña es correcta, generamos el token
     const payload = { id: user._id, email: user.email, role: user.role };
     const token = generateTokens(payload, false);
 
@@ -91,7 +119,7 @@ const login = async (req, res) => {
 
     await user.save();
 
-    //enviar el token
+    // Enviar el token
     res.status(200).json({
       status: "succeeded",
       data: { user, token, refreshToken },
@@ -107,7 +135,6 @@ const login = async (req, res) => {
 };
 
 //GET /auth/refresh-token
-
 const refreshToken = async (req, res) => {
   try {
     //si no hay payload desde el token de refresco enviamos un error

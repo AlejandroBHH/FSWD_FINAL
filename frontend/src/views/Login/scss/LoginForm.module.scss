@@ -1,4 +1,24 @@
-form .form-control {
+.errorMessage {
+    display: block;
+    color: #ffffff; /* Color del texto */
+    background-color: #dd5b5b; /* Fondo rojo */
+    padding: 5px; /* Espaciado interior para que el mensaje sea más visible */
+    border: 1px solid #ff0000; /* Borde rojo */
+    border-radius: 4px; /* Bordes redondeados */
+    font-size: 14px; /* Tamaño de fuente */
+    margin: 0 !important;
+    opacity: 0; /* Inicialmente, el mensaje está oculto */
+    transform: translateY(-10px); /* Mover hacia arriba 10px */
+    transition: opacity 0.3s ease, transform 0.3s ease; /* Transición suave */
+  }
+
+  .errorMessage.active {
+    opacity: 1; /* Mostrar el mensaje */
+    transform: translateY(0); /* Volver a su posición original */
+    margin-bottom: .5em !important;
+  }
+
+  form .form-control {
     background-color: #fefeff !important;
     color: #afa8a8 !important;
     width: 100%;

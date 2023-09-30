@@ -21,7 +21,7 @@ function Modal(props) {
                 <strong>Email:</strong> {props.data.email}
               </li>
               <li>
-                <strong>Password:</strong> {props.data.password}
+                <strong>Password:</strong> {"*******"}
               </li>
               <li>
                 <strong>Remember checked:</strong>{" "}

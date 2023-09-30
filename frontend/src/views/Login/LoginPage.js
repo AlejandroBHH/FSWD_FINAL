@@ -38,6 +38,7 @@ function LoginPage() {
       loginHeader: "login successfull",
       loginMessage: "you may be redirected to calendar",
     };
+
     //console.log(validateEmail(loginData.email));
     if (
       !loginData ||
@@ -82,7 +83,7 @@ function LoginPage() {
         // Aquí puedes mostrar un mensaje de error o realizar cualquier otra acción apropiada
         info.loggedIn = false;
         info.loginHeader = "login failed";
-        info.loginMessage = "WTF";
+        info.loginMessage = "Wrong email or Password";
         console.log(response.status);
       }
     } catch (error) {
@@ -108,12 +109,12 @@ function LoginPage() {
       <div className={classes.container}>
         <div className={classes.formContainer}>
           <div className={classes.formWrapper}>
-            <h1>
-              {" "}
+            <div className={classes.title}>
               <FontAwesomeIcon icon={faHouseUser} size="xl" />
-              Welcome Back!
-            </h1>
+              <h1> Welcome Back!</h1>{" "}
+            </div>
             <p>Login to have access.</p>
+
             <div className={classes["login-links"]}>
               <a href="#" className={classes.active}>
                 Login
