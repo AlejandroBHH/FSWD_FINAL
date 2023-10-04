@@ -18,6 +18,14 @@
     margin-bottom: .5em !important;
   }
 
+  /* Estilo para un botón deshabilitado */
+   button:disabled {
+    background-color: #9a9898; /* Cambia el color de fondo cuando está deshabilitado */
+    color: #999; /* Cambia el color del texto cuando está deshabilitado */
+    cursor: not-allowed; /* Cambia el cursor a "no permitido" cuando está deshabilitado */
+    /* Otros estilos personalizados aquí */
+  }
+
   form .form-control {
     background-color: #fefeff !important;
     color: #afa8a8 !important;

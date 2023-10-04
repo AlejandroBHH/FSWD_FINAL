@@ -83,26 +83,13 @@ const login = async (req, res) => {
     }
     // Obtener el hash de la contraseña almacenada en la base de datos
     const storedPasswordHash = user.password;
-    console.log(storedPasswordHash);
-    console.log(password);
+    //console.log(storedPasswordHash);
+    //console.log(password);
 
     // Verificar si la contraseña proporcionada coincide con el hash almacenado
-    const isPasswordValid = await bcrypt
-      .compare(password, storedPasswordHash)
-      .then((isMatch) => {
-        if (isMatch) {
-          console.log("Contraseña válida. El usuario puede iniciar sesión.");
-        } else {
-          console.log(
-            "Contraseña incorrecta. El usuario no puede iniciar sesión."
-          );
-        }
-      })
-      .catch((err) => {
-        console.error("Error al comparar contraseñas:", err);
-      });
+    const isPasswordValid = await bcrypt.compare(password, storedPasswordHash);
 
-    if (!isPasswordValid) {
+    if (isPasswordValid) {
       return res.status(401).json({
         status: "failed",
         data: null,
