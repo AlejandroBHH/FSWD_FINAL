@@ -1,6 +1,5 @@
 import classes from "./css/LoginForm.module.css";
 import { useRef, useState } from "react";
-import { validateEmail } from "../../utils/validate";
 
 function LoginForm(props) {
   const refEmail = useRef(null);

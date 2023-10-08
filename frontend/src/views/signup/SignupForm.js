@@ -1,4 +1,4 @@
-import classes from "./SignupForm.module.css";
+import classes from "../signup/css/SignupForm.module.css";
 import { useRef } from "react";
 
 function SignupForm(props) {
@@ -13,10 +13,20 @@ function SignupForm(props) {
       name: refName.current.value,
       email: refEmail.current.value,
       password: refPassword.current.value,
-      rememberMe: refCheckbox.current.checked,
     };
     //lo sacamos arriba
     props.onSignup(SignupData);
+  };
+
+  const handlePasswordChange = (e) => {
+    const newPassword = e.target.value;
+    const newRequirements = {
+      lowercase: /[a-z]/.test(newPassword),
+      uppercase: /[A-Z]/.test(newPassword),
+      number: /\d/.test(newPassword),
+    };
+    //lo sacamos arriba
+    props.passwordRequirementsChanged(newRequirements);
   };
 
   return (
@@ -41,12 +51,8 @@ function SignupForm(props) {
         type="password"
         name="password"
         placeholder="password"
+        onChange={handlePasswordChange}
       />
-      <div className={classes.remember}>
-        {" "}
-        <input type="checkbox" id="check1" ref={refCheckbox} />
-        <label htmlFor="check1">Remember me?</label>
-      </div>
       <div className={classes["form-button"]}>
         <button type="submit">Sign Up</button>
         <a href="/ForgotPassword">Forget Password?</a>

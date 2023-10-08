@@ -4,6 +4,10 @@
   padding: 0;
 }
 
+.underline {
+  text-decoration: line-through;
+}
+
 .container {
   display: flex;
   align-items: center;
@@ -74,8 +78,8 @@
 .container .formWrapper p {
   line-height: 1.1;
   font-weight: 300;
-  font-size: 1.5rem;
-  margin: 1.3em;
+  font-size: 1rem;
+  margin-top: 1.3em;
 }
 .container .login-links {
   margin-bottom: 2.5em;
@@ -118,4 +122,4 @@
   margin-right: 10px;
   position: relative;
   top: 6px;
-}/*# sourceMappingURL=LoginPage.module.css.map */
+}/*# sourceMappingURL=SignupPage.module.css.map */

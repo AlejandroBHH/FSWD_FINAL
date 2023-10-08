@@ -1,4 +1,4 @@
-import classes from "./SignupPage.module.css";
+import classes from "../signup/css/SignupPage.module.css";
 import SignupForm from "./SignupForm";
 import Modal from "../Modal/Modal";
 import { useState } from "react";
@@ -21,9 +21,16 @@ function SignupPage() {
     password: "",
     name: "",
     role: "user",
-    rememberMe: false,
+
     loginError: "",
   });
+  //para las lines del password req
+  const [passwordRequirements, setPasswordRequirements] = useState({
+    lowercase: false,
+    uppercase: false,
+    number: false,
+  });
+
   //refactor
   const handleVisibility = async (SignupData) => {
     const info = {
@@ -34,7 +41,6 @@ function SignupPage() {
         SignupData.password === "" ? "Password required" : SignupData.password,
       name: SignupData.name === "" ? "Name required" : SignupData.name,
 
-      rememberMe: SignupData.rememberMe,
       loginHeader: "register successfull",
       loginMessage: "you may be redirected to login",
     };
@@ -75,14 +81,6 @@ function SignupPage() {
         const data = await response.json();
         console.log(data);
         if (response.ok && SignupData.email !== "") {
-          console.log(SignupData.rememberMe);
-          if (SignupData.rememberMe) {
-            localStorageService.setItem("name", SignupData.name);
-            localStorageService.setItem("email", SignupData.email);
-            localStorageService.setItem("password", SignupData.password);
-            localStorageService.setItem("rememberMe", SignupData.rememberMe);
-          }
-
           //redirección cuando pasen 3s
 
           setTimeout(() => {
@@ -92,7 +90,7 @@ function SignupPage() {
           // Aquí puedes mostrar un mensaje de error o realizar cualquier otra acción apropiada
           info.loggedIn = false;
           info.loginHeader = "Register failed";
-          info.loginMessage = "WTF";
+          info.loginMessage = error.message;
           console.log(response.status);
         }
       } catch (error) {
@@ -100,7 +98,6 @@ function SignupPage() {
           info.loggedIn = false;
           info.loginHeader = "Register failed";
           info.loginMessage = "wrong email or password";
-          console.log("Register failed");
         }
       }
     setLoginInfo(info);
@@ -110,7 +107,6 @@ function SignupPage() {
 
   return (
     <>
-      {/* creamos el portal y lo asignamos */}
       {ReactDOM.createPortal(
         <Modal visible={visible} onLogin={handleVisibility} data={loginInfo} />,
         document.querySelector("#modal")
@@ -118,22 +114,46 @@ function SignupPage() {
       <div className={classes.container}>
         <div className={classes.formContainer}>
           <div className={classes.formWrapper}>
-            <div className={classes.passwordrequirements}>
-              <p>La contraseña debe cumplir con los siguientes requisitos:</p>
-              <ul className={classes.noBullets}>
-                <li>Incluir al menos una letra minúscula.</li>
-                <li>Incluir al menos una letra mayúscula.</li>
-                <li>Incluir al menos un número.</li>
-              </ul>
-            </div>
-
             <div className={classes["login-links"]}>
               <a onClick={() => navigate("/login")}>Login</a>
               <a href="#" className={classes.active}>
                 Register
               </a>
             </div>
-            <SignupForm onSignup={handleVisibility} />
+            <SignupForm
+              onSignup={handleVisibility}
+              passwordRequirementsChanged={(newRequirements) => {
+                setPasswordRequirements(newRequirements);
+              }}
+            />
+            <div className={classes.passwordrequirements}>
+              <p>
+                Password must meet the following requirements:
+                <ul className={classes.noBullets}>
+                  <li
+                    className={
+                      passwordRequirements.lowercase ? classes.underline : ""
+                    }
+                  >
+                    Include at least one lowercase letter.
+                  </li>
+                  <li
+                    className={
+                      passwordRequirements.uppercase ? classes.underline : ""
+                    }
+                  >
+                    Include at least one uppercase letter.
+                  </li>
+                  <li
+                    className={
+                      passwordRequirements.number ? classes.underline : ""
+                    }
+                  >
+                    Include at least one number.
+                  </li>
+                </ul>
+              </p>
+            </div>
           </div>
         </div>
       </div>

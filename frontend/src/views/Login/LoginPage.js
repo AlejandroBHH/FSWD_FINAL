@@ -123,7 +123,6 @@ function LoginPage() {
             </div>
             <LoginForm onLogin={handleVisibility} />
           </div>
-          .
         </div>
       </div>
     </>
