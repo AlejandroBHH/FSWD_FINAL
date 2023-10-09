@@ -117,7 +117,7 @@ function Index() {
   };*/
 
   const handleImageClick = () => {
-    // Hacer focus en la tabla cuando se haga clic en la imagen
+    // Hacer focus en la tabla cuando se haga click en la imagen
     tableRef.current.scrollIntoView({
       behavior: "smooth",
       block: "start",
@@ -195,9 +195,16 @@ function Index() {
           </div>
         </div>{" "}
       </div>
-      <div className={classes.lineTable}></div>
+      <div className={classes.lineTable} ref={tableRef}></div>
+      <SubmitButton
+        current={currentPage}
+        total={totalPages}
+        onPageChange={handlePageChange}
+        onImageClick={handleImageClick}
+      ></SubmitButton>
       {/*empieza la tabla */}
-      <div className={classes.Container} ref={tableRef}>
+
+      <div className={classes.Container}>
         <Table
           data={components}
           handleSort={handleSortUpdate}

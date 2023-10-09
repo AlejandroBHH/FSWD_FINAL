@@ -57,8 +57,7 @@
    /* //el active lo usa automático el navlink */
 
   div.Container {    
-     padding: 40px;
-     padding-top: 80px;
+     padding: 10px;    
      margin: 0 auto; /* Margen automático en los lados para centrar horizontalmente */
       }
 
@@ -96,8 +95,7 @@ margin-top: -100px;
   border-bottom: #06a7e4 solid 2px;
   width: 50%;
   margin: auto;
-  top: 60px;
-  position: relative;
+position: relative;
   opacity: 0.5;
   z-index: -2;
 }

@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 const generateTokens = (user, isRefreshToken) => {
   if (isRefreshToken) {
     return jwt.sign(user, process.env.REFRESH_TOKEN_SECRET, {
-      expiresIn: "20m",
+      expiresIn: "60m",
     });
   } else {
     return jwt.sign(user, process.env.TOKEN_SECRET, { expiresIn: "15m" });
