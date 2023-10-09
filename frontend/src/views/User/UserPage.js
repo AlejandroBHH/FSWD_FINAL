@@ -32,12 +32,12 @@ const UserPage = () => {
         const data1 = await response.json();
         if (response.ok) {
           setUser(data1.data.user); // Actualiza el estado con los datos del usuario
-          console.log("User after setting:", user, response);
+          //console.log("User after setting:", user, response);
         } else {
           throw new Error(data1.error);
         }
       } catch (error) {
-        console.error("Error fetching user data:", error);
+        console.log("Error fetching user data:", error);
       }
     };
 
@@ -79,7 +79,7 @@ const UserPage = () => {
         throw new Error(data.error);
       }
     } catch (error) {
-      console.error("Error updating user data:", error);
+      console.log("Error updating user data:", error);
     }
   };
 
@@ -106,7 +106,7 @@ const UserPage = () => {
           )}
         </div>
       </div>
-      <FavHistory></FavHistory>
+      <FavHistory data={user}></FavHistory>
       <Footer></Footer>
     </>
   );

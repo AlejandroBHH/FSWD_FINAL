@@ -1,0 +1,64 @@
+/* VerifyModal.module.css */
+
+.md-modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    text-align: center;
+  }
+  
+  .md-show {
+    display: block;
+  }
+  
+  .md-modal span {
+    display: block;
+    margin-bottom: 20px;
+    font-size: 18px;
+  }
+  
+  .md-modal button {
+    padding: 10px 20px;
+    margin-right: 10px;
+    border: none;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .md-modal button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Estilos para el fondo oscuro detrás del modal */
+  .md-overlay {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    visibility: hidden;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    opacity: 0;
+    background: rgba(0, 0, 0, 0.8);
+    transition: all .3s;
+}
+
+/* Enable overlay visibility */
+.md-show ~ .md-overlay {
+    opacity: 1;
+    visibility: visible;
+}
+
+.md-show.md-effect-1 ~ .md-overlay {
+    background: rgba(0, 0, 0, 0.8);
+}

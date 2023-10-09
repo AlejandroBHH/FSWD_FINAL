@@ -3,6 +3,9 @@ import classes from "./FavHistory.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
+//para verificar que lo elimina
+import Modal from "../../utils/VerifyModal/VerifyModal";
+
 // Función para obtener las historias favoritas
 const getFavoriteStories = async (userEmail) => {
   try {
@@ -32,9 +35,9 @@ const getFavoriteStories = async (userEmail) => {
     return []; // Retorna un array vacío en caso de excepción
   }
 };
-
 function FavHistory(props) {
   const [favoriteStories, setFavoriteStories] = useState([]);
+  const [storyToRemove, setStoryToRemove] = useState(null); // Estado para almacenar la historia a eliminar
 
   useEffect(() => {
     const fetchData = async () => {
@@ -50,9 +53,9 @@ function FavHistory(props) {
     fetchData();
   }, []);
 
-  // Función para agregar o quitar historias de favoritos
-  const handleAddToFavorites = async (storyId, userEmail) => {
-    // Realizar solicitud POST para agregar o quitar la historia de favoritos
+  // Función para eliminar una historia de favoritos
+  const removeStory = async (storyId, userEmail) => {
+    // Realizar solicitud POST para eliminar la historia de favoritos
     try {
       const response = await fetch("http://localhost:8000/", {
         method: "POST",
@@ -62,16 +65,13 @@ function FavHistory(props) {
         },
         body: JSON.stringify({
           story_id: storyId._id,
-          title: storyId.title,
-          href: storyId.href,
           user_email: userEmail,
         }),
       });
 
-      const data = await response.json();
       if (response.ok) {
         // Éxito: puedes manejarlo aquí
-        // Por ejemplo, puedes actualizar la lista de historias favoritas después de agregar/quitar una nueva
+        // Por ejemplo, puedes actualizar la lista de historias favoritas después de eliminar una
         const updatedStories = await getFavoriteStories(userEmail);
         setFavoriteStories(updatedStories);
       } else {
@@ -81,33 +81,48 @@ function FavHistory(props) {
     } catch (error) {
       // Error en la solicitud
       console.error("Error:", error);
+    } finally {
+      // Luego de eliminar la historia, cierra el modal
+      setStoryToRemove(null);
     }
   };
-
+  //console.log(storyToRemove);
   return (
-    <div className={classes.FavContainer}>
-      <h3>Historias Favoritas</h3>
-      <ul className={classes.List}>
-        {favoriteStories.map((story, index) => (
-          <li key={index} className={classes.list}>
-            {/* Renderiza los detalles de las historias aquí */}
+    <>
+      {/* Modal de confirmación */}
 
-            <FontAwesomeIcon
-              icon={faXmark}
-              className={classes.RemoveButton}
-              onClick={() =>
-                handleAddToFavorites(story, localStorage.getItem("email"))
-              }
-            />
-
-            <a href={`${story.href}`}>
-              Título nº{index + 1}: {story.title}
-            </a>
-            {/* Agregar o quitar de favoritos */}
-          </li>
-        ))}
-      </ul>
-    </div>
+      {storyToRemove && (
+        <Modal
+          visible={true}
+          onConfirm={() =>
+            removeStory(storyToRemove, localStorage.getItem("email"))
+          }
+          onCancel={() => setStoryToRemove(null)} // Cancela la eliminación
+          story={storyToRemove} // Pasa la historia al modal
+        >
+          ¿Estás seguro de que deseas eliminar esta historia favorita?
+        </Modal>
+      )}
+      <div className={classes.FavContainer}>
+        <h3>Historias Favoritas</h3>
+        <ul className={classes.List}>
+          {favoriteStories.map((story, index) => (
+            <li key={index} className={classes.list}>
+              {/* Renderiza los detalles de las historias aquí */}
+              {/* Icono de eliminación */}
+              <FontAwesomeIcon
+                icon={faXmark}
+                className={classes.RemoveButton}
+                onClick={() => setStoryToRemove(story)} // Establece la historia a eliminar
+              />
+              <a href={`${story.href}`}>
+                Título nº{index + 1}: {story.title}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </>
   );
 }
 

@@ -15,7 +15,7 @@ const favoriteSchema = new mongoose.Schema({
   },
   user_email: {
     type: String,
-    required: true,
+    required: false,
   },
 });
 module.exports = mongoose.model("Favorite", favoriteSchema);
