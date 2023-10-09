@@ -3,7 +3,6 @@
     justify-content: center;
     align-items: center;
     margin-top: 10px;
-  
     color: whitesmoke;
   }
   
@@ -27,3 +26,6 @@
  
   }
   
+  .paginationButton:disabled {
+   z-index: -1;
+  }

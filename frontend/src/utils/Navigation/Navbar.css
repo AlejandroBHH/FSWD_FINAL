@@ -1,8 +1,6 @@
-header nav ul li a.active {
-   
+.active {
     padding: 1em;
-    color: #06a7e4;
-    border-bottom: 4px solid yellow;
+    border-bottom: 4px solid rgb(0, 140, 255);
   }
 
   li { list-style: none;}

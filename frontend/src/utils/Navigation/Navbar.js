@@ -1,11 +1,13 @@
 import { NavLink } from "react-router-dom";
-import "../Navigation/Navbar.css";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import "../Navigation/Navbar.css";
 
 function Navbar() {
   //para el sticky navbar
   const [scrolled, setScrolled] = useState(false);
-
+  //para el logout
+  const navigate = useNavigate();
   //manejar el sticky navbar
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
@@ -20,6 +22,12 @@ function Navbar() {
     } else {
       setScrolled(false);
     }
+  };
+
+  const handleLogout = () => {
+    // Limpiar el token de acceso y cualquier otra información de usuario almacenada
+    localStorage.removeItem("accessToken");
+    navigate("/login"); // Redirigir al usuario a la página de inicio de sesión
   };
 
   return (
@@ -53,6 +61,15 @@ function Navbar() {
             >
               User
             </NavLink>
+          </li>
+          <li>
+            <button
+              className="nav-link" // Agregar la clase nav-link aquí
+              onClick={handleLogout}
+              style={{ marginLeft: "5px", borderRadius: "3px" }}
+            >
+              Logout
+            </button>
           </li>
         </ul>
       </nav>

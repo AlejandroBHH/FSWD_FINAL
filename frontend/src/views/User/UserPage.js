@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Navbar from "../../utils/Navigation/Navbar";
 import UserProfile from "../User/UserProfile";
 import EditProfileForm from "./EditProfileForm";
-import { useNavigate } from "react-router-dom";
+
 import "../User/UserPage.css";
 
 import FavHistory from "../../components/History/FavHistory";
@@ -11,7 +11,6 @@ import Footer from "../../utils/Footer/Footer";
 const UserPage = () => {
   const [editing, setEditing] = useState(false);
   const [user, setUser] = useState(null); // Inicialmente, el usuario es null hasta que se carguen los datos
-  const navigate = useNavigate();
 
   const token = localStorage.getItem("accessToken");
   //console.log(token);
@@ -84,13 +83,6 @@ const UserPage = () => {
     }
   };
 
-  const handleLogout = () => {
-    // Limpiar el token de acceso y cualquier otra información de usuario almacenada
-    localStorage.removeItem("accessToken");
-    setUser(null);
-    navigate("/login"); // Redirigir al usuario a la página de inicio de sesión
-  };
-
   return (
     <>
       <Navbar />
@@ -107,12 +99,6 @@ const UserPage = () => {
                   <UserProfile user={user} />
                   <div className="edit-button">
                     <button onClick={handleEditClick}>Edit Profile</button>
-                    <button
-                      onClick={handleLogout}
-                      style={{ marginLeft: "5px", borderRadius: "3px" }}
-                    >
-                      Logout
-                    </button>
                   </div>
                 </>
               )}
