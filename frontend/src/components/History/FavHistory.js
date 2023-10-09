@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import classes from "./FavHistory.module.css"; // Asegúrate de importar tus estilos aquí
+import classes from "./FavHistory.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
@@ -85,9 +85,9 @@ function FavHistory(props) {
   };
 
   return (
-    <div>
+    <div className={classes.FavContainer}>
       <h3>Historias Favoritas</h3>
-      <ul>
+      <ul className={classes.List}>
         {favoriteStories.map((story, index) => (
           <li key={index} className={classes.list}>
             {/* Renderiza los detalles de las historias aquí */}

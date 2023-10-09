@@ -1,7 +1,5 @@
 *, *::before, *::after {
   box-sizing: border-box; /* Todos los elementos usan el modelo de caja con borde */
-  margin: 0;
-  padding: 0;
 }
 
 .container {
