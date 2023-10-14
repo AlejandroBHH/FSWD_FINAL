@@ -28,4 +28,5 @@
   
   .paginationButton:disabled {
    z-index: -1;
+   color: #fff;
   }

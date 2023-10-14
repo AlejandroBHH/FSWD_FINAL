@@ -74,6 +74,13 @@ function LoginPage() {
         localStorage.setItem("refreshToken", data.data.refreshToken);
         //guardamos el correo del user para pasarselo a Table
         localStorage.setItem("email", loginData.email);
+        // Almacenar la hora de expiración de la sesión en milisegundos
+        const sessionExpirationTime = Date.now() + 10 * 1000; // Caducará en 1 hora
+
+        localStorage.setItem(
+          "sessionExpirationTime",
+          sessionExpirationTime.toString()
+        );
 
         //redirección cuando pasen 3s
         setTimeout(() => {
@@ -99,11 +106,15 @@ function LoginPage() {
     setVisible(!visible);
   };
 
+  function handleModal() {
+    setVisible(false);
+  }
+
   return (
     <>
       {/* creamos el portal y lo asignamos */}
       {ReactDOM.createPortal(
-        <Modal visible={visible} onLogin={handleVisibility} data={loginInfo} />,
+        <Modal visible={visible} onLogin={handleModal} data={loginInfo} />,
         document.querySelector("#modal")
       )}
       <div className={classes.container}>

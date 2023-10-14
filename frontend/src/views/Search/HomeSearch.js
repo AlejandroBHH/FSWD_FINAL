@@ -68,8 +68,8 @@ function Index() {
           //para que aparezca el modal de stayloggedin
           setVisible(true);
           // Token inválido, mostrar alerta y redirigir a la página de inicio de sesión
-          alert("Tu sesión ha caducado. Por favor, inicia sesión nuevamente.");
-          navigate(`/login`);
+          //alert("Tu sesión ha caducado. Por favor, inicia sesión nuevamente.");
+          //navigate(`/login`);
         });
     } else {
       navigate(`/login`); // Redirigir a la página de inicio de sesión si no hay un token

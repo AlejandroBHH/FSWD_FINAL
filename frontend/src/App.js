@@ -64,6 +64,15 @@ function App() {
           </Suspense>
         }
       />
+      <Route
+        path="*"
+        element={
+          <div>
+            <h1>Página no encontrada</h1>
+            <p>La URL que ingresaste no coincide con ninguna página.</p>
+          </div>
+        }
+      />
     </Routes>
   );
 }
@@ -71,7 +80,7 @@ function App() {
 // Nuevo componente para Component con paginación y useParams
 function ComponentWithPagination() {
   const { id } = useParams(); // Obtener el valor de id de la URL
-  console.log(id);
+  //console.log(id);
   return <Search id={id} />; // Pasar el valor de id al componente Component
 }
 
