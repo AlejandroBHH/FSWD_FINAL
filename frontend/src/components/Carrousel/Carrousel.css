@@ -1,0 +1,51 @@
+/* Estilos generales del carrusel y las imágenes */
+.centered-carousel {
+  position: relative;
+  width: 100%;
+  margin: 0 auto; /* Esto centra el carrusel horizontalmente */
+  direction: ltr;
+  margin-top: 40px;
+}
+
+.sliderimg {
+  position: relative;
+  cursor: pointer;
+}
+
+.sliderimg img {
+  width: 80%;
+  height: 380px;
+}
+
+/* Estilos para el overlay */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 80%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo gris con opacidad */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  font-size: 1.5rem;
+  opacity: 0; /* Inicialmente, el overlay está oculto (sin opacidad) */
+  transition: opacity 0.3s; /* Agrega una transición de opacidad para una apariencia suave */
+}
+
+.sliderimg:hover .overlay {
+  opacity: 1; /* Muestra el overlay con opacidad completa al hacer hover en la imagen */
+}
+
+/* Ajusta el espacio entre los slides */
+.alice-carousel__stage-item {
+  margin-bottom: 10px; /* Reduce el espacio entre los slides, ajusta según tus preferencias */
+}
+
+.alice-carousel__wrapper {
+  margin: 0 auto;
+  width: 90%;
+  margin-bottom: 30px;
+}

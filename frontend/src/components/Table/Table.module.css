@@ -20,7 +20,7 @@ grid-template-columns: 200px 700px 100px 100px;
 
 td {
 padding: 8px;
-border: 1px solid black;
+border-bottom: 1px solid gray;
 text-overflow: ellipsis;
 overflow: hidden;
 white-space: nowrap;
