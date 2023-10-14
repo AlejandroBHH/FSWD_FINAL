@@ -3,6 +3,10 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../Navigation/Navbar.css";
 
+//icono para el logout
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHouseUser } from "@fortawesome/free-solid-svg-icons";
+
 function Navbar() {
   //para el sticky navbar
   const [scrolled, setScrolled] = useState(false);
@@ -68,6 +72,7 @@ function Navbar() {
               onClick={handleLogout}
               style={{ marginLeft: "5px", borderRadius: "3px" }}
             >
+              <FontAwesomeIcon icon={faHouseUser} size="xl" />
               Logout
             </button>
           </li>

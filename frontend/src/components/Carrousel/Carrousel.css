@@ -46,6 +46,50 @@
 
 .alice-carousel__wrapper {
   margin: 0 auto;
-  width: 90%;
+  width: 85%;
   margin-bottom: 30px;
+}
+
+
+.description {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  text-align: left;
+  color: white; /* Color de texto blanco */
+  padding: 5px; /* Relleno para el texto */
+  font-size: 14px; /* Tamaño de fuente */
+  max-height: 200px; /* Altura máxima para el área de texto */
+  overflow: hidden; /* Ocultar texto adicional */
+  text-overflow: ellipsis; /* Agregar puntos suspensivos al texto recortado */
+  margin-bottom: 20px; /* Agrega margen en la parte inferior del párrafo */
+  line-height: 1.5; /* Controla el espaciado entre líneas */
+
+}
+
+
+
+/* Estilo para los botones de navegación del carrusel */
+.alice-carousel__prev-btn-item,
+.alice-carousel__next-btn-item {
+ 
+  color: #fff; /* Cambia el color del texto */
+  border: none; /* Elimina el borde */
+  border-radius: 50%; /* Da forma redonda a los botones */
+  font-size: 24px; /* Tamaño de fuente */
+  width: 40px; /* Ancho del botón */
+  height: 40px; /* Alto del botón */
+  position: absolute; /* Posiciona de forma absoluta */
+  top: 50%; /* Lo coloca en el centro verticalmente */
+  transform: translateY(-50%); /* Alinea verticalmente */
+}
+
+.alice-carousel__prev-btn-item {
+  left: 30px; /* Lo coloca en el extremo izquierdo */
+}
+
+.alice-carousel__next-btn-item {
+  right: 30px; /* Lo coloca en el extremo derecho */
 }

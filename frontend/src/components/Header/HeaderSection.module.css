@@ -38,3 +38,30 @@
   text-align: center; /* Centra el texto horizontalmente */
   color: white; /* Cambia el color del texto */
 }
+
+/* Clase para el texto que se escribe a máquina */
+.typewriter-text {
+  overflow: hidden; /* Oculta el contenido que se desborda */
+  border-right: .15em solid orange; /* Efecto del cursor intermitente */
+  margin: 0 auto; /* Centra el texto */
+  letter-spacing: .15em; /* Espaciado entre letras */
+  animation: typing 4s steps(38) 1s 1 normal both, blink 1s steps(1) infinite;
+
+
+}
+
+/* Animación para el parpadeo */
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }}
+
+  /* Animación para simular la escritura */
+  @keyframes typing {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
+  }

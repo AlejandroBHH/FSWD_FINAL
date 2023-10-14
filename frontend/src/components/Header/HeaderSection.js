@@ -4,7 +4,7 @@ import classes from "./HeaderSection.module.css";
 function HeaderSection() {
   const [text, setText] = useState(""); // Estado para el texto dinámico
   const fullText =
-    "El fanfiction es una forma de amor y gratitud hacia las historias y los personajes que más nos han impactado.";
+    "El fanfiction es una expresión creativa que permite a los amantes de la narrativa participar activamente en los mundos que adoran, explorar personajes desde nuevas perspectivas y dar rienda suelta a su imaginación de maneras sorprendentes.";
 
   useEffect(() => {
     let currentIndex = 0;
@@ -31,7 +31,8 @@ function HeaderSection() {
         <div className={classes.thinContainer}>
           <h1> Fanfiction searcher</h1>
           <h2>
-            <span>{text}</span> {/* Elemento span para el texto dinámico */}
+            <span className={classes["typewriter-text"]}>{text}</span>{" "}
+            {/* Elemento span para el texto dinámico */}
           </h2>
         </div>
       </div>

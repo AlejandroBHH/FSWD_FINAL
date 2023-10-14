@@ -22,7 +22,7 @@ const Carrousel = (props) => {
         autoPlayInterval={3000}
         animationDuration={2500}
         disableDotsControls
-        disableButtonsControls
+        disableButtonsControls={false}
         responsive={responsive}
         autoPlay
         autoPlayStrategy="default"
@@ -36,7 +36,11 @@ const Carrousel = (props) => {
               props.setModel("HarryP"); // Llama a la nueva función que deseas ejecutar
             }}
           >
-            <p className="description">"Descripción de la imagen 1"</p>
+            <p className="description">
+              Serie de Libros que se centran en la lucha entre Harry Potter y el
+              malvado mago lord Voldemort, quien asesinó a los padres de Harry
+              en su afán de conquistar el mundo mágico.
+            </p>
           </div>
         </div>
         <div className="sliderimg">
@@ -48,7 +52,14 @@ const Carrousel = (props) => {
               props.setModel("Book"); // Llama a la nueva función que deseas ejecutar
             }}
           >
-            <p className="description">"Descripción de la imagen 2"</p>
+            <p className="description">
+              Una chica adolescente introvertida con un superpoder poco
+              convencional, Taylor sale en traje para huir de una vida de civil
+              profundamente triste y frustrante. Su primer intento de derrotar a
+              un supervillano termina con ella siendo confundida con uno,
+              lanzándola en medio del mundo de la política de los «capas»,
+              normas no escritas, y moralidad ambigua.
+            </p>
           </div>
         </div>
         <div className="sliderimg">
