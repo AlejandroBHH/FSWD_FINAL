@@ -174,7 +174,7 @@ function Table(props) {
               <tr key={idx}>
                 <td>{component.date}</td>
                 <td>
-                  <a href={component.href}>
+                  <a href={component.href} target={"_blank"}>
                     <p>{component.title}</p>{" "}
                   </a>
                   by {component.author}
@@ -182,17 +182,16 @@ function Table(props) {
                 <td>{component.words}</td>
 
                 <td>
-                  <button
+                  <FontAwesomeIcon
+                    icon={faStar}
                     className={classes.AddButton}
                     onClick={() => handleAddToFavorites(component, storedEmail)}
                     style={
                       isComponentInFavorites(component)
-                        ? { backgroundColor: "green" }
-                        : { backgroundColor: "grey" }
+                        ? { color: "gold" }
+                        : { color: "grey" }
                     }
-                  >
-                    <FontAwesomeIcon icon={faStar} />
-                  </button>
+                  />
                 </td>
               </tr>
             ))}

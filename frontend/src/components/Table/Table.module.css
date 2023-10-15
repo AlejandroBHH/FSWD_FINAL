@@ -9,7 +9,7 @@ table.TableContainer {
 }
 
 .TableContainer tbody:last-child tr:hover {
- background-color: #888484; /* Cambia este color según tus preferencias */
+ background-color: #c3bfbf; /* Cambia este color según tus preferencias */
  color: white;
  cursor: pointer;
 }
@@ -50,4 +50,13 @@ color:#2E4E7A
 tr {
   grid-template-columns: 150px 400px 80px 80px;
 }
+}
+
+.AddButton {
+  background-color: transparent;
+  border-radius: white;
+}
+
+.AddButton:hover {
+  transform: scale(2);
 }

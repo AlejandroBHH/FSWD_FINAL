@@ -2,9 +2,18 @@
 .centered-carousel {
   position: relative;
   width: 100%;
-  margin: 0 auto; /* Esto centra el carrusel horizontalmente */
+  margin: 0 auto;
   direction: ltr;
   margin-top: 40px;
+}
+
+.alice-carousel {
+  position: relative;
+  width: 100%;
+  margin: auto;
+  direction: ltr;
+  height: 423px;
+  background: linear-gradient(to bottom, #2a3141 0%, #000000 51%, #000000 50%, #2a3141 100%);
 }
 
 .sliderimg {
@@ -12,9 +21,16 @@
   cursor: pointer;
 }
 
+/* Estilos para las imágenes 3D */
 .sliderimg img {
   width: 80%;
   height: 380px;
+  transition: transform 0.5s;
+  transform-style: preserve-3d;
+}
+
+.sliderimg:hover img {
+  transform: perspective(800px) rotateY(15deg);
 }
 
 /* Estilos para el overlay */
@@ -24,24 +40,33 @@
   left: 0;
   width: 80%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Fondo gris con opacidad */
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-end;
   text-align: center;
   color: white;
   font-size: 1.5rem;
-  opacity: 0; /* Inicialmente, el overlay está oculto (sin opacidad) */
-  transition: opacity 0.3s; /* Agrega una transición de opacidad para una apariencia suave */
+  opacity: 0;
+  transition: opacity 0.3s, transform 0.3s; /* Agrega transiciones para opacidad y transform */
+
+}
+
+.overlay p {
+  margin: 0;
+  padding: 10px;
+  max-height: 100px;
+  overflow-y: auto;
 }
 
 .sliderimg:hover .overlay {
-  opacity: 1; /* Muestra el overlay con opacidad completa al hacer hover en la imagen */
+  opacity: 1;
+   transform: perspective(800px) rotateY(15deg) translateX(10px) translateY(10px); /* Aplica la misma transformación 3D al texto */
 }
 
 /* Ajusta el espacio entre los slides */
 .alice-carousel__stage-item {
-  margin-bottom: 10px; /* Reduce el espacio entre los slides, ajusta según tus preferencias */
+  margin-bottom: 10px;
 }
 
 .alice-carousel__wrapper {
@@ -50,46 +75,44 @@
   margin-bottom: 30px;
 }
 
-
-.description {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  text-align: left;
-  color: white; /* Color de texto blanco */
-  padding: 5px; /* Relleno para el texto */
-  font-size: 14px; /* Tamaño de fuente */
-  max-height: 200px; /* Altura máxima para el área de texto */
-  overflow: hidden; /* Ocultar texto adicional */
-  text-overflow: ellipsis; /* Agregar puntos suspensivos al texto recortado */
-  margin-bottom: 20px; /* Agrega margen en la parte inferior del párrafo */
-  line-height: 1.5; /* Controla el espaciado entre líneas */
-
+/* Estilos del scroll */
+/* Para navegadores webkit como Chrome y Safari */
+.overlay p::-webkit-scrollbar {
+  width: 10px;
 }
 
+.overlay p::-webkit-scrollbar-thumb {
+  background-color: #0074d9;
+}
 
+/* Para navegadores basados en Gecko como Firefox */
+.overlay p {
+  scrollbar-width: thin;
+  scrollbar-color: #0074d9 transparent;
+}
 
 /* Estilo para los botones de navegación del carrusel */
 .alice-carousel__prev-btn-item,
 .alice-carousel__next-btn-item {
- 
-  color: #fff; /* Cambia el color del texto */
-  border: none; /* Elimina el borde */
-  border-radius: 50%; /* Da forma redonda a los botones */
-  font-size: 24px; /* Tamaño de fuente */
-  width: 40px; /* Ancho del botón */
-  height: 40px; /* Alto del botón */
-  position: absolute; /* Posiciona de forma absoluta */
-  top: 50%; /* Lo coloca en el centro verticalmente */
-  transform: translateY(-50%); /* Alinea verticalmente */
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  font-size: 24px;
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .alice-carousel__prev-btn-item {
-  left: 30px; /* Lo coloca en el extremo izquierdo */
+  left: 30px;
 }
 
 .alice-carousel__next-btn-item {
-  right: 30px; /* Lo coloca en el extremo derecho */
+  right: 30px;
+}
+
+.alice-carousel__stage {
+  padding: 10px;
 }
