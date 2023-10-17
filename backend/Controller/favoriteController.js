@@ -2,6 +2,7 @@ const Favorite = require("../Model/favoriteModel");
 const User = require("../Model/loginModel");
 const Book = require("../Model/booksModel");
 const HarryP = require("../Model/harryPModel"); // Importar el modelo HarryP
+const DC = require("../Model/DCModel");
 
 const markOrUnmarkFavorite = async (req, res) => {
   try {
@@ -76,7 +77,7 @@ const getFavoriteStories = async (req, res) => {
       });
     }
 
-    // Buscar todas las historias marcadas como favoritas por el usuario en ambas colecciones
+    // Buscar todas las historias marcadas como favoritas por el usuario en todas las colecciones
     const favoriteStoriesHarryP = await Favorite.find({
       user_email: user_email,
       story_id: { $in: await HarryP.find({}).distinct("_id") }, // Usar el modelo HarryP
@@ -85,6 +86,11 @@ const getFavoriteStories = async (req, res) => {
     const favoriteStoriesBook = await Favorite.find({
       user_email: user_email,
       story_id: { $in: await Book.find({}).distinct("_id") },
+    });
+
+    const favoriteStoriesDC = await Favorite.find({
+      user_email: user_email,
+      story_id: { $in: await DC.find({}).distinct("_id") },
     });
 
     // Obtener los detalles completos de las historias usando los IDs almacenados en los favoritos
@@ -110,6 +116,10 @@ const getFavoriteStories = async (req, res) => {
       favoriteStoriesWithDetails.push(
         await getDetails(Book, favorite.story_id)
       );
+    }
+
+    for (const favorite of favoriteStoriesDC) {
+      favoriteStoriesWithDetails.push(await getDetails(DC, favorite.story_id));
     }
 
     return res.status(200).json({

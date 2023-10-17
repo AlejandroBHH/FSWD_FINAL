@@ -26,7 +26,7 @@ const TaskInput = (props) => {
             <option value="">Source</option>
             <option value="spacebattle">SpaceBattles</option>
             <option value="sufficentVelocity">SufficentVelocity</option>
-            <option value="RoyalRoad">RoyalRoad</option>
+            <option value="Archive of Our Own">Archive of Our Own</option>
           </select>
           <button className="FilterPage-button">Filter</button>
           <input

@@ -1,11 +1,12 @@
 const ObjectId = require("bson").ObjectId;
 const Book = require("../Model/booksModel");
 const HarryP = require("../Model/harryPModel");
+const DC = require("../Model/DCModel");
 
 const getBooks = async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
-    const eventsPerPage = 15;
+    const eventsPerPage = 10;
     const sortField = req.query.sortField || "title"; // Campo por defecto para ordenar
     const sortOrder = req.query.sortOrder || "asc"; // Dirección por defecto de ordenación
     const modelName = req.query.modelToQuery || "HarryP"; // Nombre del modelo dinámico
@@ -15,6 +16,8 @@ const getBooks = async (req, res) => {
       History = Book;
     } else if (modelName === "HarryP") {
       History = HarryP;
+    } else if (modelName === "DC") {
+      History = DC;
     } else {
       // Manejo de un modelo no válido (puedes agregar una respuesta de error apropiada aquí)
       return res.status(400).json({

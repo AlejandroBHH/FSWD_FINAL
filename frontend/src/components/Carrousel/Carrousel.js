@@ -76,7 +76,7 @@ const Carrousel = (props) => {
         </div>
         <div className="sliderimg">
           <img
-            src={"/images/worm.jpg"}
+            src={"/images/DC.jpg"}
             alt="Image 4"
             style={{ cursor: "cursor: pointer" }}
           />{" "}
@@ -84,7 +84,7 @@ const Carrousel = (props) => {
             className="overlay"
             onClick={() => {
               props.imagenClick(); // Llama a la función existente
-              props.setModel("Book"); // Llama a la nueva función que deseas ejecutar
+              props.setModel("DC"); // Llama a la nueva función que deseas ejecutar
             }}
           >
             <p className="description">"Descripción de la imagen 4"</p>

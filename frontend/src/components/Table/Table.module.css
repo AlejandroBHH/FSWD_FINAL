@@ -22,7 +22,6 @@ td {
 padding: 8px;
 border-bottom: 1px solid gray;
 text-overflow: ellipsis;
-overflow: hidden;
 white-space: nowrap;
 }
 
@@ -59,4 +58,62 @@ tr {
 
 .AddButton:hover {
   transform: scale(2);
+}
+
+/*TOOLTIP CODE*/
+/* Tooltip container */
+.tooltip {
+  position:relative; /* making the .tooltip span a container for the tooltip text */
+}
+
+.tooltip:before {
+  content: attr(data-text); /* here's the magic */
+  position:absolute;
+  
+  /* vertically center */
+  top:50%;
+  transform:translateY(-50%);
+  
+  /* move to right */
+  left:30%;
+  margin-left:15px; /* and add a small left margin */
+  
+  /* basic styles */
+  padding:10px;
+  border-radius:10px;
+  background:#000;
+  color: #fff;
+  text-align:center;
+  max-width: 500px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; /* Agrega puntos suspensivos si el texto es demasiado largo */
+  display:none; /* hide by default */
+}
+
+.tooltip:hover:before {
+  display:block;
+}
+
+/*arrow*/
+.tooltip:after {
+  content: "";
+  position:absolute;
+  
+  /* position tooltip correctly */
+  left:30%;
+  margin-left:-5px;
+ 
+  /* vertically center */
+  top:50%;
+  transform:translateY(-50%);
+ 
+  /* the arrow */
+  border:10px solid #000;
+  border-color: transparent black transparent transparent;
+  
+  display:none;
+}
+.tooltip:hover:before, .tooltip:hover:after {
+  display:block;
 }
