@@ -175,12 +175,21 @@ function Table(props) {
                 <td>{component.date}</td>
                 <td>
                   <a href={component.href} target={"_blank"}>
-                    <p
-                      className={classes.tooltip}
-                      data-text={component.description}
-                    >
-                      {component.title}
-                    </p>
+                    {component.description ? ( // Verifica si hay descripción
+                      <p
+                        className={classes.tooltip}
+                        data-text={component.description}
+                      >
+                        {component.title}
+                      </p>
+                    ) : (
+                      <p
+                        style={{ marginTop: "0" }}
+                        data-text={component.description}
+                      >
+                        {component.title}
+                      </p>
+                    )}
                   </a>
                   by {component.author}
                 </td>
