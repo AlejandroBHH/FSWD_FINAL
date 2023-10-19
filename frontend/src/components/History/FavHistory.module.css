@@ -1,10 +1,10 @@
 /* Estilos para el contenedor principal */
 div .FavContainer {
-  margin-top: 20px;
-  padding: 20px;
+  margin: 0px 20px 20px 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
   background-color: #f7f7f7;
+  padding: 20px;
 }
 
 /* Estilos para el encabezado "Historias Favoritas" */

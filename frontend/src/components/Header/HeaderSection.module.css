@@ -3,7 +3,7 @@
   height: 400px; /* Establece la altura deseada */
   width: 100%;
   overflow: hidden;
-  background: linear-gradient(to bottom, #14161a, #2a3141); /* Degradado de colores */
+
 }
 .backimages {
   background-size: cover;
@@ -39,7 +39,6 @@
   text-align: center; /* Centra el texto horizontalmente */
   color: white; /* Cambia el color del texto */
   margin-top: 4rem;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
 }
 
 /* Clase para el texto que se escribe a máquina */
@@ -49,7 +48,8 @@
   margin: 0 auto; /* Centra el texto */
   letter-spacing: .15em; /* Espaciado entre letras */
   animation: typing 4s steps(38) 1s 1 normal both, blink 1s steps(1) infinite;
-
+  background-color: #191919;
+ 
 
 }
 

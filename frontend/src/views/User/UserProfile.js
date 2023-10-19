@@ -3,12 +3,6 @@ const UserDetails = ({ user }) => {
     <div className="user-details">
       <h2>User Details</h2>
       <div className="user-info">
-        <div className="avatar">
-          {/* Usar el código Unicode de un emoji de persona */}
-          <span role="img" aria-label="User Avatar">
-            👤
-          </span>
-        </div>
         <div className="details">
           <p>
             <strong>Name:</strong> {user.name}

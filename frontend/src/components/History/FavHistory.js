@@ -109,7 +109,7 @@ function FavHistory(props) {
           <h3>Historias Favoritas</h3>
 
           {/* Agrega un botón "Crear Historia" que redirige al formulario */}
-          <Link to="/crear-historia" className={classes.CreateStoryButton}>
+          <Link to="/NewStory" className={classes.CreateStoryButton}>
             Add History
           </Link>
         </div>

@@ -28,15 +28,6 @@ function Footer() {
         </div>
 
         <div className="row">
-          <ul>
-            <li>
-              <a href="#">Contact us</a>
-            </li>
-            {/* ... */}
-          </ul>
-        </div>
-
-        <div className="row">
           Copyright © 2023 AlejandroBH - All rights reserved || Designed By:
           AlejandroBH
         </div>

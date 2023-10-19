@@ -11,6 +11,9 @@ const ForgotPassword = lazy(() =>
 const ChangePassword = lazy(() => import("./views/ForgotPassword/NewPassword"));
 const Search = lazy(() => import("./views/Search/HomeSearch"));
 const UserPage = lazy(() => import("../src/views/User/UserPage"));
+const CreateStoryForm = lazy(() =>
+  import("./views/CreateStory/CreateStoryForm")
+);
 
 function App() {
   return (
@@ -21,6 +24,14 @@ function App() {
         element={
           <Suspense fallback={<div>Loading...</div>}>
             <LoginPage />
+          </Suspense>
+        }
+      />
+      <Route
+        path="/NewStory"
+        element={
+          <Suspense fallback={<div>Loading...</div>}>
+            <CreateStoryForm />
           </Suspense>
         }
       />

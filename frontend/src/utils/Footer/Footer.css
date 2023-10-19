@@ -4,23 +4,22 @@ body{
   }
   
   .footer{
-  background:#000;
+  background:black;
   padding:30px 0px;
   font-family: 'Play', sans-serif;
   text-align:center;
-  --tw-bg-opacity: 1;
-    background-color: rgb(241 245 249/var(--tw-bg-opacity));
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
 
-  margin-top: 20px;
+ 
   }
   
   .footer .row{
   width:100%;
-  margin:1% 0%;
   padding:0.6% 0%;
   color:gray;
   font-size:0.8em;
+  padding-bottom: 0;
   }
   
   .footer .row a{
