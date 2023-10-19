@@ -44,12 +44,14 @@
   }
   
   nav {
-    display: flex; /* Hace que los elementos dentro del nav se coloquen en línea */
-    justify-content: space-between; /* Distribuye los elementos horizontalmente */
-    align-items: center; /* Centra verticalmente los elementos */
-    padding: 10px 20px; /* Espaciado interno para el nav */
-    width:100%;
-    color: #06a7e4; /* Color de texto de la barra de navegación */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 20px 15px;
+    width: 100%;
+    color: #06a7e4;
+    background-color: rgb(241 245 249);
+    height: 30px;
   }
 
 .scrolled {

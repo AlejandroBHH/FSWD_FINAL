@@ -5,6 +5,8 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
 //para verificar que lo elimina
 import Modal from "../../utils/VerifyModal/VerifyModal";
+import { Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 // Función para obtener las historias favoritas
 const getFavoriteStories = async (userEmail) => {
@@ -90,7 +92,6 @@ function FavHistory(props) {
   return (
     <>
       {/* Modal de confirmación */}
-
       {storyToRemove && (
         <Modal
           visible={true}
@@ -104,7 +105,14 @@ function FavHistory(props) {
         </Modal>
       )}
       <div className={classes.FavContainer}>
-        <h3>Historias Favoritas</h3>
+        <div className={classes.ButContainer}>
+          <h3>Historias Favoritas</h3>
+
+          {/* Agrega un botón "Crear Historia" que redirige al formulario */}
+          <Link to="/crear-historia" className={classes.CreateStoryButton}>
+            Add History
+          </Link>
+        </div>
         <ul className={classes.List}>
           {favoriteStories.map((story, index) => (
             <li key={index} className={classes.list}>

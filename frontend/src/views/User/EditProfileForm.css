@@ -1,31 +1,21 @@
-.Sect{
-   display:flex;
-   align-items: baseline;
-   gap: 10px;
-   justify-content: flex-start
+.Sect {
+  background-color: #b4aaaa1a; /* Color de fondo similar al de userPage */
+  padding: 10px;
+  width: 100%;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  justify-content: flex-start;
 }
 
-.Sect input[type="text"] {
-    width: 50%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-bottom: 10px;
-  }
+.Sect input[type="text"],
+.Sect input[type="email"],
+.Sect label {
+  width: 100%; /* Ancho al 100% para ocupar todo el espacio disponible */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
 
-  .Sect input[type="email"] {
-    width: 50%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-bottom: 10px;
-  }
 
-  .Sect label {
-    width: 60px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    overflow: hidden;
-  }

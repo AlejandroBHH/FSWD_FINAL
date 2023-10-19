@@ -67,14 +67,13 @@ function Navbar() {
             </NavLink>
           </li>
           <li>
-            <button
+            <FontAwesomeIcon
+              icon={faHouseUser}
+              size="xl"
               className="nav-link" // Agregar la clase nav-link aquí
               onClick={handleLogout}
               style={{ marginLeft: "5px", borderRadius: "3px" }}
-            >
-              <FontAwesomeIcon icon={faHouseUser} size="xl" />
-              Logout
-            </button>
+            />
           </li>
         </ul>
       </nav>
