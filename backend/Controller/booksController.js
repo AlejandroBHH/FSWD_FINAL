@@ -10,7 +10,7 @@ const getBooks = async (req, res) => {
     const sortField = req.query.sortField || "title"; // Campo por defecto para ordenar
     const sortOrder = req.query.sortOrder || "asc"; // Dirección por defecto de ordenación
     const modelName = req.query.modelToQuery || "HarryP"; // Nombre del modelo dinámico
-    console.log(modelName);
+    /*console.log(modelName);*/
     let History;
     if (modelName === "Book") {
       History = Book;
@@ -27,20 +27,20 @@ const getBooks = async (req, res) => {
       });
     }
 
-    const totalEvents = await History.countDocuments();
-    const totalPages = Math.ceil(totalEvents / eventsPerPage);
-
-    const skip = (page - 1) * eventsPerPage;
-
-    let sortOption = {};
-    sortOption[sortField] = sortOrder === "asc" ? 1 : -1;
-
     //para el buscador cambiamos el valor del title
     let filterOption = {};
     if (req.query.filterValue) {
       //filterOption.title se utiliza para buscar el valor proporcionado en req.query.filterValue en el campo title
       filterOption.title = new RegExp(req.query.filterValue, "i");
     }
+
+    const totalEvents = await History.countDocuments(filterOption);
+    const totalPages = Math.ceil(totalEvents / eventsPerPage);
+
+    const skip = (page - 1) * eventsPerPage;
+
+    let sortOption = {};
+    sortOption[sortField] = sortOrder === "asc" ? 1 : -1;
 
     //si no hay req.query.filterValue entonces  se hace el Book.find() obteniendo todos los valores
     const data = await History.find(filterOption)

@@ -8,6 +8,7 @@ import {
   faStar,
 } from "@fortawesome/free-solid-svg-icons";
 import TaskInput from "../Task/TaskInput";
+import { Navigate } from "react-router-dom";
 
 function Table(props) {
   const [filterSource, setFilterSource] = useState(""); // Estado para filtrar por source
@@ -74,6 +75,8 @@ function Table(props) {
 
       if (response.ok) {
         setFavoriteStories(data.data);
+      } else if (response.status === 401) {
+        Navigate("/login");
       } else {
         console.log("Error:", data.error);
       }

@@ -28,7 +28,7 @@ const TaskInput = (props) => {
             <option value="sufficentVelocity">SufficentVelocity</option>
             <option value="Archive of Our Own">Archive of Our Own</option>
           </select>
-          <button className="FilterPage-button">Filter</button>
+
           <input
             type="text"
             //funcion en index para pasar el enteredvalue al backend

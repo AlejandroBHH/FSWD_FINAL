@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import { lazy, Suspense, useState, useEffect } from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 import "./App.css";
 import { useParams } from "react-router-dom"; // Importar useParams
@@ -16,6 +16,20 @@ const CreateStoryForm = lazy(() =>
 );
 
 function App() {
+  useEffect(() => {
+    const sessionExpirationTime = localStorage.getItem("sessionExpirationTime");
+
+    if (sessionExpirationTime) {
+      const sessionExpirationTimeAsNumber = parseFloat(sessionExpirationTime);
+      const currentTime = Date.now();
+
+      if (currentTime > sessionExpirationTimeAsNumber) {
+        // La sesión ha expirado, redirige al usuario al login
+        <Navigate to="/login" />;
+      }
+    }
+  }, [Navigate]);
+
   return (
     <Routes>
       <Route path="/" element={<Navigate to="/login" />} />

@@ -67,8 +67,10 @@ tr {
   margin-top: 0;
 }
 
+
+
 .tooltip:before {
-  content: attr(data-text); /* here's the magic */
+  content: attr(data-text); /* take data text as the main content */
   position:absolute;
   
   /* vertically center */

@@ -36,7 +36,7 @@ function LoginPage() {
         loginData.password === "" ? "Password required" : loginData.password,
       rememberMe: loginData.rememberMe,
       loginHeader: "login successfull",
-      loginMessage: "you may be redirected to calendar",
+      loginMessage: "you may be redirected to index",
     };
 
     //console.log(validateEmail(loginData.email));
