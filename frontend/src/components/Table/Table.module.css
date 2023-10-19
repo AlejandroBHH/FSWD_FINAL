@@ -64,6 +64,7 @@ tr {
 /* Tooltip container */
 .tooltip {
   position:relative; /* making the .tooltip span a container for the tooltip text */
+  margin-top: 0;
 }
 
 .tooltip:before {

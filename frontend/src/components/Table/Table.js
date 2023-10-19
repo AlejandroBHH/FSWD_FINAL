@@ -193,8 +193,8 @@ function Table(props) {
                     onClick={() => handleAddToFavorites(component, storedEmail)}
                     style={
                       isComponentInFavorites(component)
-                        ? { color: "gold" }
-                        : { color: "grey" }
+                        ? { color: "gold", marginLeft: "15px" }
+                        : { color: "grey", marginLeft: "15px" }
                     }
                   />
                 </td>
