@@ -31,6 +31,7 @@ const getBooks = async (req, res) => {
     let filterOption = {};
     if (req.query.filterValue) {
       //filterOption.title se utiliza para buscar el valor proporcionado en req.query.filterValue en el campo title
+      //filterOption.title es el campo de consulta
       filterOption.title = new RegExp(req.query.filterValue, "i");
     }
 

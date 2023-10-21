@@ -8,13 +8,13 @@ import {
   faStar,
 } from "@fortawesome/free-solid-svg-icons";
 import TaskInput from "../Task/TaskInput";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 function Table(props) {
   const [filterSource, setFilterSource] = useState(""); // Estado para filtrar por source
   const [favoriteStories, setFavoriteStories] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-
+  const navigate = useNavigate();
   // Función para manejar el filtro por source
   const handleFilterSource = (source) => {
     setFilterSource(source);
@@ -51,6 +51,8 @@ function Table(props) {
     } catch (error) {
       // Error en la solicitud
       console.error("Error:", error);
+      alert("Session ended");
+      navigate("/login");
     }
   };
 

@@ -16,7 +16,7 @@ const CreateStoryForm = lazy(() =>
 );
 
 function App() {
-  useEffect(() => {
+  /* useEffect(() => {
     const sessionExpirationTime = localStorage.getItem("sessionExpirationTime");
 
     if (sessionExpirationTime) {
@@ -28,7 +28,7 @@ function App() {
         <Navigate to="/login" />;
       }
     }
-  }, [Navigate]);
+  }, [Navigate]);*/
 
   return (
     <Routes>
