@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import classes from "./FavHistory.module.css";
+import classes from "./FavoriteStories.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
@@ -27,6 +27,7 @@ const getFavoriteStories = async (userEmail) => {
     const data = await response.json();
 
     if (response.ok) {
+      console.log(data.data);
       return data.data; // Retorna los datos de las historias favoritas
     } else {
       console.log("Error:", data.error);
@@ -106,28 +107,31 @@ function FavHistory(props) {
       )}
       <div className={classes.FavContainer}>
         <div className={classes.ButContainer}>
-          <h3>Historias Favoritas</h3>
-
+          <h3>Favorite Stories</h3>
           {/* Agrega un botón "Crear Historia" que redirige al formulario */}
           <Link to="/NewStory" className={classes.CreateStoryButton}>
             Add History
           </Link>
         </div>
         <ul className={classes.List}>
-          {favoriteStories.map((story, index) => (
-            <li key={index} className={classes.list}>
-              {/* Renderiza los detalles de las historias aquí */}
-              {/* Icono de eliminación */}
-              <FontAwesomeIcon
-                icon={faXmark}
-                className={classes.RemoveButton}
-                onClick={() => setStoryToRemove(story)} // Establece la historia a eliminar
-              />
-              <a href={`${story.href}`}>
-                Título nº{index + 1}: {story.title}
-              </a>
-            </li>
-          ))}
+          {favoriteStories.length > 0 ? (
+            favoriteStories.map((story, index) => (
+              <li key={index} className={classes.list}>
+                {/* Renderiza los detalles de las historias aquí */}
+                {/* Icono de eliminación */}
+                <FontAwesomeIcon
+                  icon={faXmark}
+                  className={classes.RemoveButton}
+                  onClick={() => setStoryToRemove(story)} // Establece la historia a eliminar
+                />
+                <a href={`${story.href}`} target={"_blank"}>
+                  Title nº{index + 1}: {story.title}
+                </a>
+              </li>
+            ))
+          ) : (
+            <p>You dont have any favorite Story</p>
+          )}
         </ul>
       </div>
     </>

@@ -6,7 +6,7 @@ const DC = require("../Model/DCModel");
 
 const markOrUnmarkFavorite = async (req, res) => {
   try {
-    const { user_email, story_id, title, href } = req.body;
+    const { user_email, story_id, title, href, is_dc } = req.body;
 
     // Buscar al usuario en la base de datos por su correo electrónico
     const user = await User.findOne({ email: user_email });
@@ -102,6 +102,7 @@ const getFavoriteStories = async (req, res) => {
         _id: story._id,
         title: story.title,
         href: story.href,
+        is_dc: story.is_dc,
         // Otros campos de la historia que quieras incluir
       };
     };

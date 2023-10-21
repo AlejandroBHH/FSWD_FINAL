@@ -5,7 +5,7 @@ import EditProfileForm from "./EditProfileForm";
 
 import "../User/UserPage.css";
 
-import FavHistory from "../../components/History/FavHistory";
+import FavoriteStories from "../../components/FavoriteStories/FavoriteStories";
 import Footer from "../../utils/Footer/Footer";
 
 const UserPage = () => {
@@ -106,7 +106,7 @@ const UserPage = () => {
           )}
         </div>
       </div>
-      <FavHistory data={user}></FavHistory>
+      <FavoriteStories data={user}></FavoriteStories>
       <Footer></Footer>
     </>
   );

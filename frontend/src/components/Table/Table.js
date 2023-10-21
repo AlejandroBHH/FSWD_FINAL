@@ -34,6 +34,7 @@ function Table(props) {
           story_id: storyId._id,
           title: storyId.title,
           href: storyId.href,
+          type: storyId.is_dc ? "DC" : "Otro",
           user_email: userEmail,
         }),
       });
