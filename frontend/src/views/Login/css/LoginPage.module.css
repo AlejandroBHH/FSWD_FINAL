@@ -2,6 +2,10 @@
   box-sizing: border-box; /* Todos los elementos usan el modelo de caja con borde */
 }
 
+.underline {
+  text-decoration: line-through;
+}
+
 .container {
   display: flex;
   align-items: center;
@@ -72,8 +76,6 @@
 .container .formWrapper p {
   line-height: 1.1;
   font-weight: 300;
-  font-size: 1.5rem;
-  margin: 1.3em;
 }
 .container .login-links {
   margin-bottom: 2.5em;

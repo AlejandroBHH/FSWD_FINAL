@@ -1,6 +1,7 @@
 import classes from "./css/LoginPage.module.css";
 import LoginForm from "./LoginForm";
 import Modal from "../Modal/Modal";
+import SignupForm from "../signup/SignupForm";
 
 import { useState } from "react";
 import ReactDOM from "react-dom";
@@ -20,13 +21,27 @@ function LoginPage() {
   //el pending es para el spinner
   const [pending, setPending] = useState(false);
   const [visible, setVisible] = useState(false);
+
+  //para login o signup
+  const [isLogin, setIsLogin] = useState(true);
+
   const [loginInfo, setLoginInfo] = useState({
     loggedIn: false,
     email: localStorage.getItem("email") || "",
     password: localStorage.getItem("password") || "",
     rememberMe: localStorage.getItem("rememberMe") || false,
     loginError: "",
+    name: "",
+    role: "user",
   });
+
+  //para las lines del password req
+  const [passwordRequirements, setPasswordRequirements] = useState({
+    lowercase: false,
+    uppercase: false,
+    number: false,
+  });
+
   //refactor
   const handleVisibility = async (loginData) => {
     const info = {
@@ -34,10 +49,24 @@ function LoginPage() {
       email: loginData.email === "" ? "Email required" : loginData.email,
       password:
         loginData.password === "" ? "Password required" : loginData.password,
+      name: loginData.name === "" ? "Name required" : loginData.name,
+
       rememberMe: loginData.rememberMe,
       loginHeader: "login successfull",
       loginMessage: "you may be redirected to index",
     };
+    if (
+      loginData.email === "" ||
+      loginData.password === "" ||
+      loginData.name === ""
+    ) {
+      info.loggedIn = false;
+      info.loginHeader = "Register failed";
+      info.loginMessage = "Please fill in all required fields.";
+      setLoginInfo(info);
+      setVisible(true); // Mostrar el modal con el mensaje de error
+      return; // Salir de la función ya que hay campos en blanco
+    }
 
     //console.log(validateEmail(loginData.email));
     if (
@@ -49,7 +78,11 @@ function LoginPage() {
     )
       setPending(true);
     try {
-      const response = await fetch("http://localhost:8000/auth/login", {
+      const endpoint = isLogin
+        ? "http://localhost:8000/auth/login"
+        : "http://localhost:8000/auth/signup";
+
+      const response = await fetch(endpoint, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -57,6 +90,8 @@ function LoginPage() {
         body: JSON.stringify({
           email: loginData.email,
           password: loginData.password,
+          name: loginData.name,
+          role: "user",
         }),
       });
 
@@ -82,10 +117,14 @@ function LoginPage() {
           sessionExpirationTime.toString()
         );
 
-        //redirección cuando pasen 3s
-        setTimeout(() => {
-          navigate("/index/Page/1.html");
-        }, 3000);
+        isLogin
+          ? //redirección cuando pasen 3s
+            setTimeout(() => {
+              navigate("/index/Page/1.html");
+            }, 3000)
+          : setTimeout(() => {
+              setIsLogin(!isLogin);
+            }, 3000);
       } else {
         // Aquí puedes mostrar un mensaje de error o realizar cualquier otra acción apropiada
         info.loggedIn = false;
@@ -112,7 +151,6 @@ function LoginPage() {
 
   return (
     <>
-      {/* creamos el portal y lo asignamos */}
       {ReactDOM.createPortal(
         <Modal visible={visible} onLogin={handleModal} data={loginInfo} />,
         document.querySelector("#modal")
@@ -122,17 +160,73 @@ function LoginPage() {
           <div className={classes.formWrapper}>
             <div className={classes.title}>
               <FontAwesomeIcon icon={faHouseUser} size="xl" />
-              <h1> Welcome Back!</h1>{" "}
+              <h1 style={{ margin: 0 }}> Welcome Back!</h1>
             </div>
-            <p>Login to have access.</p>
-
+            <p>{isLogin ? "Login to have access." : "Create an account."}</p>
             <div className={classes["login-links"]}>
-              <a href="#" className={classes.active}>
+              <a
+                className={isLogin ? classes.active : ""}
+                onClick={() => {
+                  setIsLogin(true);
+                  navigate("/login");
+                }}
+              >
                 Login
               </a>
-              <a onClick={() => navigate("/register")}>Register</a>
+              <a
+                className={!isLogin ? classes.active : ""}
+                onClick={() => {
+                  setIsLogin(false);
+                  navigate("/register");
+                }}
+              >
+                Register
+              </a>
             </div>
-            <LoginForm onLogin={handleVisibility} />
+            {isLogin ? (
+              <LoginForm onLogin={handleVisibility} />
+            ) : (
+              <>
+                <SignupForm
+                  onSignup={handleVisibility}
+                  passwordRequirementsChanged={(newRequirements) => {
+                    setPasswordRequirements(newRequirements);
+                  }}
+                />
+                <div className={classes.passwordrequirements}>
+                  <p>
+                    Password must meet the following requirements:
+                    <ul className={classes.noBullets}>
+                      <li
+                        className={
+                          passwordRequirements.lowercase
+                            ? classes.underline
+                            : ""
+                        }
+                      >
+                        Include at least one lowercase letter.
+                      </li>
+                      <li
+                        className={
+                          passwordRequirements.uppercase
+                            ? classes.underline
+                            : ""
+                        }
+                      >
+                        Include at least one uppercase letter.
+                      </li>
+                      <li
+                        className={
+                          passwordRequirements.number ? classes.underline : ""
+                        }
+                      >
+                        Include at least one number.
+                      </li>
+                    </ul>
+                  </p>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>
