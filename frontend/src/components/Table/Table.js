@@ -32,10 +32,6 @@ function Table(props) {
         },
         body: JSON.stringify({
           story_id: storyId._id,
-          title: storyId.title,
-          href: storyId.href,
-          type: storyId.is_dc ? "DC" : "Otro",
-          user_email: userEmail,
         }),
       });
 
@@ -60,19 +56,15 @@ function Table(props) {
   // Función para obtener las historias favoritas
   const fetchFavoriteStories = async () => {
     try {
-      const userEmail = localStorage.getItem("email");
       const authToken = localStorage.getItem("accessToken");
 
-      const response = await fetch(
-        `http://localhost:8000/get-favorites?user_email=${userEmail}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            "auth-token": authToken,
-          },
-        }
-      );
+      const response = await fetch(`http://localhost:8000/get-favorites`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": authToken,
+        },
+      });
 
       const data = await response.json();
 

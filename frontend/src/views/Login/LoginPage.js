@@ -194,9 +194,9 @@ function LoginPage() {
                   }}
                 />
                 <div className={classes.passwordrequirements}>
-                  <p>
+                  <ul>
                     Password must meet the following requirements:
-                    <ul className={classes.noBullets}>
+                    <li className={classes.noBullets}>
                       <li
                         className={
                           passwordRequirements.lowercase
@@ -222,8 +222,8 @@ function LoginPage() {
                       >
                         Include at least one number.
                       </li>
-                    </ul>
-                  </p>
+                    </li>
+                  </ul>
                 </div>
               </>
             )}

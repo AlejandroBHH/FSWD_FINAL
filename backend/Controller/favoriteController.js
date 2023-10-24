@@ -3,27 +3,16 @@ const User = require("../Model/loginModel");
 const Book = require("../Model/booksModel");
 const HarryP = require("../Model/harryPModel"); // Importar el modelo HarryP
 const DC = require("../Model/DCModel");
+const ObjectId = require("bson").ObjectId;
 
 const markOrUnmarkFavorite = async (req, res) => {
   try {
-    const { user_email, story_id, title, href, is_dc } = req.body;
-
-    // Buscar al usuario en la base de datos por su correo electrónico
-    const user = await User.findOne({ email: user_email });
-
-    if (!user) {
-      return res.status(404).json({
-        status: "failed",
-        data: null,
-        error: "User not found",
-      });
-    }
-
-    console.log("User found:", user);
+    const { story_id } = req.body;
+    const id = new ObjectId(req.user.id);
 
     // Verificar si la historia ya está marcada como favorita por el usuario
     const existingFavorite = await Favorite.findOne({
-      user_email: user_email,
+      user_id: id,
       story_id: story_id,
     });
 
@@ -39,10 +28,8 @@ const markOrUnmarkFavorite = async (req, res) => {
     } else {
       // Si no existe, agregarlo a la lista de favoritos
       const newFavorite = new Favorite({
-        user_email: user_email,
+        user_id: id,
         story_id: story_id,
-        title: title,
-        href: href,
       });
 
       await newFavorite.save();
@@ -64,10 +51,9 @@ const markOrUnmarkFavorite = async (req, res) => {
 
 const getFavoriteStories = async (req, res) => {
   try {
-    const { user_email } = req.query;
-
+    const id = new ObjectId(req.user.id);
     // Buscar al usuario en la base de datos por su correo electrónico
-    const user = await User.findOne({ email: user_email });
+    const user = await User.findOne({ _id: id });
 
     if (!user) {
       return res.status(404).json({
@@ -79,17 +65,17 @@ const getFavoriteStories = async (req, res) => {
 
     // Buscar todas las historias marcadas como favoritas por el usuario en todas las colecciones
     const favoriteStoriesHarryP = await Favorite.find({
-      user_email: user_email,
+      user_id: id,
       story_id: { $in: await HarryP.find({}).distinct("_id") }, // Usar el modelo HarryP
     });
 
     const favoriteStoriesBook = await Favorite.find({
-      user_email: user_email,
+      user_id: id,
       story_id: { $in: await Book.find({}).distinct("_id") },
     });
 
     const favoriteStoriesDC = await Favorite.find({
-      user_email: user_email,
+      user_id: id,
       story_id: { $in: await DC.find({}).distinct("_id") },
     });
 
