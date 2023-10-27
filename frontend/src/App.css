@@ -1,4 +1,17 @@
 body {
-    background-color: #191919!important;
-    margin: 0%;
+
+background-color: #ffffff;
+
+border-radius: 0px 0px 0px 0px;
+  }
+
+
+  button{
+    color: #fff!important;
+    padding: 10px 20px!important;
+    border: none!important;
+    border-radius: 4px!important;
+    cursor: pointer!important;
+    font-size: 16px!important;
+    background-color: rgb(55, 128, 191)!important;
   }

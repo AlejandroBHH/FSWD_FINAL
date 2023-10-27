@@ -1,21 +1,39 @@
-.Sect {
-  background-color: #b4aaaa1a; /* Color de fondo similar al de userPage */
-  padding: 10px;
-  width: 100%;
+/* Estilos para el formulario */
+form {
   display: flex;
-  align-items: baseline;
-  gap: 10px;
-  justify-content: flex-start;
+  flex-direction: column;
+  max-width: 300px;
+  margin: 0 auto;
 }
 
-.Sect input[type="text"],
-.Sect input[type="email"],
-.Sect label {
-  width: 100%; /* Ancho al 100% para ocupar todo el espacio disponible */
-  padding: 10px;
+/* Estilos para los campos de entrada y etiquetas */
+.Sect {
+  margin: 10px 0;
+}
+
+label {
+  font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"] {
+  width: 100%;
+  padding: 5px;
   border: 1px solid #ccc;
-  border-radius: 5px;
-  margin-bottom: 10px;
+  border-radius: 4px;
 }
 
+/* Estilos para el botón "Save" */
+button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
 
+button:hover {
+  background-color: #0056b3;
+}

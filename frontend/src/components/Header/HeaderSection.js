@@ -27,13 +27,13 @@ function HeaderSection() {
   return (
     <section>
       <div className={classes.images}>
-        <img className={classes.backimages} src="" alt="Mi Imagen" />
         <div className={classes.thinContainer}>
-          <h1> Fanfiction searcher</h1>
+          <h1> FANFICTION</h1>
           <h2>
             <span className={classes["typewriter-text"]}>{text}</span>{" "}
             {/* Elemento span para el texto dinámico */}
           </h2>
+          <button className={classes["Explorer"]}>EXPLORE NOW</button>
         </div>
       </div>
     </section>

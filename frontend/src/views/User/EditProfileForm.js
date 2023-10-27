@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Navbar from "../../utils/Navigation/Navbar";
 import { validateEmail, validateName } from "../../utils/validate";
 
 import "../User/EditProfileForm.css";
@@ -37,29 +38,32 @@ const EditProfileForm = ({ user, onSave }) => {
   };
 
   return (
-    <form>
-      <div className="Sect">
-        <label>Name:</label>
-        <input
-          type="text"
-          name="name"
-          value={editedUser.name}
-          onChange={handleInputChange}
-        />
-      </div>
-      <div className="Sect">
-        <label>Email:</label>
-        <input
-          type="email"
-          name="email"
-          value={editedUser.email}
-          onChange={handleInputChange}
-        />
-        {/*console.log(editedUser)*/}
-      </div>
-      {/* Agregar más campos de edición aquí */}
-      <button onClick={handleSaveClick}>Save</button>
-    </form>
+    <>
+      <Navbar></Navbar>
+      <form>
+        <div className="Sect">
+          <label>Name:</label>
+          <input
+            type="text"
+            name="name"
+            value={editedUser.name}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div className="Sect">
+          <label>Email:</label>
+          <input
+            type="email"
+            name="email"
+            value={editedUser.email}
+            onChange={handleInputChange}
+          />
+          {/*console.log(editedUser)*/}
+        </div>
+        {/* Agregar más campos de edición aquí */}
+        <button onClick={handleSaveClick}>Save</button>
+      </form>
+    </>
   );
 };
 

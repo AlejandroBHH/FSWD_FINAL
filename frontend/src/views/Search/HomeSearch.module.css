@@ -1,7 +1,7 @@
 
  
   main {
-    background-color: #494b49;
+   
     padding: 1em;
   }
   
@@ -82,12 +82,30 @@ button[disabled] {
     margin-bottom: 1em;
   }
 }
+.backimages {
+  
+  width: 80rem;
+  height: 600px;
+  display: block;
+  -webkit-filter: grayscale(1);
+  filter: grayscale(1);
+  max-width: 100%;
+  overflow: hidden;
+
+ 
+  background-repeat: no-repeat;
+  background-position: center;
+  margin: auto;
+  border-radius: 20px;
+  
+}
 
 .line {
-  border-bottom: #06a7e4 solid 2px;
-width: 50%;
+  border-bottom: #6f15db solid 2px;
+width: 30%;
 margin: auto;
-margin-top: -100px;
+margin-top: -150px;
+margin-bottom: 50px;
 
 }
 

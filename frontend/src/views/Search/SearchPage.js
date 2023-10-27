@@ -8,7 +8,6 @@ import Table from "../../components/Table/Table";
 import SubmitButton from "../../UI/Button/SubmitButton";
 //modal para el stayloggedin
 
-import IntermediateRows from "../IntermediateRows/IntermediateRows";
 import Carrousel from "../../components/Carrousel/Carrousel";
 import Footer from "../../utils/Footer/Footer";
 
@@ -138,13 +137,7 @@ function Index() {
       <Navbar></Navbar>
       <HeaderSection></HeaderSection>
       <div className={classes.line}></div>
-      <img
-        className={classes.backimages}
-        src="/images/DC.jpg"
-        alt="Mi Imagen"
-      />
       {/*imagenes*/}
-      <IntermediateRows></IntermediateRows>
       <Carrousel
         imagenClick={handleImageClick}
         setModel={setModelToQuery}
