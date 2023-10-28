@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Navbar from "../../utils/Navigation/Navbar";
+
 import { validateEmail, validateName } from "../../utils/validate";
 
 import "../User/EditProfileForm.css";
@@ -39,7 +39,6 @@ const EditProfileForm = ({ user, onSave }) => {
 
   return (
     <>
-      <Navbar></Navbar>
       <form>
         <div className="Sect">
           <label>Name:</label>

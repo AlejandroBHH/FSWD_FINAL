@@ -12,11 +12,121 @@
     font-size: 18px;
   }
   
+  .landContainer span {
+    flex: 1;
+width: 1px;
+height: auto;
+white-space: pre-wrap;
+word-wrap: break-word;
+word-break: break-word;
+max-width: 1000px;
+z-index: 10;
+font-weight: 400;
+font-style: normal;
+font-family: "Dela Gothic One", sans-serif;
+color: #ffffff;
+font-size: 48px;
+letter-spacing: 0em;
+line-height: 1.3;
+text-align: center;
+  }
+
+.landContainer {
+  box-sizing: border-box;
+width: 100%;
+height: min-content;
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 100px 100px 100px 100px;
+mix-blend-mode: luminosity;
+background-color: #1d4e89;
+min-height: 800px;
+overflow: hidden;
+align-content: center;
+flex-wrap: nowrap;
+gap: 10;
+border-radius: 0px 0px 0px 0px;
+margin-top: 100px;
+background-image: url( https://miro.medium.com/v2/resize:fit:4800/format:webp/1*fmjMH3yIbhn1VNo3rGKaUA.jpeg);
+background-size: cover;
+background-repeat: no-repeat;
+background-position: center;
+}
+.landContainerLog {
+  box-sizing: border-box;
+width: 100%;
+height: min-content;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 100px 100px 100px 100px;
+background-color: #ffffff;
+overflow: visible;
+align-content: center;
+flex-wrap: nowrap;
+gap: 40;
+border-radius: 0px 0px 0px 0px;
+}
+
+.landContainerLogWrapper{
+  width: 1000px;
+height: min-content;
+display: flex;
+flex-direction: column;
+justify-content: flex-start;
+align-items: flex-start;
+max-width: 100%;
+overflow: hidden;
+padding: 0px 0px 0px 0px;
+align-content: flex-start;
+flex-wrap: nowrap;
+gap: 40;
+border-radius: 0px 0px 0px 0px;
+}
+
+.LastButton {
+  
+height: min-content;
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+overflow: visible;
+padding: 0px 0px 0px 0px;
+align-content: center;
+flex-wrap: nowrap;
+gap: 15px;
+border-radius: 0px 0px 0px 0px;
+margin-top: 20px;
+}
+
+.landContainerLog span {
+  width: 800px;
+height: auto;
+white-space: pre-wrap;
+word-wrap: break-word;
+word-break: break-word;
+max-width: 100%;
+overflow: visible;
+font-weight: 400;
+font-style: normal;
+font-family: "Dela Gothic One", sans-serif;
+color: #1d4e89;
+font-size: 48px;
+letter-spacing: 0em;
+line-height: 1.2;
+text-align: left;
+}
+
+
   section {
     color:white;
     position: relative;
     top: -120px;
-    z-index: -1;
+  
   }
   aside h1 {
     min-width: 30vw;
@@ -104,18 +214,19 @@ button[disabled] {
   border-bottom: #6f15db solid 2px;
 width: 30%;
 margin: auto;
-margin-top: -150px;
+margin-top: -100px;
 margin-bottom: 50px;
 
 }
 
 .lineTable {
-  border-bottom: #06a7e4 solid 2px;
-  width: 50%;
+  border-bottom: #6f15db solid 2px;
+  width: 30%;
   margin: auto;
 position: relative;
   opacity: 0.5;
   z-index: -2;
+  margin-bottom: 50px;
 }
 
 

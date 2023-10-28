@@ -32,6 +32,11 @@ img {
     border-radius: 10px;
   }
 
+  svg{  width: 32px;
+    height: 32px;
+    border-radius: 0px 0px 0px 0px;}
+
+
   .rowInter:hover {
     cursor: pointer;
     background-color: #d9d8d8;

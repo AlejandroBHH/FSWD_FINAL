@@ -23,7 +23,7 @@
   
   header nav ul li a {
     padding: 0.5em;
-    color: #06a7e4;
+    color: #000000;
     transition: transform 0.3s;
   }
   
@@ -40,7 +40,7 @@
   }
 
   .nav-link:hover {
-    color: #4c9aee;
+    color: #000000;
     text-decoration: none;
   }
   
@@ -50,8 +50,8 @@
     align-items: center;
     padding: 20px 20px 15px;
     width: 100%;
-    color: #06a7e4;
-    background-color: black;
+    color: #000000;
+    background-color: #d9d8d8;
     
   }
 
@@ -66,7 +66,7 @@
   background-color: transparent;
   transition: 0.4s ease-in-out;
   height: 60px;
-  margin-bottom: 100px;
+
 }
 
 .scrolledoff::before {

@@ -1,7 +1,7 @@
 import Navbar from "../../utils/Navigation/Navbar";
 import { useState, useEffect, useRef } from "react";
 import classes from "../Search/HomeSearch.module.css";
-import { useNavigate, useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 
 import HeaderSection from "../../components/Header/HeaderSection";
 import Table from "../../components/Table/Table";
@@ -25,8 +25,8 @@ function Index() {
   const [sortBy, setSortBy] = useState("");
   //manejar el filter
   const [enteredValue, setEnteredValue] = useState(""); // Nuevo estado
-  //para hacer visible el modal de stayloggedin
-  const [visible, setVisible] = useState(false);
+
+  const [userIsLoggedIn, setUserIsLoggedIn] = useState(false); // Cambiar a `true` cuando el usuario inicie sesión
   const tableRef = useRef(null); // Crear una referencia para la tabla
   //Fanfiction selección
   const [modelToQuery, setModelToQuery] = useState("Book");
@@ -64,15 +64,16 @@ function Index() {
         .then((data) => {
           setComponents(data.data);
           setTotalPages(data.totalPages);
+          setUserIsLoggedIn(true);
         })
         .catch((error) => {
           //para que aparezca el modal de stayloggedin
-          setVisible(true);
           // Token inválido, mostrar alerta y redirigir a la página de inicio de sesión
           //alert("Tu sesión ha caducado. Por favor, inicia sesión nuevamente.");
           //navigate(`/login`);
         });
     } else {
+      setUserIsLoggedIn(false);
       navigate(`/login`); // Redirigir a la página de inicio de sesión si no hay un token
     }
   }, [currentPage, sortBy, sortOrder, enteredValue, modelToQuery]);
@@ -134,7 +135,6 @@ function Index() {
         <StayLogged visible={visible} onStayLoggedIn={handleRefreshToken} />,
         document.querySelector("#modal")
       )}*/}
-
       <Navbar></Navbar>
       <HeaderSection></HeaderSection>
       <div className={classes.line}></div>
@@ -145,36 +145,61 @@ function Index() {
       />
       {/*imagenes*/}
       <IntermediateRows></IntermediateRows>
-      <Carrousel
-        imagenClick={handleImageClick}
-        setModel={setModelToQuery}
-      ></Carrousel>
-      {/*fin imagenes*/}
-      <div className={classes.lineTable} ref={tableRef}></div>
-      <SubmitButton
-        current={currentPage}
-        total={totalPages}
-        onPageChange={handlePageChange}
-        onImageClick={handleImageClick}
-      ></SubmitButton>
-      {/*empieza la tabla */}
+      <div className={classes.landContainer}>
+        <span>
+          “Fanfiction is a place where dreams and reality collide. It’s pure
+          magic!”
+        </span>
+      </div>
 
-      <div className={classes.Container}>
-        <Table
-          data={components}
-          handleSort={handleSortUpdate}
-          sort={sortOrder}
-          sortBy={sortBy}
-          //proviene del filter del taskinput qque le pasa a table y ahora a index para tener el get
-          onEnteredValueChange={handleEnteredValueChange}
-        ></Table>
-        <SubmitButton
-          current={currentPage}
-          total={totalPages}
-          onPageChange={handlePageChange}
-          onImageClick={handleImageClick}
-        ></SubmitButton>
-        {/*pasamos por props el counter del numero de historias para el fetch de FavHistory */}
+      <div>
+        {" "}
+        {userIsLoggedIn && (
+          <>
+            <Carrousel
+              imagenClick={handleImageClick}
+              setModel={setModelToQuery}
+            ></Carrousel>
+
+            <div className={classes.lineTable} ref={tableRef}></div>
+            <SubmitButton
+              current={currentPage}
+              total={totalPages}
+              onPageChange={handlePageChange}
+              onImageClick={handleImageClick}
+            ></SubmitButton>
+
+            <div className={classes.Container}>
+              <Table
+                data={components}
+                handleSort={handleSortUpdate}
+                sort={sortOrder}
+                sortBy={sortBy}
+                onEnteredValueChange={handleEnteredValueChange}
+              ></Table>
+              <SubmitButton
+                current={currentPage}
+                total={totalPages}
+                onPageChange={handlePageChange}
+                onImageClick={handleImageClick}
+              ></SubmitButton>
+            </div>
+          </>
+        )}
+        <div className={classes.landContainerLog}>
+          <div className={classes.landContainerLogWrapper}>
+            {" "}
+            <span>
+              Ready for an unforgettable adventure? Join the Fanfiction Hub
+              community today and share your tales!
+            </span>
+            <div className={classes.LastButton}>
+              {" "}
+              <button onClick={(e) => navigate("/register")}>Sign Up</button>
+              <button style={{ backgroundColor: "orange" }}>Learn More</button>
+            </div>
+          </div>
+        </div>
       </div>
       <Footer></Footer>
     </div>
