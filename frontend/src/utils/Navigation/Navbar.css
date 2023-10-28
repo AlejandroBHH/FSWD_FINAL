@@ -52,6 +52,7 @@
     width: 100%;
     color: #000000;
     background-color: #d9d8d8;
+   
     
   }
 
@@ -66,7 +67,7 @@
   background-color: transparent;
   transition: 0.4s ease-in-out;
   height: 60px;
-
+  z-index: 999;
 }
 
 .scrolledoff::before {

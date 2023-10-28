@@ -1,16 +1,10 @@
 /* Estilos para el contenedor principal de User Page */
 .userPage {
     
-    padding: 20px;
-    width: 100%;
-  }
-  
-  /* Estilos para el contenedor principal de User Wrap */
-  .userWrap {
-    border: 1px solid #ddd;
-    padding: 20px;
-    width: 100%;
-    background-color: #f7f7f7;
-    border-radius: 5px;
+  margin: 20px 20px 20px 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f7f7f7;
+  padding: 20px;
   }
   

@@ -1,13 +1,17 @@
 import { useState } from "react";
 import classes from "./CreateStoryForm.module.css";
+import Navbar from "../../utils/Navigation/Navbar";
 
 function CreateStoryForm() {
   const [formData, setFormData] = useState({
     title: "",
-    date: "", // Puedes ajustar esto para que se complete automáticamente
-    tags: [],
+    date: "", // Hacerlo automático
+    description: [],
     content: "",
   });
+
+  const [chartlength, setCharlength] = useState(0);
+  const maxcharlength = 1500;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,55 +27,62 @@ function CreateStoryForm() {
   };
 
   return (
-    <main className={classes.Main}>
-      <h2>Crear Nueva Historia</h2>
-      <section className={classes.Section}>
-        <aside>
-          <h1>Formulario</h1>
-          <div className={classes.Container}>
-            <form onSubmit={handleSubmit}>
-              <div className={classes.FormGroup}>
-                <label htmlFor="title">Título</label>
-                <input
-                  type="text"
-                  id="title"
-                  name="title"
-                  value={formData.title}
-                  onChange={handleChange}
-                />
-              </div>
-              <div className={classes.FormGroup}>
-                <label htmlFor="tags">Tags</label>
-                <input
-                  type="text"
-                  id="tags"
-                  name="tags"
-                  value={formData.tags}
-                  onChange={handleChange}
-                />
-              </div>
-              <div className={classes.FormGroup}>
-                <label htmlFor="content">Contenido</label>
-                <textarea
-                  id="content"
-                  name="content"
-                  value={formData.content}
-                  onChange={handleChange}
-                />
-              </div>
-              <div className={classes.FormGroup}>
-                <button type="submit" className={classes.SubmitButton}>
-                  Guardar Historia
-                </button>
-              </div>
-            </form>
-          </div>
-        </aside>
-        <div className={classes.Container}>
-          {/* Aquí puedes agregar la visualización previa de la historia si lo deseas */}
+    <>
+      <Navbar></Navbar>
+      <div className={classes.Main}>
+        <div style={{ margin: 0 }}>
+          <h2>Create a New Story</h2>
         </div>
-      </section>
-    </main>
+
+        <div className={classes.ContainerStory}>
+          <form onSubmit={handleSubmit}>
+            <div className={classes.FormGroup}>
+              <label htmlFor="title">Title</label>
+              <input
+                type="text"
+                id="title"
+                name="title"
+                value={formData.title}
+                onChange={handleChange}
+              />
+            </div>
+            <div className={classes.FormGroup}>
+              <label htmlFor="tags">Description</label>
+              <input
+                type="text"
+                id="description"
+                name="description"
+                value={formData.tags}
+                onChange={handleChange}
+              />
+            </div>
+            <div className={classes.FormGroup}>
+              <label htmlFor="content">Content</label>
+              <textarea
+                id="content"
+                name="content"
+                value={formData.content}
+                onChange={(e) => {
+                  const inputValue = e.target.value;
+                  // Actualiza la longitud del contenido y luego llama a handleChange
+                  setCharlength(inputValue.length);
+                  handleChange(e);
+                }}
+                maxLength={maxcharlength}
+              />
+            </div>
+            <p style={{ textAlign: "right", margin: 0 }}>
+              {chartlength}/{maxcharlength}
+            </p>
+            <div className={classes.FormGroup}>
+              <button type="submit" className={classes.SubmitButton}>
+                Save Story
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </>
   );
 }
 

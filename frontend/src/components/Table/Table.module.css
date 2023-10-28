@@ -4,8 +4,9 @@ table.TableContainer {
  padding: 10px;
  margin-left: auto;
  margin-right: auto;
- background-color: rgb(225, 225, 225);
+ background-color: #d9d8d8;
  border-radius: 0.5%;
+ width: min-content;
 }
 
 .TableContainer tbody:last-child tr:hover {

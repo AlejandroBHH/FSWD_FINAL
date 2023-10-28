@@ -4,7 +4,7 @@ import classes from "./HeaderSection.module.css";
 function HeaderSection() {
   const [text, setText] = useState(""); // Estado para el texto dinámico
   const fullText =
-    "El fanfiction es una expresión creativa que permite a los amantes de la narrativa participar activamente en los mundos que adoran, explorar personajes desde nuevas perspectivas y dar rienda suelta a su imaginación de maneras sorprendentes.";
+    "Dive into the thrilling world of fanfiction where your favorite characters come to life! Whether you crave romance, adventure, or mystery, we’ve got you covered.";
 
   useEffect(() => {
     let currentIndex = 0;
