@@ -12,14 +12,51 @@ const logins = require("../backend/routes/loginRoutes");
 const books = require("./routes/booksRoutes");
 const favorites = require("../backend/routes/favoriteRoutes");
 
+// Importa tu middleware verifyToken
+const verifyToken = require("../backend/middlewares/auth");
+const passport = require("passport");
+const BearerStrategy = require("passport-http-bearer").Strategy;
+
+// Configura Passport con la estrategia Bearer
+passport.use(
+  new BearerStrategy((token, done) => {
+    // Aquí se verifica el token de portador.
+    // Luego, se utiliza el middleware verifyToken para validar el token JWT.
+    verifyToken(
+      { header: () => ({ "auth-token": token }) }, // Simulación de req para verifyToken
+      null,
+      (error, user) => {
+        if (error) {
+          return done(null, false); // El token no es válido
+        } else {
+          return done(null, user); // El token es válido y proporciona el objeto de usuario si es necesario
+        }
+      }
+    );
+  })
+);
+
+// Inicializa Passport
+passport.initialize();
+
 // Leer las variables de entorno
 dotenv.config();
 // Crear el servidor
 const app = express();
+
 // Habilitar el uso del json en el body
 app.use(express.json());
 // Habilitar el uso de cors
 app.use(cors({ origin: "http://localhost:3000" }));
+
+// Definir una ruta protegida que requiere autenticación mediante token de portador
+app.get(
+  "/User",
+  passport.authenticate("bearer", { session: false }),
+  (req, res) => {
+    res.json({ message: "Ruta protegida exitosamente" });
+  }
+);
 
 // Conectar a la BBDD
 mongoose

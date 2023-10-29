@@ -36,7 +36,7 @@ function Navbar() {
 
   return (
     <header className={scrolled ? "scrolled" : "scrolledoff"}>
-      <nav>
+      <nav className="navbar">
         <h1>FanFicVerse</h1>
         <ul>
           <li>

@@ -1,5 +1,5 @@
 /* Estilos para el formulario */
-form {
+.useredit {
   display: flex;
   flex-direction: column;
   max-width: 300px;

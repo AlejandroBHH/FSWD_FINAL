@@ -5,10 +5,14 @@
   display: flex;
 flex-direction: column;
 align-items: center;
+flex: 4;
 
 }
 
-
+.Menu {
+  display: flex;
+ 
+}
 
 
 .Main h2 {
@@ -17,18 +21,29 @@ align-items: center;
 }
 
 .ContainerStory form {
-  background: #eaeaea;
+  border: 1px solid rgb(227, 224, 224);
 padding: 30px;
 border-radius: 5px;
-width: 900px;
-max-width: 1000px;
-height: 650px;
-overflow: hidden;
+
 display: flex;
 flex-direction: column;
 gap: 15px;
+margin: 20px;
+margin-top: 0;
 }
 
+.ImagePreviewBlank{
+   width: 200px;
+   height: 300px;
+   border: 1px solid rgb(173, 173, 173);
+   margin: 10px;
+   background-color: #e8e7e7;
+}
+
+.ImagePreviewBlank:hover {
+  cursor:pointer;
+  background-color: #a8a7a7;
+}
 
 .Section {
   width: 1000px;
@@ -58,8 +73,9 @@ textarea {
 
 button.SubmitButton {
   background: #007BFF;
-  color: #fff;
+  color: #000000;
   padding: 10px 20px;
+  width: 10%;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -67,4 +83,43 @@ button.SubmitButton {
 
 button.SubmitButton:hover {
   background: #0056b3;
+}
+
+/* Estilo para el contenedor de la imagen */
+.ImageContainer {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+ margin:10px
+}
+
+.FormGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+/* Estilo para el icono de la estrella */
+.IconContainer {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: rgb(255, 255, 254);
+}
+
+
+
+/* Estilo para la imagen */
+.ImagePreview {
+  width: 300px;
+  height: 400px;
+  /* Añade otros estilos según tus preferencias */
+}
+
+
+
+.Container {
+  transition: all  2s; 
+  margin-top: 20px;
 }

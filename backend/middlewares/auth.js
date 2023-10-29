@@ -6,7 +6,7 @@ const verifyToken = (req, res, next) => {
     return res.status(401).send("Access Denied");
   }
   try {
-    // Verificamos si el token de acceso valida con la firma
+    // Verificamos si el token de acceso es válido y obtenemos los datos del usuario.
     const verified = jwt.verify(token, process.env.TOKEN_SECRET);
     req.user = verified;
     next();

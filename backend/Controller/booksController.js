@@ -2,6 +2,7 @@ const ObjectId = require("bson").ObjectId;
 const Book = require("../Model/booksModel");
 const HarryP = require("../Model/harryPModel");
 const DC = require("../Model/DCModel");
+const NewBook = require("../Model/newModel");
 
 const getBooks = async (req, res) => {
   try {
@@ -67,18 +68,23 @@ const getBooks = async (req, res) => {
 
 const createBook = async (req, res) => {
   try {
-    const { title, start, end, allDay } = req.body;
-    //user sale del middleware
-    const user = new ObjectId(req.user.id);
-    const newBook = new Book({
+    const { title, description, content, image } = req.body;
+    const authorID = req.user.id; // Supongo que tienes el usuario en el objeto de solicitud req
+    const date = new Date(); // Fecha actual
+    const state = "in review";
+
+    const newBook = new NewBook({
       title,
-      start,
-      end,
-      allDay,
-      user,
+      description,
+      content,
+      image,
+      authorID,
+      date,
+      state,
     });
-    const event = await newBook.save();
-    res.status(200).json(event);
+
+    const savedBook = await newBook.save();
+    res.status(200).json(savedBook);
   } catch (error) {
     res.status(400).json({
       status: "failed",

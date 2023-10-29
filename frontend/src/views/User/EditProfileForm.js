@@ -39,7 +39,7 @@ const EditProfileForm = ({ user, onSave }) => {
 
   return (
     <>
-      <form>
+      <form className="useredit">
         <div className="Sect">
           <label>Name:</label>
           <input

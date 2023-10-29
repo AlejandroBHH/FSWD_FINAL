@@ -46,7 +46,7 @@ min-height: 800px;
 overflow: hidden;
 align-content: center;
 flex-wrap: nowrap;
-gap: 10;
+gap: 10px;
 border-radius: 0px 0px 0px 0px;
 margin-top: 100px;
 background-image: url( https://miro.medium.com/v2/resize:fit:4800/format:webp/1*fmjMH3yIbhn1VNo3rGKaUA.jpeg);
@@ -67,7 +67,7 @@ background-color: #ffffff;
 overflow: visible;
 align-content: center;
 flex-wrap: nowrap;
-gap: 40;
+gap: 40px;
 border-radius: 0px 0px 0px 0px;
 }
 
@@ -83,7 +83,7 @@ overflow: hidden;
 padding: 0px 0px 0px 0px;
 align-content: flex-start;
 flex-wrap: nowrap;
-gap: 40;
+gap: 40px;
 border-radius: 0px 0px 0px 0px;
 }
 
