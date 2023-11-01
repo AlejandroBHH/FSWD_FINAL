@@ -23,10 +23,6 @@ function Modal(props) {
               <li>
                 <strong>Password:</strong> {"*******"}
               </li>
-              <li>
-                <strong>Remember checked:</strong>{" "}
-                {props.data.rememberMe ? "yes" : "no"}
-              </li>
             </ul>
             <button onClick={props.onLogin} className={classes["md-closed"]}>
               Close me!

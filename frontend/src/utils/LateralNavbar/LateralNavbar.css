@@ -75,7 +75,7 @@ h1 {
 
 .lateral li {
     padding: 10px;
-
+    margin-right: 0 !important;
 }
 
 

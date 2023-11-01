@@ -22,7 +22,7 @@ function App() {
         path="/login"
         element={
           <Suspense fallback={<div>Loading...</div>}>
-            <LoginPage />
+            <LoginPage isLogin={true} />
           </Suspense>
         }
       />
@@ -38,7 +38,7 @@ function App() {
         path="/register"
         element={
           <Suspense fallback={<div>Loading...</div>}>
-            <LoginPage />
+            <LoginPage isLogin={false} />
           </Suspense>
         }
       />

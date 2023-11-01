@@ -2,9 +2,9 @@ import classes from "../signup/css/SignupForm.module.css";
 import { useRef, useState } from "react";
 
 function SignupForm(props) {
-  const refName = useRef("");
-  const refEmail = useRef("");
-  const refPassword = useRef("");
+  const refName = useRef(null);
+  const refEmail = useRef(null);
+  const refPassword = useRef(null);
 
   const [inputErrors, setInputErrors] = useState({
     emailError: "",
@@ -128,12 +128,13 @@ function SignupForm(props) {
         onChange={handleChangeName}
       />
       <p
-        className={`${classes["errorMessage"]} ${
-          inputErrors.nameError ? classes.active : ""
+        className={`${classes.errorMessage} ${
+          inputErrors.nameError && classes.active
         }`}
       >
         {inputErrors.nameError}
       </p>
+
       <input
         ref={refEmail}
         className={classes["form-control"]}
@@ -143,8 +144,8 @@ function SignupForm(props) {
         onChange={handleChange}
       />
       <p
-        className={`${classes["errorMessage"]} ${
-          inputErrors.emailError ? classes.active : ""
+        className={`${classes.errorMessage} ${
+          inputErrors.emailError && classes.active
         }`}
       >
         {inputErrors.emailError}
@@ -161,8 +162,8 @@ function SignupForm(props) {
         }}
       />
       <p
-        className={`${classes["errorMessage"]} ${
-          inputErrors.passwordError ? classes.active : ""
+        className={`${classes.errorMessage} ${
+          inputErrors.passwordError && classes.active
         }`}
       >
         {inputErrors.passwordError}
@@ -178,7 +179,9 @@ function SignupForm(props) {
         >
           Sign Up
         </button>
-        <a href="/ForgotPassword">Forget Password?</a>
+        <a href="/ForgotPassword" style={{ color: "black" }}>
+          Forget Password?
+        </a>
       </div>
     </form>
   );

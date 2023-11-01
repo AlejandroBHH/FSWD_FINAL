@@ -12,6 +12,7 @@
     transition: opacity 0.3s ease, transform 0.3s ease; /* Transición suave */
   }
 
+
   .errorMessage.active {
     opacity: 1; /* Mostrar el mensaje */
     transform: translateY(0); /* Volver a su posición original */

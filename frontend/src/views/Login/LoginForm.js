@@ -4,7 +4,6 @@ import { useRef, useState } from "react";
 function LoginForm(props) {
   const refEmail = useRef(null);
   const refPassword = useRef(null);
-  const refCheckbox = useRef(null);
 
   const [inputErrors, setInputErrors] = useState({
     emailError: "",
@@ -46,7 +45,6 @@ function LoginForm(props) {
     const loginData = {
       email: emailValue,
       password: passwordValue,
-      rememberMe: refCheckbox.current.checked,
     };
 
     // Llamar a la función de inicio de sesión
@@ -119,11 +117,6 @@ function LoginForm(props) {
         {inputErrors.passwordError}
       </p>
 
-      <div className={classes.remember}>
-        {" "}
-        <input type="checkbox" id="check1" ref={refCheckbox} />
-        <label htmlFor="check1">Remember me?</label>
-      </div>
       <div className={classes["form-button"]}>
         <button
           type="submit"
@@ -131,7 +124,9 @@ function LoginForm(props) {
         >
           Login
         </button>
-        <a href="/ForgotPassword">Forget Password?</a>
+        <a href="/ForgotPassword" style={{ color: "black" }}>
+          Forget Password?
+        </a>
       </div>
     </form>
   );

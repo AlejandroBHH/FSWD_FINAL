@@ -4,6 +4,8 @@ import LateralNavbar from "../../utils/LateralNavbar/LateralNavbar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileLines, faCirclePlus } from "@fortawesome/free-solid-svg-icons";
 
+import Footer from "../../utils/Footer/Footer";
+
 function CreateStoryForm() {
   const [hovered, setHovered] = useState(false);
 
@@ -187,6 +189,7 @@ function CreateStoryForm() {
             </form>
           </div>
         </div>
+        <Footer></Footer>
       </div>
     </div>
   );

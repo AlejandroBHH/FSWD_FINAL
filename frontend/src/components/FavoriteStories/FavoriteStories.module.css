@@ -5,6 +5,7 @@ div .FavContainer {
   border-radius: 5px;
   background-color: #f7f7f7;
   padding: 20px;
+  height: 30em;
 }
 
 /* Estilos para el encabezado "Historias Favoritas" */

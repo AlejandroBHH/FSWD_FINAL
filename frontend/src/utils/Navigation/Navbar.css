@@ -1,6 +1,7 @@
 .active {
     padding: 1em;
     border-bottom: 4px solid rgb(0, 140, 255);
+    color:rgb(0, 140, 255)
   }
 
   li { list-style: none;}
@@ -21,7 +22,7 @@
    margin-right: 1em;
   }
   
-  header nav ul li a {
+  header nav.navbar ul li a {
     padding: 0.5em;
     color: #000000;
     transition: transform 0.3s;
@@ -51,20 +52,19 @@
     padding: 20px 20px 15px;
     width: 100%;
     color: #000000;
-    background-color: #d9d8d8;
+
    
     
   }
 
 .scrolled {
-
+  background-color: rgba(255, 255, 255, 0.7);
   height: 60px;
   z-index: 999;
   transition: 0.4s ease-in-out;
 }
 
 .scrolledoff {
-  background-color: transparent;
   transition: 0.4s ease-in-out;
   height: 60px;
   z-index: 999;
