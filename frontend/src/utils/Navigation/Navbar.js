@@ -1,10 +1,10 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import "../Navigation/Navbar.css";
+import classes from "../Navigation/Navbar.module.css"; // Importa las clases desde el módulo CSS
 
 // Icono para el logout
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHouseUser } from "@fortawesome/free-solid-svg-icons";
+import { faPowerOff } from "@fortawesome/free-solid-svg-icons";
 
 function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -34,15 +34,15 @@ function Navbar() {
   const currentPath = window.location.pathname;
 
   return (
-    <header className={scrolled ? "scrolled" : "scrolledoff"}>
-      <nav className="navbar">
+    <header className={scrolled ? classes.scrolled : classes.scrolledoff}>
+      <nav className={classes.navbar}>
         <h1>FanFicVerse</h1>
         <ul>
           {currentPath === "/login" ? (
             <li>
               <NavLink
-                className="nav-link"
-                activeclassname="active"
+                className={`${classes["nav-link"]} `}
+                activeclassname={classes.active}
                 to="/register"
               >
                 Sign up
@@ -51,8 +51,8 @@ function Navbar() {
           ) : (
             <li>
               <NavLink
-                className="nav-link"
-                activeclassname="active"
+                className={`${classes["nav-link"]}`}
+                activeclassname={classes.active}
                 to="/login"
               >
                 Login
@@ -63,8 +63,8 @@ function Navbar() {
             <>
               <li>
                 <NavLink
-                  className="nav-link"
-                  activeclassname="active"
+                  className={`${classes["nav-link"]}`}
+                  activeclassname={classes.active}
                   to="/index/Page/1.html"
                 >
                   Home
@@ -72,8 +72,8 @@ function Navbar() {
               </li>
               <li>
                 <NavLink
-                  className="nav-link"
-                  activeclassname="active"
+                  className={`${classes["nav-link"]}`}
+                  activeclassname={classes.active}
                   to="/User"
                 >
                   User
@@ -84,11 +84,15 @@ function Navbar() {
 
           <li>
             <FontAwesomeIcon
-              icon={faHouseUser}
+              icon={faPowerOff}
               size="xl"
-              className="nav-link"
+              className={`${classes["nav-link"]}`}
               onClick={handleLogout}
-              style={{ marginLeft: "5px", borderRadius: "3px" }}
+              style={{
+                marginLeft: "5px",
+                borderRadius: "3px",
+                cursor: "pointer",
+              }}
             />
           </li>
         </ul>

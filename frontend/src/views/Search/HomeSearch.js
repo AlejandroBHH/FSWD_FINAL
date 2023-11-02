@@ -8,7 +8,7 @@ import Table from "../../components/Table/Table";
 import SubmitButton from "../../UI/Button/SubmitButton";
 //modal para el stayloggedin
 
-import IntermediateRows from "../IntermediateRows/IntermediateRows";
+import IntermediateRows from "../../components/IntermediateRows/IntermediateRows";
 import Carrousel from "../../components/Carrousel/Carrousel";
 import Footer from "../../utils/Footer/Footer";
 

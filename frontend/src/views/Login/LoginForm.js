@@ -124,7 +124,7 @@ function LoginForm(props) {
         >
           Login
         </button>
-        <a href="/ForgotPassword" style={{ color: "black" }}>
+        <a href="/forgotPassword" style={{ color: "black" }}>
           Forget Password?
         </a>
       </div>

@@ -2,6 +2,7 @@ import { lazy, Suspense, useState, useEffect } from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 import "./App.css";
 import { useParams } from "react-router-dom"; // Importar useParams
+import DashBoard from "./views/DashBoard/DashBoard";
 
 const LoginPage = lazy(() => import("./views/Login/LoginPage"));
 const ForgotPassword = lazy(() =>
@@ -43,7 +44,7 @@ function App() {
         }
       />
       <Route
-        path="/ForgotPassword"
+        path="/forgotPassword"
         element={
           <Suspense fallback={<div>Loading...</div>}>
             <ForgotPassword />
@@ -71,6 +72,14 @@ function App() {
         element={
           <Suspense fallback={<div>Loading...</div>}>
             <UserPage />
+          </Suspense>
+        }
+      />
+      <Route
+        path="/dashboard"
+        element={
+          <Suspense fallback={<div>Loading...</div>}>
+            <DashBoard />
           </Suspense>
         }
       />

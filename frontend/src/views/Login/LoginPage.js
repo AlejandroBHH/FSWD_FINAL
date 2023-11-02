@@ -12,15 +12,18 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHouseUser } from "@fortawesome/free-solid-svg-icons";
 import Navbar from "../../utils/Navigation/Navbar";
 
+import {
+  validateEmail,
+  validatePassword,
+  validateName,
+} from "../../utils/validate";
+
 function LoginPage(props) {
   const navigate = useNavigate();
 
   const [visible, setVisible] = useState(false);
 
   const state = props.isLogin;
-
-  //console.log(state);
-  //para login o signup
 
   const [loginInfo, setLoginInfo] = useState({
     loggedIn: false,
@@ -31,14 +34,12 @@ function LoginPage(props) {
     role: "user",
   });
 
-  //para las lines del password req
   const [passwordRequirements, setPasswordRequirements] = useState({
     lowercase: false,
     uppercase: false,
     number: false,
   });
 
-  //refactor
   const handleVisibility = async (loginData) => {
     const info = {
       loggedIn: true,
@@ -46,8 +47,8 @@ function LoginPage(props) {
       password:
         loginData.password === "" ? "Password required" : loginData.password,
       name: loginData.name === "" ? "Name required" : loginData.name,
-      loginHeader: "login successfull",
-      loginMessage: "you may be redirected to index",
+      loginHeader: "Login successful",
+      loginMessage: "You may be redirected to the index page.",
     };
 
     if (
@@ -56,67 +57,80 @@ function LoginPage(props) {
       loginData.name === ""
     ) {
       info.loggedIn = false;
-      info.loginHeader = "Register failed";
+      info.loginHeader = "Registration failed";
       info.loginMessage = "Please fill in all required fields.";
-      setLoginInfo(info);
-      setVisible(true);
-      console.log("Required fields are missing.");
-      return;
     }
-    //console.log(isLogin);
-    try {
-      const endpoint = state
-        ? "http://localhost:8000/auth/login"
-        : "http://localhost:8000/auth/signup";
-
-      const response = await fetch(endpoint, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: loginData.email,
-          password: loginData.password,
-          name: loginData.name,
-          role: "user",
-        }),
-      });
-
-      const data = await response.json();
-      if (response.ok) {
-        localStorage.setItem("accessToken", data.data.token);
-        localStorage.setItem("refreshToken", data.data.refreshToken);
-        localStorage.setItem("email", loginData.email);
-        const sessionExpirationTime = Date.now() + 10 * 1000;
-        localStorage.setItem(
-          "sessionExpirationTime",
-          sessionExpirationTime.toString()
-        );
-        //console.log("Hello", isLogin); // Esta línea debería ejecutarse correctamente
-
-        if (state) {
-          setTimeout(() => {
-            navigate("/index/Page/1.html");
-          }, 3000);
-        } else {
-          setTimeout(() => {
-            navigate("/login");
-          }, 3000);
-        }
-      } else {
-        info.loggedIn = false;
-        info.loginHeader = "login failed";
-        info.loginMessage = "Wrong email or Password";
-        console.log("Login failed. Status: " + response.status);
-      }
-    } catch (error) {
+    const isEmailValid = validateEmail(loginData.email);
+    const isPasswordValid = validatePassword(loginData.password);
+    const isNameValid = validateName(loginData.name);
+    if ((!state && !isEmailValid) || !isPasswordValid || !isNameValid) {
+      // Realiza la validación solo si estás en la página de registro
       info.loggedIn = false;
-      info.loginHeader = "login failed";
-      info.loginMessage = "Wrong email or password";
-      console.log("An error occurred: " + error);
+      info.loginHeader = "Registration failed";
+
+      if (!isEmailValid) {
+        info.loginMessage = "Invalid email address";
+      }
+      if (!isPasswordValid) {
+        info.loginMessage = "Password must have at least 8 characters";
+      }
+      if (!isNameValid) {
+        info.loginMessage =
+          "Name must have at least two charachters and without numbers";
+      }
+    } else {
+      try {
+        const endpoint = state
+          ? "http://localhost:8000/auth/login"
+          : "http://localhost:8000/auth/signup";
+
+        const response = await fetch(endpoint, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: loginData.email,
+            password: loginData.password,
+            name: loginData.name,
+            role: "user",
+          }),
+        });
+
+        const data = await response.json();
+        if (response.ok) {
+          localStorage.setItem("accessToken", data.data.token);
+          localStorage.setItem("refreshToken", data.data.refreshToken);
+          localStorage.setItem("email", loginData.email);
+          const sessionExpirationTime = Date.now() + 10 * 1000;
+          localStorage.setItem(
+            "sessionExpirationTime",
+            sessionExpirationTime.toString()
+          );
+
+          if (state) {
+            setTimeout(() => {
+              navigate("/index/Page/1.html");
+            }, 3000);
+          } else {
+            setTimeout(() => {
+              navigate("/login");
+            }, 3000);
+          }
+        } else {
+          info.loggedIn = false;
+          info.loginHeader = "Login failed";
+          info.loginMessage = "Wrong email or password";
+          console.log("Login failed. Status: " + response.status);
+        }
+      } catch (error) {
+        info.loggedIn = false;
+        info.loginHeader = "Login failed";
+        info.loginMessage = "An error occurred: " + error;
+      }
     }
     setLoginInfo(info);
-    setVisible(!visible);
+    setVisible(true);
   };
 
   function handleModal() {
@@ -135,7 +149,7 @@ function LoginPage(props) {
           {" "}
           <img
             src="/images/neon.jpg"
-            alt="Descripción de la imagen 3"
+            alt="Image description"
             className={classes.MainImg}
           />
         </div>
@@ -143,8 +157,7 @@ function LoginPage(props) {
           <div className={classes.MainTitle}>
             <FontAwesomeIcon icon={faHouseUser} size="2xl" />
             <h1 style={{ margin: 0 }} className={classes.MainTitle}>
-              {" "}
-              Welcome Back!
+              {state ? "Welcome Back!" : "Create an Account"}
             </h1>
           </div>
           <p className={classes.Maindescription}>

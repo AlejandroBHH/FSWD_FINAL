@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import classes from "./FavoriteStories.module.css";
+import classes from "./DashBoard.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
@@ -35,7 +35,7 @@ const getFavoriteStories = async (userEmail) => {
     return []; // Retorna un array vacío en caso de excepción
   }
 };
-function FavHistory(props) {
+function DashBoard(props) {
   const [favoriteStories, setFavoriteStories] = useState([]);
   const [storyToRemove, setStoryToRemove] = useState(null); // Estado para almacenar la historia a eliminar
 
@@ -135,4 +135,4 @@ function FavHistory(props) {
   );
 }
 
-export default FavHistory;
+export default DashBoard;

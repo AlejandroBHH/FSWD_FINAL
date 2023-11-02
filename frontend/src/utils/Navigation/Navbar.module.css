@@ -17,6 +17,7 @@
     padding: 0;
     display: flex;
     gap: 20px; /* Espacio entre elementos de la lista */
+    align-items: center;
   }
   header nav ul li:not(:last-child){
    margin-right: 1em;
