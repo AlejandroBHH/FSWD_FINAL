@@ -62,7 +62,8 @@ function LoginPage(props) {
     }
     const isEmailValid = validateEmail(loginData.email);
     const isPasswordValid = validatePassword(loginData.password);
-    const isNameValid = validateName(loginData.name);
+    const isNameValid = loginData.name ? validateName(loginData.name) : "s";
+
     if ((!state && !isEmailValid) || !isPasswordValid || !isNameValid) {
       // Realiza la validación solo si estás en la página de registro
       info.loggedIn = false;

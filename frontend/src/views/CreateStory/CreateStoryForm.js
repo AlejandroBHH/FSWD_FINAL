@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileLines, faCirclePlus } from "@fortawesome/free-solid-svg-icons";
 
 import Footer from "../../utils/Footer/Footer";
-
 function CreateStoryForm() {
   const [hovered, setHovered] = useState(false);
 
@@ -27,20 +26,25 @@ function CreateStoryForm() {
   const token = localStorage.getItem("accessToken");
 
   const handleSave = async () => {
-    console.log(formData);
     try {
+      const formDataToSend = new FormData();
+      formDataToSend.append("image", formData.image);
+      formDataToSend.append("title", formData.title);
+      formDataToSend.append("description", formData.description);
+      formDataToSend.append("content", formData.content);
+
       const response = await fetch("http://localhost:8000/library/book", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
           "auth-token": token,
         },
-        body: JSON.stringify(formData),
+        body: formDataToSend,
       });
 
       const data = await response.json();
 
       if (response.ok) {
+        // Éxito
       } else {
         throw new Error(data.error);
       }
@@ -64,21 +68,31 @@ function CreateStoryForm() {
   }, [formData.image]);
 
   const handleChange = (e) => {
-    const { name, value, type, files } = e.target;
-    if (type === "file") {
+    const { name, type, files } = e.target;
+    if (type === "file" && files.length > 0) {
       const image = files[0];
+
+      // Update the state with the selected file
       setFormData({
         ...formData,
         [name]: image,
       });
+
+      // Optionally, you can also set the image preview:
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setImagePreview(e.target.result);
+      };
+
+      // Read the file content as a data URL
+      reader.readAsDataURL(image);
     } else {
       setFormData({
         ...formData,
-        [name]: value,
+        [name]: e.target.value,
       });
     }
   };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     handleSave();
@@ -147,6 +161,7 @@ function CreateStoryForm() {
                   name="title"
                   value={formData.title}
                   onChange={handleChange}
+                  required
                 />
               </div>
               <div className={classes.FormGroup}>

@@ -12,6 +12,8 @@ const logins = require("../backend/routes/loginRoutes");
 const books = require("./routes/booksRoutes");
 const favorites = require("../backend/routes/favoriteRoutes");
 
+const fs = require("file-system");
+
 // Importa tu middleware verifyToken
 const verifyToken = require("../backend/middlewares/auth");
 const passport = require("passport");
@@ -48,15 +50,6 @@ const app = express();
 app.use(express.json());
 // Habilitar el uso de cors
 app.use(cors({ origin: "http://localhost:3000" }));
-
-// Definir una ruta protegida que requiere autenticación mediante token de portador
-app.get(
-  "/User",
-  passport.authenticate("bearer", { session: false }),
-  (req, res) => {
-    res.json({ message: "Ruta protegida exitosamente" });
-  }
-);
 
 // Conectar a la BBDD
 mongoose

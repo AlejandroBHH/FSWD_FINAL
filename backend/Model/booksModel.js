@@ -2,11 +2,15 @@ const { default: mongoose } = require("mongoose");
 const eventSchema = new mongoose.Schema({
   href: {
     type: String,
-    required: true,
+    required: false,
   },
   title: {
     type: String,
     required: true,
+  },
+  img: {
+    data: Buffer,
+    contentType: String,
   },
   words: {
     type: String,
@@ -22,11 +26,11 @@ const eventSchema = new mongoose.Schema({
   },
   tags: {
     type: Array,
-    required: true,
+    required: false,
   },
   source: {
     type: String,
-    required: true,
+    required: false,
   },
 });
 module.exports = mongoose.model("Book", eventSchema);

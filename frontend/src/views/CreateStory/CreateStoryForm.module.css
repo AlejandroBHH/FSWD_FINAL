@@ -57,14 +57,27 @@ label {
   color: black;
 }
 
-input[type="text"],
-textarea {
+input[id="description"] {
   width: 97%;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 3px;
 }
 
+input[id="title"]  {
+  width: 97%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+
+textarea {
+  width: 97%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
 
 textarea {
   height: 350px;

@@ -2,7 +2,7 @@ const ObjectId = require("bson").ObjectId;
 const Book = require("../Model/booksModel");
 const HarryP = require("../Model/harryPModel");
 const DC = require("../Model/DCModel");
-const NewBook = require("../Model/newModel");
+const newModel = require("../Model/newModel");
 
 const getBooks = async (req, res) => {
   try {
@@ -68,22 +68,14 @@ const getBooks = async (req, res) => {
 
 const createBook = async (req, res) => {
   try {
-    const { title, description, content, image } = req.body;
-    const authorID = req.user.id; // Supongo que tienes el usuario en el objeto de solicitud req
-    const date = new Date(); // Fecha actual
-    const state = "in review";
+    // `req.file.path` contiene la ubicación del archivo en el servidor
+    const image = req.file.path;
 
-    const newBook = new NewBook({
-      title,
-      description,
-      content,
+    const new_storie = new newModel({
       image,
-      authorID,
-      date,
-      state,
     });
 
-    const savedBook = await newBook.save();
+    const savedBook = await new_storie.save();
     res.status(200).json(savedBook);
   } catch (error) {
     res.status(400).json({

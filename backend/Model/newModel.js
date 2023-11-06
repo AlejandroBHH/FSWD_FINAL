@@ -3,11 +3,11 @@ const mongoose = require("mongoose");
 const eventSchema = new mongoose.Schema({
   title: {
     type: String,
-    required: true,
+    required: false,
   },
-  authorID: {
+  author: {
     type: String,
-    required: true,
+    required: false,
   },
   date: {
     type: Date,
@@ -15,15 +15,15 @@ const eventSchema = new mongoose.Schema({
   },
   description: {
     type: String,
-    required: true,
+    required: false,
   },
   content: {
     type: String,
-    required: true,
+    required: false,
   },
   state: {
     type: String,
-    required: true,
+    required: false,
   },
   image: {
     type: String, // Puedes almacenar la URL de la imagen aquí

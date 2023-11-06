@@ -26,14 +26,14 @@ button:disabled {
   /* Otros estilos personalizados aquí */
 }
 
-form .form-control {
+form input[type=text].form-control, form input[type=password].form-control {
   background-color: #fefeff !important;
   color: #afa8a8 !important;
   width: 100%;
   padding: 0.5em 1em;
   border-radius: 0.4rem;
   font-size: 1.3rem;
-  margin-bottom: 0.8em;
+  margin-bottom: 0.8em; /* Nota: Corregí ".8em" a "0.8em" */
 }
 
 input:focus {
