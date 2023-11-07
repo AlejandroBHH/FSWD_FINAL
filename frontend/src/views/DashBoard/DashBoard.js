@@ -5,27 +5,31 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
 //para verificar que lo elimina
 import Modal from "../../utils/VerifyModal/VerifyModal";
-import { Navigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import LateralNavbar from "../../utils/LateralNavbar/LateralNavbar";
+import Footer from "../../utils/Footer/Footer";
 
 // Función para obtener las historias favoritas
-const getFavoriteStories = async (userEmail) => {
+const getCreatedStories = async (userEmail) => {
   try {
     const authToken = localStorage.getItem("accessToken");
 
-    const response = await fetch(`http://localhost:8000/get-favorites`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "auth-token": authToken,
-      },
-    });
+    const response = await fetch(
+      `http://localhost:8000/library/created-books/`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": authToken,
+        },
+      }
+    );
 
     const data = await response.json();
 
     if (response.ok) {
-      console.log(data.data);
-      return data.data; // Retorna los datos de las historias favoritas
+      console.log(data);
+      return data.data; // Retorna los datos de las historias creadas
     } else {
       console.log("Error:", data.error);
       return []; // Retorna un array vacío en caso de error
@@ -35,16 +39,17 @@ const getFavoriteStories = async (userEmail) => {
     return []; // Retorna un array vacío en caso de excepción
   }
 };
-function DashBoard(props) {
-  const [favoriteStories, setFavoriteStories] = useState([]);
+
+function DashBoard() {
+  const [createdStory, setCreatedStory] = useState([]);
   const [storyToRemove, setStoryToRemove] = useState(null); // Estado para almacenar la historia a eliminar
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const userEmail = localStorage.getItem("email");
-        const stories = await getFavoriteStories(userEmail);
-        setFavoriteStories(stories);
+        const stories = await getCreatedStories(userEmail);
+        setCreatedStory(stories);
       } catch (error) {
         console.error("Error fetching favorite stories:", error);
       }
@@ -57,23 +62,22 @@ function DashBoard(props) {
   const removeStory = async (storyId, userEmail) => {
     // Realizar solicitud POST para eliminar la historia de favoritos
     try {
-      const response = await fetch("http://localhost:8000/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "auth-token": localStorage.getItem("accessToken"),
-        },
-        body: JSON.stringify({
-          story_id: storyId._id,
-          user_email: userEmail,
-        }),
-      });
+      const response = await fetch(
+        "http://localhost:8000/library/delete-books",
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            "auth-token": localStorage.getItem("accessToken"),
+          },
+        }
+      );
 
       if (response.ok) {
         // Éxito: puedes manejarlo aquí
         // Por ejemplo, puedes actualizar la lista de historias favoritas después de eliminar una
-        const updatedStories = await getFavoriteStories(userEmail);
-        setFavoriteStories(updatedStories);
+        const updatedStories = await getCreatedStories(userEmail);
+        setCreatedStory(updatedStories);
       } else {
         // Error: puedes mostrar un mensaje de error o realizar otras acciones
         console.log(response.status);
@@ -93,44 +97,59 @@ function DashBoard(props) {
       {storyToRemove && (
         <Modal
           visible={true}
-          onConfirm={() =>
-            removeStory(storyToRemove, localStorage.getItem("email"))
-          }
+          onConfirm={() => removeStory(storyToRemove)}
           onCancel={() => setStoryToRemove(null)} // Cancela la eliminación
           story={storyToRemove} // Pasa la historia al modal
         >
-          ¿Estás seguro de que deseas eliminar esta historia favorita?
+          ¿Estás seguro de que deseas eliminar esta historia?
         </Modal>
       )}
-      <div className={classes.FavContainer}>
-        <div className={classes.ButContainer}>
-          <h3>Favorite Stories</h3>
-          {/* Agrega un botón "Crear Historia" que redirige al formulario */}
-          <Link to="/NewStory" className={classes.CreateStoryButton}>
-            Add History
-          </Link>
+      <div style={{ display: "flex" }}>
+        {" "}
+        <LateralNavbar></LateralNavbar>
+        <div className={classes.FavContainer}>
+          <div className={classes.ButContainer}>
+            <h3>Favorite Stories</h3>
+            {/* Agrega un botón "Crear Historia" que redirige al formulario */}
+            <Link to="/NewStory" className={classes.CreateStoryButton}>
+              All Stories
+            </Link>
+          </div>
+          <div style={{ height: "90%", padding: "10px" }}>
+            <ul className={classes.List}>
+              {createdStory.length > 0 ? (
+                createdStory.map((story, index) => (
+                  <li key={index} className={classes.list}>
+                    {/* Renderiza los detalles de las historias aquí */}
+                    {/* Icono de eliminación */}
+                    <FontAwesomeIcon
+                      icon={faXmark}
+                      className={classes.RemoveButton}
+                      style={{ top: "-30px", position: "relative" }}
+                      onClick={() => setStoryToRemove(story)} // Establece la historia a eliminar
+                    />
+                    <img
+                      className={classes.stories}
+                      src={`http://localhost:8000/${story.image}`}
+                      alt="Story Image"
+                    />
+
+                    <div style={{ display: "flex", flexDirection: "column" }}>
+                      <a href={`${story.href}`} target={"_blank"}>
+                        Title nº{index + 1}: {story.title} - {story.status}
+                      </a>
+                      <p>{story.description}</p>
+                    </div>
+                  </li>
+                ))
+              ) : (
+                <p>You dont have any Story created</p>
+              )}
+            </ul>
+          </div>
         </div>
-        <ul className={classes.List}>
-          {favoriteStories.length > 0 ? (
-            favoriteStories.map((story, index) => (
-              <li key={index} className={classes.list}>
-                {/* Renderiza los detalles de las historias aquí */}
-                {/* Icono de eliminación */}
-                <FontAwesomeIcon
-                  icon={faXmark}
-                  className={classes.RemoveButton}
-                  onClick={() => setStoryToRemove(story)} // Establece la historia a eliminar
-                />
-                <a href={`${story.href}`} target={"_blank"}>
-                  Title nº{index + 1}: {story.title}
-                </a>
-              </li>
-            ))
-          ) : (
-            <p>You dont have any favorite Story</p>
-          )}
-        </ul>
       </div>
+      <Footer></Footer>
     </>
   );
 }

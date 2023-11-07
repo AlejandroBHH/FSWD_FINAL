@@ -4,6 +4,7 @@ const {
   createBook,
   updateBook,
   deleteBook,
+  getCreatedBooks,
 } = require("../Controller/booksController");
 
 const verifyToken = require("../middlewares/auth");
@@ -24,6 +25,7 @@ const upload = multer({ storage: storage });
 router.get("/", verifyToken, getBooks);
 router.post("/book", upload.single("image"), verifyToken, createBook);
 router.patch("/:id", verifyToken, updateBook);
-router.delete("/:id", verifyToken, deleteBook);
+router.delete("/delete-books", verifyToken, deleteBook);
+router.get("/created-books", verifyToken, getCreatedBooks);
 
 module.exports = router;

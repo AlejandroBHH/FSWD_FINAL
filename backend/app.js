@@ -51,6 +51,9 @@ app.use(express.json());
 // Habilitar el uso de cors
 app.use(cors({ origin: "http://localhost:3000" }));
 
+// Ruta para servir imágenes desde la carpeta 'uploads'
+app.use("/uploads", express.static("uploads"));
+
 // Conectar a la BBDD
 mongoose
   .connect(process.env.DATABASE_URL, {

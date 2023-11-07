@@ -13,10 +13,14 @@ const eventSchema = new mongoose.Schema({
     type: Date,
     default: Date.now, // Esto establece la fecha de creación automáticamente
   },
-  description: {
-    type: String,
-    required: true,
-  },
+
+  chapters: [
+    {
+      title: String,
+      content: String,
+      // Otros campos relacionados con los capítulos
+    },
+  ],
   content: {
     type: String,
     required: true,

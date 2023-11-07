@@ -69,7 +69,7 @@ const getBooks = async (req, res) => {
 const createBook = async (req, res) => {
   try {
     // Obtener los campos del formulario de la solicitud
-    const { title, description, content } = req.body;
+    const { title, content } = req.body;
 
     // `req.file.path` contiene la ubicación del archivo de imagen en el servidor
     const image = req.file.path;
@@ -80,7 +80,7 @@ const createBook = async (req, res) => {
     // Crear un nuevo libro utilizando un modelo (asegúrate de tener el modelo definido)
     const new_storie = new newModel({
       title,
-      description,
+
       content,
       image,
       author,
@@ -98,35 +98,59 @@ const createBook = async (req, res) => {
   }
 };
 
-const updateBook = async (req, res) => {
+const getCreatedBooks = async (req, res) => {
   try {
-    const event = await Book.findById(req.params.id);
-    //si no existe el evento
-    if (!event) {
-      res.status(400).json({
-        status: "failed",
-        data: null,
-        error: "Book not found",
-      });
-    }
+    const author = req.user.id; // Obtén el ID del usuario autenticado
+    const createdBooks = await newModel.find({ author });
 
-    //si el usuario no es el mismo que el que creo el evento
-    if (event.user._id.toString() !== req.user.id) {
-      return res
-        .status(403)
-        .json("You don't have permission to edit this event");
-    }
-    //actualizar mediante findbyIdAndUpdate
-    const data = await Book.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-    });
     res.status(200).json({
-      status: "succeded",
-      data: null,
+      status: "success",
+      data: createdBooks,
       error: null,
     });
   } catch (error) {
-    res.status(400).json({
+    res.status(500).json({
+      status: "failed",
+      data: null,
+      error: error.message,
+    });
+  }
+};
+
+const updateBook = async (req, res) => {
+  try {
+    const book = await Book.findById(req.params.id);
+
+    if (!book) {
+      return res.status(404).json({ error: "Book not found" });
+    }
+
+    if (book.author.toString() !== req.user.id) {
+      return res
+        .status(403)
+        .json({ error: "You don't have permission to edit this book" });
+    }
+
+    // Obtén los datos del nuevo capítulo desde el cuerpo de la solicitud (req.body)
+    const newChapter = {
+      title: req.body.chapterTitle,
+      content: req.body.chapterContent,
+      // Otros campos relacionados con el capítulo
+    };
+
+    // Agrega el nuevo capítulo al array de capítulos
+    book.chapters.push(newChapter);
+
+    // Guarda el libro actualizado en la base de datos
+    const updatedBook = await book.save();
+
+    res.status(200).json({
+      status: "succeeded",
+      data: updatedBook,
+      error: null,
+    });
+  } catch (error) {
+    res.status(500).json({
       status: "failed",
       data: null,
       error: error.message,
@@ -136,25 +160,42 @@ const updateBook = async (req, res) => {
 
 const deleteBook = async (req, res) => {
   try {
-    const event = await Book.findById(req.params.id);
-    if (event.user._id.toString() !== req.user.id) {
+    const book = await newModel.findOne({ author: req.user.id });
+
+    if (!book) {
+      return res.status(404).json({ error: "Book not found" });
+    }
+
+    if (book.author.toString() !== req.user.id) {
       return res
         .status(403)
-        .json("You don't have permission to edit this event");
+        .json({ error: "You don't have permission to delete this book" });
     }
-    await event.remove();
-    res.status(200).json({
-      status: "succeded",
-      data: null,
-      error: null,
-    });
+
+    const deletedBook = await newModel.deleteOne({ _id: book._id });
+
+    if (deletedBook.deletedCount === 1) {
+      res.status(200).json({ status: "succeeded", data: null, error: null });
+    } else {
+      res
+        .status(500)
+        .json({
+          status: "failed",
+          data: null,
+          error: "Failed to delete the book",
+        });
+    }
   } catch (error) {
-    res.status(400).json({
-      status: "failed",
-      data: null,
-      error: error.message,
-    });
+    res
+      .status(500)
+      .json({ status: "failed", data: null, error: error.message });
   }
 };
 
-module.exports = { getBooks, createBook, updateBook, deleteBook };
+module.exports = {
+  getBooks,
+  createBook,
+  updateBook,
+  deleteBook,
+  getCreatedBooks,
+};

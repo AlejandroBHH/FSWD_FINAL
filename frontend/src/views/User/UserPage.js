@@ -86,27 +86,28 @@ const UserPage = () => {
   return (
     <>
       <Navbar />
-
-      <div className="userPage">
-        <div className="userWrap">
-          {user && (
-            <>
-              {editing ? (
-                /*aquí recibe los datos de user y la edición se la pasa al handlesave para guardar los cambios*/
-                <EditProfileForm user={user} onSave={handleSave} />
-              ) : (
-                <>
-                  <UserProfile user={user} />
-                  <div className="edit-button">
-                    <button onClick={handleEditClick}>Edit Profile</button>
-                  </div>
-                </>
-              )}
-            </>
-          )}
+      <div style={{ display: "flex" }}>
+        <div className="userPage">
+          <div className="userWrap">
+            {user && (
+              <>
+                {editing ? (
+                  /*aquí recibe los datos de user y la edición se la pasa al handlesave para guardar los cambios*/
+                  <EditProfileForm user={user} onSave={handleSave} />
+                ) : (
+                  <>
+                    <UserProfile user={user} />
+                    <div className="edit-button">
+                      <button onClick={handleEditClick}>Edit Profile</button>
+                    </div>
+                  </>
+                )}
+              </>
+            )}
+          </div>
         </div>
+        <FavoriteStories data={user}></FavoriteStories>
       </div>
-      <FavoriteStories data={user}></FavoriteStories>
       <Footer></Footer>
     </>
   );
