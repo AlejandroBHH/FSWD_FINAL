@@ -85,11 +85,11 @@ function Index() {
         navigate(`/index/Page/${newPage}.html`);
         setCurrentPage(newPage);
         //para subir la pantalla al pasar de páginas
-        window.scrollTo({ top: 0, behavior: "smooth" });
+        window.scrollTo({ top: -50, behavior: "smooth" });
       } else {
         navigate(`/index/Page/${newPage}.html`);
         setCurrentPage(newPage); // Mover setCurrentPage después de la navegación
-        window.scrollTo({ top: 0, behavior: "smooth" });
+        window.scrollTo({ top: -50, behavior: "smooth" });
       }
     } else if (newPage < 1) {
       // Si newPage es menor que 1, ajustar a 1 para evitar valores negativos

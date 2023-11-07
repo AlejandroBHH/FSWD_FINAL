@@ -68,21 +68,33 @@ const getBooks = async (req, res) => {
 
 const createBook = async (req, res) => {
   try {
-    // `req.file.path` contiene la ubicación del archivo en el servidor
+    // Obtener los campos del formulario de la solicitud
+    const { title, description, content } = req.body;
+
+    // `req.file.path` contiene la ubicación del archivo de imagen en el servidor
     const image = req.file.path;
 
+    const author = req.user.id;
+    const status = "in review";
+
+    // Crear un nuevo libro utilizando un modelo (asegúrate de tener el modelo definido)
     const new_storie = new newModel({
+      title,
+      description,
+      content,
       image,
+      author,
+      status,
     });
 
-    const savedBook = await new_storie.save();
-    res.status(200).json(savedBook);
+    // Guardar el libro en la base de datos
+    const savedStorie = await new_storie.save();
+
+    res
+      .status(201)
+      .json({ message: "Libro creado con éxito", storie: savedStorie });
   } catch (error) {
-    res.status(400).json({
-      status: "failed",
-      data: null,
-      error: error.message,
-    });
+    res.status(500).json({ error: "Error al crear el libro" });
   }
 };
 

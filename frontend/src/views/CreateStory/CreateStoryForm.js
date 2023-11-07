@@ -3,6 +3,7 @@ import classes from "./CreateStoryForm.module.css";
 import LateralNavbar from "../../utils/LateralNavbar/LateralNavbar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileLines, faCirclePlus } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
 
 import Footer from "../../utils/Footer/Footer";
 function CreateStoryForm() {
@@ -19,13 +20,29 @@ function CreateStoryForm() {
   const [charLength, setCharLength] = useState(0);
   const maxCharLength = 1500;
 
+  const navigate = useNavigate();
+
   // Almacena la URL de la imagen seleccionada para la vista previa
   const [imagePreview, setImagePreview] = useState(null);
 
   const fileInputRef = useRef(null);
   const token = localStorage.getItem("accessToken");
 
+  const isFormValid = () => {
+    // Verifica si alguno de los campos requeridos está vacío
+    return (
+      formData.title &&
+      formData.description &&
+      formData.content &&
+      formData.image
+    );
+  };
+
   const handleSave = async () => {
+    if (!isFormValid()) {
+      // Si el formulario no es válido, no hagas nada
+      return;
+    }
     try {
       const formDataToSend = new FormData();
       formDataToSend.append("image", formData.image);
@@ -45,6 +62,7 @@ function CreateStoryForm() {
 
       if (response.ok) {
         // Éxito
+        navigate("/dashboard");
       } else {
         throw new Error(data.error);
       }
@@ -172,6 +190,7 @@ function CreateStoryForm() {
                   name="description"
                   value={formData.description}
                   onChange={handleChange}
+                  required
                 />
               </div>
               <div className={classes.FormGroup}>
@@ -197,6 +216,7 @@ function CreateStoryForm() {
                   type="submit"
                   className={classes.SubmitButton}
                   onClick={handleSubmit}
+                  disabled={!isFormValid()}
                 >
                   Create
                 </button>
