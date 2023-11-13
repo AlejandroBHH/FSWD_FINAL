@@ -69,7 +69,7 @@ const getBooks = async (req, res) => {
 const createBook = async (req, res) => {
   try {
     // Obtener los campos del formulario de la solicitud
-    const { title, content } = req.body;
+    const { title, content, synopsis } = req.body;
 
     // `req.file.path` contiene la ubicación del archivo de imagen en el servidor
     const image = req.file.path;
@@ -80,7 +80,7 @@ const createBook = async (req, res) => {
     // Crear un nuevo libro utilizando un modelo (asegúrate de tener el modelo definido)
     const new_storie = new newModel({
       title,
-
+      synopsis,
       content,
       image,
       author,
@@ -119,7 +119,7 @@ const getCreatedBooks = async (req, res) => {
 
 const updateBook = async (req, res) => {
   try {
-    const book = await Book.findById(req.params.id);
+    const book = await newModel.findById(req.params.id);
 
     if (!book) {
       return res.status(404).json({ error: "Book not found" });
@@ -139,10 +139,10 @@ const updateBook = async (req, res) => {
     };
 
     // Agrega el nuevo capítulo al array de capítulos
-    book.chapters.push(newChapter);
+    newModel.chapters.push(newChapter);
 
     // Guarda el libro actualizado en la base de datos
-    const updatedBook = await book.save();
+    const updatedBook = await newModel.save();
 
     res.status(200).json({
       status: "succeeded",
@@ -177,13 +177,11 @@ const deleteBook = async (req, res) => {
     if (deletedBook.deletedCount === 1) {
       res.status(200).json({ status: "succeeded", data: null, error: null });
     } else {
-      res
-        .status(500)
-        .json({
-          status: "failed",
-          data: null,
-          error: "Failed to delete the book",
-        });
+      res.status(500).json({
+        status: "failed",
+        data: null,
+        error: "Failed to delete the book",
+      });
     }
   } catch (error) {
     res

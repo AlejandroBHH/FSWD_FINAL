@@ -43,6 +43,7 @@ const getCreatedStories = async (userEmail) => {
 function DashBoard() {
   const [createdStory, setCreatedStory] = useState([]);
   const [storyToRemove, setStoryToRemove] = useState(null); // Estado para almacenar la historia a eliminar
+  const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -90,6 +91,14 @@ function DashBoard() {
       setStoryToRemove(null);
     }
   };
+
+  const toggle = (index) => {
+    setIsActive((prev) => ({
+      ...prev,
+      [index]: !prev[index],
+    }));
+  };
+
   //console.log(storyToRemove);
   return (
     <>
@@ -119,13 +128,19 @@ function DashBoard() {
             <ul className={classes.List}>
               {createdStory.length > 0 ? (
                 createdStory.map((story, index) => (
-                  <li key={index} className={classes.list}>
+                  <li
+                    key={index}
+                    className={classes.list}
+                    onClick={(e) => {
+                      toggle(index);
+                    }}
+                  >
                     {/* Renderiza los detalles de las historias aquí */}
                     {/* Icono de eliminación */}
                     <FontAwesomeIcon
                       icon={faXmark}
                       className={classes.RemoveButton}
-                      style={{ top: "-30px", position: "relative" }}
+                      style={{ position: "relative" }}
                       onClick={() => setStoryToRemove(story)} // Establece la historia a eliminar
                     />
                     <img
@@ -134,11 +149,34 @@ function DashBoard() {
                       alt="Story Image"
                     />
 
-                    <div style={{ display: "flex", flexDirection: "column" }}>
-                      <a href={`${story.href}`} target={"_blank"}>
-                        Title nº{index + 1}: {story.title} - {story.status}
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        flex: 1,
+                      }}
+                    >
+                      <a>
+                        Title nº{index + 1}: {story.title} - {story.date}
                       </a>
-                      <p>{story.description}</p>
+                      <p>{story.synopsis}</p>
+                      <div
+                        style={{
+                          borderTop: "1px solid rgba(76, 76, 76, 0.1)",
+                        }}
+                        className={
+                          isActive[index] ? classes.active : classes.noActive
+                        }
+                      >
+                        {" "}
+                      </div>
+                      <p
+                        className={
+                          isActive[index] ? classes.active : classes.noActive
+                        }
+                      >
+                        {story.content}
+                      </p>
                     </div>
                   </li>
                 ))

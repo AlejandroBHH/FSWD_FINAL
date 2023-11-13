@@ -79,6 +79,15 @@ function Navbar() {
                   User
                 </NavLink>
               </li>
+              <li>
+                <NavLink
+                  className={`${classes["nav-link"]}`}
+                  activeclassname={classes.active}
+                  to="/Dashboard"
+                >
+                  DashBoard
+                </NavLink>
+              </li>
             </>
           )}
 

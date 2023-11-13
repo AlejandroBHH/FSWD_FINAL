@@ -12,7 +12,7 @@ function CreateStoryForm() {
   const [formData, setFormData] = useState({
     title: "",
     date: "", // Hacerlo automático
-
+    synopsis: "", // Initialize synopsis field
     content: "",
     image: null, // Almacena la imagen seleccionada
   });
@@ -30,7 +30,9 @@ function CreateStoryForm() {
 
   const isFormValid = () => {
     // Verifica si alguno de los campos requeridos está vacío
-    return formData.title && formData.content && formData.image;
+    return (
+      formData.title && formData.content && formData.image && formData.synopsis
+    );
   };
 
   const handleSave = async () => {
@@ -42,6 +44,7 @@ function CreateStoryForm() {
       const formDataToSend = new FormData();
       formDataToSend.append("image", formData.image);
       formDataToSend.append("title", formData.title);
+      formDataToSend.append("synopsis", formData.synopsis);
       formDataToSend.append("content", formData.content);
 
       const response = await fetch("http://localhost:8000/library/book", {
@@ -176,9 +179,21 @@ function CreateStoryForm() {
                   required
                 />
               </div>
+              <div className={classes.FormGroup}>
+                <label htmlFor="synopsis">Synopsis</label>
+                <textarea
+                  id="synopsis"
+                  name="synopsis"
+                  value={formData.synopsis}
+                  onChange={(e) => {
+                    handleChange(e);
+                  }}
+                  style={{ height: "50px" }}
+                />
+              </div>
 
               <div className={classes.FormGroup}>
-                <label htmlFor="content">Synopsis</label>
+                <label htmlFor="content">Content</label>
                 <textarea
                   id="content"
                   name="content"
