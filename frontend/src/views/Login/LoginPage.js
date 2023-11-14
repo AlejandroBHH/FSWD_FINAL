@@ -73,7 +73,7 @@ function LoginPage(props) {
         info.loginMessage = "Invalid email address";
       }
       if (!isPasswordValid) {
-        info.loginMessage = "Password must have at least 8 characters";
+        info.loginMessage = "Wrong password";
       }
       if (!isNameValid) {
         info.loginMessage =

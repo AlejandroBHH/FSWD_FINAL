@@ -36,7 +36,6 @@ function Index() {
     // del almacenamiento local (localStorage) o de donde corresponda.
     // Por ejemplo, si estás usando un token almacenado en localStorage:
     const storedToken = localStorage.getItem("accessToken");
-    const storedToken2 = localStorage.getItem("refreshToken");
 
     // Realizar la llamada a la API solo si tienes un token válido
     if (storedToken) {
@@ -51,7 +50,6 @@ function Index() {
       fetch(apiUrl, {
         headers: {
           "auth-token": storedToken,
-          "refresh-token": storedToken2,
         },
       })
         .then((response) => {
@@ -121,11 +119,13 @@ function Index() {
 
   const handleImageClick = () => {
     // Hacer focus en la tabla cuando se haga click en la imagen
-    tableRef.current.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-      inline: "nearest",
-    });
+    if (tableRef.current) {
+      tableRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+        inline: "start",
+      });
+    }
   };
 
   return (

@@ -1,9 +1,6 @@
-import { NavLink } from "react-router-dom";
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom"; // Importa useNavigate
-import "../LateralNavbar/LateralNavbar.css";
-
-// icono para el logout
+import { NavLink, useLocation } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHouseUser,
@@ -12,10 +9,12 @@ import {
   faUser,
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
+import "../LateralNavbar/LateralNavbar.css";
 
 function LateralNavbar() {
-  // para el logout
-  const navigate = useNavigate(); // Usa useNavigate para manejar la redirección
+  const navigate = useNavigate();
+  const location = useLocation(); // Use useLocation to get the current location
+
   const [navAlternative, setNavAlternative] = useState(true);
 
   const handleToggleNav = () => {
@@ -23,8 +22,12 @@ function LateralNavbar() {
   };
 
   const handleLogout = () => {
-    navigate("/index"); // Redirigir al usuario a la página de inicio de sesión
+    navigate("/index");
   };
+
+  const dashboardLink = location.pathname.includes("Dashboard")
+    ? "/NewStory"
+    : "/Dashboard";
 
   return (
     <header className={"scrolledLateral"}>
@@ -34,7 +37,7 @@ function LateralNavbar() {
             <FontAwesomeIcon
               icon={navAlternative ? faBars : faXmark}
               size="xl"
-              className={navAlternative ? "nav-button" : ""} // Agregar la clase nav-lateral aquí
+              className={navAlternative ? "nav-button" : ""}
               style={{ marginLeft: "5px", borderRadius: "3px" }}
             />
             <strong className={navAlternative ? "hidden" : "visible"}>
@@ -42,10 +45,7 @@ function LateralNavbar() {
             </strong>
           </li>
           <li>
-            <NavLink
-              className="nav-lateral" // Agregar la clase nav-lateral aquí
-              to="/index/Page/1.html"
-            >
+            <NavLink className="nav-lateral" to={`/index/Page/1.html`}>
               <FontAwesomeIcon
                 icon={faHouseUser}
                 size="xl"
@@ -58,30 +58,24 @@ function LateralNavbar() {
             </NavLink>
           </li>
           <li>
-            <NavLink
-              className="nav-lateral" // Agregar la clase nav-lateral aquí
-              to="/Dashboard"
-            >
+            <NavLink className="nav-lateral" to={dashboardLink}>
               <FontAwesomeIcon
                 icon={faTableColumns}
                 size="xl"
-                className="nav-lateral" // Agregar la clase nav-lateral aquí
                 style={{ marginLeft: "5px", borderRadius: "3px" }}
               />
               <strong className={navAlternative ? "hidden" : "visible"}>
-                Dashboard
+                {location.pathname.includes("Dashboard")
+                  ? "NewStory"
+                  : "Dashboard"}
               </strong>
             </NavLink>
           </li>
           <li>
-            <NavLink
-              className="nav-lateral" // Agregar la clase nav-lateral aquí
-              to="/User"
-            >
+            <NavLink className="nav-lateral" to="/User">
               <FontAwesomeIcon
                 icon={faUser}
                 size="xl"
-                className="nav-lateral" // Agregar la clase nav-lateral aquí
                 style={{ marginLeft: "5px", borderRadius: "3px" }}
               />
               <strong className={navAlternative ? "hidden" : "visible"}>

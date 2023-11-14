@@ -10,12 +10,12 @@ import LateralNavbar from "../../utils/LateralNavbar/LateralNavbar";
 import Footer from "../../utils/Footer/Footer";
 
 // Función para obtener las historias favoritas
-const getCreatedStories = async (userEmail) => {
+const getCreatedStories = async (showAllStories) => {
   try {
     const authToken = localStorage.getItem("accessToken");
 
     const response = await fetch(
-      `http://localhost:8000/library/created-books/`,
+      `http://localhost:8000/library/created-books/?showAllStories=${showAllStories}`,
       {
         method: "GET",
         headers: {
@@ -44,12 +44,12 @@ function DashBoard() {
   const [createdStory, setCreatedStory] = useState([]);
   const [storyToRemove, setStoryToRemove] = useState(null); // Estado para almacenar la historia a eliminar
   const [isActive, setIsActive] = useState(false);
+  const [showAllStories, setShowAllStories] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const userEmail = localStorage.getItem("email");
-        const stories = await getCreatedStories(userEmail);
+        const stories = await getCreatedStories(showAllStories);
         setCreatedStory(stories);
       } catch (error) {
         console.error("Error fetching favorite stories:", error);
@@ -57,7 +57,7 @@ function DashBoard() {
     };
 
     fetchData();
-  }, []);
+  }, [showAllStories]);
 
   // Función para eliminar una historia de favoritos
   const removeStory = async (storyId, userEmail) => {
@@ -118,11 +118,14 @@ function DashBoard() {
         <LateralNavbar></LateralNavbar>
         <div className={classes.FavContainer}>
           <div className={classes.ButContainer}>
-            <h3>Favorite Stories</h3>
+            {showAllStories ? <p>My Stories</p> : <p>All Stories</p>}
             {/* Agrega un botón "Crear Historia" que redirige al formulario */}
-            <Link to="/NewStory" className={classes.CreateStoryButton}>
-              All Stories
-            </Link>
+            <button
+              className={classes.CreateStoryButton}
+              onClick={() => setShowAllStories(!showAllStories)}
+            >
+              {showAllStories ? "My Stories" : "All Stories"}
+            </button>
           </div>
           <div style={{ height: "90%", padding: "10px" }}>
             <ul className={classes.List}>
@@ -137,12 +140,16 @@ function DashBoard() {
                   >
                     {/* Renderiza los detalles de las historias aquí */}
                     {/* Icono de eliminación */}
-                    <FontAwesomeIcon
-                      icon={faXmark}
-                      className={classes.RemoveButton}
-                      style={{ position: "relative" }}
-                      onClick={() => setStoryToRemove(story)} // Establece la historia a eliminar
-                    />
+                    {showAllStories ? (
+                      <FontAwesomeIcon
+                        icon={faXmark}
+                        className={classes.RemoveButton}
+                        style={{ position: "relative" }}
+                        onClick={() => setStoryToRemove(story)} // Establece la historia a eliminar
+                      />
+                    ) : (
+                      <div style={{ width: "5px" }}></div>
+                    )}
                     <img
                       className={classes.stories}
                       src={`http://localhost:8000/${story.image}`}
@@ -154,6 +161,9 @@ function DashBoard() {
                         display: "flex",
                         flexDirection: "column",
                         flex: 1,
+                        padding: "5px",
+                        borderRadius: "5px",
+                        backgroundColor: "white",
                       }}
                     >
                       <a>

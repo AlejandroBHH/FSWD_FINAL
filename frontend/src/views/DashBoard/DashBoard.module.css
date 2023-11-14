@@ -8,6 +8,7 @@ div .FavContainer {
     overflow: hidden;
     flex: 1;
     margin-top: 20px;
+    height: 80vh;
   }
   
   /* Estilos para el encabezado "Historias Favoritas" */
@@ -60,11 +61,11 @@ div .FavContainer {
     overflow: hidden;
   }
 
-  .active {
-
-
+  ul.List li:hover {
+    cursor: pointer;
+    background-color: #cdd0d2;
   }
-
+ 
   .noActive {
     display:none
     
@@ -90,16 +91,5 @@ height: 100px;
     color: #d9534f; /* Color rojo */
   }
   
-  /* Estilos para el enlace de la historia */
-  a {
-    flex-grow: 1;
-    text-decoration: none;
-  }
-  
-  /* Estilos para el enlace de la historia al pasar el mouse */
-  a:hover {
-    text-decoration: underline;
-  }
-
-
+ 
   

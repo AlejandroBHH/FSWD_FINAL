@@ -100,8 +100,15 @@ const createBook = async (req, res) => {
 
 const getCreatedBooks = async (req, res) => {
   try {
-    const author = req.user.id; // Obtén el ID del usuario autenticado
-    const createdBooks = await newModel.find({ author });
+    const showAllStories = req.query.showAllStories === "true";
+    let createdBooks;
+
+    if (showAllStories) {
+      const author = req.user.id; // Obtain the ID of the authenticated user
+      createdBooks = await newModel.find({ author });
+    } else {
+      createdBooks = await newModel.find();
+    }
 
     res.status(200).json({
       status: "success",
