@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import { validateEmail, validateName } from "../../utils/validate";
 
-import "../User/EditProfileForm.css";
+import "../User/css/EditProfile.module.css";
 
 const EditProfileForm = ({ user, onSave }) => {
   const [editedUser, setEditedUser] = useState({

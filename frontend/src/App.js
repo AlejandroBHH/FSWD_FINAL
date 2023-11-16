@@ -68,7 +68,7 @@ function App() {
         }
       />
       <Route
-        path="/user"
+        path="/profile"
         element={
           <Suspense fallback={<div>Loading...</div>}>
             <UserPage />
@@ -76,7 +76,7 @@ function App() {
         }
       />
       <Route
-        path="/dashboard"
+        path="/fictions"
         element={
           <Suspense fallback={<div>Loading...</div>}>
             <DashBoard />

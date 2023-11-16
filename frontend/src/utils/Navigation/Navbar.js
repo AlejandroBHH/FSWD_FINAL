@@ -1,6 +1,6 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import classes from "../Navigation/Navbar.module.css"; // Importa las clases desde el módulo CSS
+import classes from "../Navigation/css/Navbar.module.css"; // Importa las clases desde el módulo CSS
 
 // Icono para el logout
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -49,61 +49,53 @@ function Navbar() {
               </NavLink>
             </li>
           ) : (
-            <li>
-              <NavLink
-                className={`${classes["nav-link"]}`}
-                activeclassname={classes.active}
-                to="/login"
-              >
-                Login
-              </NavLink>
-            </li>
+            currentPath === "/register" && (
+              <li>
+                <NavLink
+                  className={`${classes["nav-link"]}`}
+                  activeclassname={classes.active}
+                  to="/login"
+                >
+                  Login
+                </NavLink>
+              </li>
+            )
           )}
           {currentPath !== "/login" && currentPath !== "/register" && (
             <>
               <li>
                 <NavLink
                   className={`${classes["nav-link"]}`}
-                  activeclassname={classes.active}
                   to="/index/Page/1.html"
                 >
                   Home
                 </NavLink>
               </li>
               <li>
-                <NavLink
-                  className={`${classes["nav-link"]}`}
-                  activeclassname={classes.active}
-                  to="/User"
-                >
-                  User
+                <NavLink className={`${classes["nav-link"]}`} to="/profile">
+                  Profile{" "}
                 </NavLink>
               </li>
               <li>
-                <NavLink
-                  className={`${classes["nav-link"]}`}
-                  activeclassname={classes.active}
-                  to="/Dashboard"
-                >
-                  DashBoard
+                <NavLink className={`${classes["nav-link"]}`} to="/fictions">
+                  Ongoing Fictions
                 </NavLink>
+              </li>
+              <li>
+                <FontAwesomeIcon
+                  icon={faPowerOff}
+                  size="xl"
+                  className={`${classes["nav-link"]}`}
+                  onClick={handleLogout}
+                  style={{
+                    marginLeft: "5px",
+                    borderRadius: "3px",
+                    cursor: "pointer",
+                  }}
+                />
               </li>
             </>
           )}
-
-          <li>
-            <FontAwesomeIcon
-              icon={faPowerOff}
-              size="xl"
-              className={`${classes["nav-link"]}`}
-              onClick={handleLogout}
-              style={{
-                marginLeft: "5px",
-                borderRadius: "3px",
-                cursor: "pointer",
-              }}
-            />
-          </li>
         </ul>
       </nav>
     </header>
