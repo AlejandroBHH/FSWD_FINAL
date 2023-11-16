@@ -8,7 +8,7 @@ div .FavContainer {
     overflow: hidden;
     flex: 1;
     margin-top: 20px;
-    height: 80vh;
+    min-height: 80vh;
   }
   
   /* Estilos para el encabezado "Historias Favoritas" */

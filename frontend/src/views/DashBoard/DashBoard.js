@@ -124,7 +124,7 @@ function DashBoard() {
               className={classes.CreateStoryButton}
               onClick={() => setShowAllStories(!showAllStories)}
             >
-              {showAllStories ? "My Stories" : "All Stories"}
+              {showAllStories ? "All Stories" : "My Stories"}
             </button>
           </div>
           <div style={{ height: "90%", padding: "10px" }}>

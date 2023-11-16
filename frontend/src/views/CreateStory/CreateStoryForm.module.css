@@ -64,7 +64,7 @@ input[id="description"] {
   border-radius: 3px;
 }
 
-input[id="title"]  {
+input[name="title"][id="title"]  {
   width: 97%;
   padding: 10px;
   border: 1px solid #ccc;

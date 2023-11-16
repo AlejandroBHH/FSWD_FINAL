@@ -140,7 +140,7 @@ function Index() {
       <div className={classes.line}></div>
       <img
         className={classes.backimages}
-        src="/images/DC.jpg"
+        src="/images/1768.png"
         alt="Mi Imagen"
       />
       {/*imagenes*/}
