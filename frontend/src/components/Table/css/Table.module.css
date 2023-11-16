@@ -1,0 +1,98 @@
+@charset "UTF-8";
+/* Estilos para el contenedor de la tabla */
+.TableContainer {
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #d9d8d8;
+  border-radius: 0.5%;
+  width: -moz-min-content;
+  width: min-content;
+  /* Estilos para filas y columnas de la tabla */
+  /* Estilos para los clasificadores */
+  /* Animación de clic en el botón */
+  /* Media query para pantallas más pequeñas */
+  /* Estilos para el botón de agregar */
+  /* CÓDIGO PARA TOOLTIP */
+  /* Contenedor del tooltip */
+}
+.TableContainer tbody:last-child tr:hover {
+  background-color: #c3bfbf;
+  color: white;
+  cursor: pointer;
+}
+.TableContainer tr {
+  display: grid;
+  grid-template-columns: 200px 700px 100px 100px;
+}
+.TableContainer td {
+  padding: 8px;
+  border-bottom: 1px solid gray;
+  text-overflow: ellipsis;
+}
+.TableContainer .Sorters {
+  color: #2e4e7a;
+}
+@keyframes buttonClickAnimation {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@media (max-width: 768px) {
+  .TableContainer tr {
+    grid-template-columns: 150px 400px 80px 80px;
+  }
+}
+.TableContainer .AddButton {
+  background-color: transparent;
+}
+.TableContainer .AddButton:hover {
+  transform: scale(2);
+}
+.TableContainer .tooltip {
+  position: relative;
+  margin-top: 0;
+  /* Flecha */
+}
+.TableContainer .tooltip:before {
+  content: attr(data-text);
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 30%;
+  margin-left: 15px;
+  padding: 10px;
+  border-radius: 10px;
+  background: #000;
+  color: #fff;
+  text-align: center;
+  max-width: 500px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: none;
+}
+.TableContainer .tooltip:hover:before {
+  display: block;
+}
+.TableContainer .tooltip:after {
+  content: "";
+  position: absolute;
+  left: 30%;
+  margin-left: -5px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 10px solid #000;
+  border-color: transparent black transparent transparent;
+  display: none;
+}
+.TableContainer .tooltip:hover:before, .TableContainer .tooltip:hover:after {
+  display: block;
+}/*# sourceMappingURL=Table.module.css.map */

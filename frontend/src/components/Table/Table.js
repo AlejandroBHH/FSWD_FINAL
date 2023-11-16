@@ -1,6 +1,6 @@
-import classes from "../Table/Table.module.css";
+import classes from "../Table/css/Table.module.css";
 import { useState, useEffect } from "react";
-import Spinner from "../../utils/Spinner/Spinner"; // Asegúrate de ajustar la ruta correcta
+import Spinner from "../../utils/Spinner/Spinner"; // Make sure to adjust the correct path
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -11,18 +11,18 @@ import TaskInput from "../Task/TaskInput";
 import { Navigate, useNavigate } from "react-router-dom";
 
 function Table(props) {
-  const [filterSource, setFilterSource] = useState(""); // Estado para filtrar por source
+  const [filterSource, setFilterSource] = useState(""); // State to filter by source
   const [favoriteStories, setFavoriteStories] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
-  // Función para manejar el filtro por source
+
+  // Function to handle filtering by source
   const handleFilterSource = (source) => {
     setFilterSource(source);
   };
 
-  // Función para manejar el agregado a favoritos
-  const handleAddToFavorites = async (storyId, userEmail) => {
-    // Realizar solicitud POST para agregar la historia a favoritos
+  // Function to handle adding to favorites
+  const handleAddToFavorites = async (storyId) => {
     try {
       const response = await fetch("http://localhost:8000/", {
         method: "POST",
@@ -37,23 +37,23 @@ function Table(props) {
 
       const data = await response.json();
       if (response.ok) {
-        // Éxito: puedes manejarlo aquí
+        // Success: handle it here
         // console.log(data);
-        // Llamar a la función para obtener las historias favoritas después de agregar una nueva
+        // Call the function to get favorite stories after adding a new one
         fetchFavoriteStories();
       } else {
-        // Error: puedes mostrar un mensaje de error o realizar otras acciones
+        // Error: you can show an error message or take other actions
         console.log(response.status);
       }
     } catch (error) {
-      // Error en la solicitud
+      // Error in the request
       console.error("Error:", error);
       alert("Session ended");
       navigate("/login");
     }
   };
 
-  // Función para obtener las historias favoritas
+  // Function to fetch favorite stories
   const fetchFavoriteStories = async () => {
     try {
       const authToken = localStorage.getItem("accessToken");
@@ -78,24 +78,24 @@ function Table(props) {
     } catch (error) {
       console.error("Error fetching favorite stories:", error);
     } finally {
-      setIsLoading(false); // Una vez que se completó la carga de datos, establecemos isLoading en false
+      setIsLoading(false); // Once data loading is complete, set isLoading to false
     }
   };
 
   useEffect(() => {
-    // Obtener las historias favoritas al cargar el componente
+    // Get favorite stories when the component is mounted
     fetchFavoriteStories();
   }, []);
 
-  // Accedemos al email que guardamos en login
+  // Access the email stored during login
   const storedEmail = localStorage.getItem("email");
 
-  // Filtrar los datos según el filtro por source
+  // Filter the data based on the source filter
   const filteredData = filterSource
     ? props.data.filter((component) => component.source === filterSource)
     : props.data;
 
-  // Verificar si un componente está en favoritos
+  // Check if a component is in favorites
   const isComponentInFavorites = (component) => {
     return (
       favoriteStories.find((favorite) => favorite.href === component.href) !==
@@ -112,14 +112,14 @@ function Table(props) {
           <tbody>
             <TaskInput
               onEnteredValueChange={props.onEnteredValueChange}
-              handleFilterSource={handleFilterSource} // Pasa la función al componente TaskInput
+              handleFilterSource={handleFilterSource}
             />
           </tbody>
           <tbody>
             <tr className={classes.Sorters}>
               <td onClick={() => props.handleSort("title")}>
                 Update
-                {/* con esto cambiamos el codigo según sortBy, el && para condicional si se cumple lo primero */}
+                {/* Sorting by title */}
                 {props.sortBy === "title" && (
                   <FontAwesomeIcon
                     icon={
@@ -173,23 +173,24 @@ function Table(props) {
                 <td>{component.date}</td>
                 <td>
                   <a href={component.href} target={"_blank"}>
-                    {component.description ? ( // Verifica si hay descripción
-                      <p
+                    {component.description ? (
+                      // Verify description
+                      <span
                         className={classes.tooltip}
                         data-text={component.description}
                       >
                         {component.title}
-                      </p>
+                      </span>
                     ) : (
-                      <p
+                      <span
                         style={{ marginTop: "0" }}
                         data-text={component.description}
                       >
                         {component.title}
-                      </p>
+                      </span>
                     )}
                   </a>
-                  by {component.author}
+                  <p>by {component.author}</p>
                 </td>
                 <td>{component.words}</td>
 

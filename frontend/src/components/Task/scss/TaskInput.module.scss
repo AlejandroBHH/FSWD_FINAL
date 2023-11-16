@@ -1,0 +1,52 @@
+.FilterPage {
+    border: 1px solid #ddd;
+    width: 100%;
+   
+  
+    td {
+      border-radius: 0;
+    }
+  
+    &-controls {
+        height: 100%;
+    }
+  
+    &-button {
+      padding: 0;
+      border-radius: 0;
+      background-color: #b4aaaa1a;
+      color: black;
+      margin-right: 10px;
+      transition: background-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+      cursor: pointer;
+      margin-left: 10px;
+  
+      &:hover {
+        background-color: #d1d1d1;
+      }
+    }
+  
+    &-input {
+      padding: 10px;
+      border: 1px solid #ccc;
+      transition: box-shadow ease-in-out 0.15s;
+      width: 80%;
+  
+      &:focus {
+        box-shadow: 0px 0px 24px rgba(70, 35, 184, 0.3);
+      }
+    }
+  
+    &-words {
+      display: flex;
+      overflow: hidden;
+    }
+  
+    .form-control {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid #ccc;
+      width: 20px;
+    }
+  }
+  

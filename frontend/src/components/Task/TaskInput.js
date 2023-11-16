@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import "../Task/TaskInput.css";
+import classes from "../Task/css/TaskInput.module.css";
 
 const TaskInput = (props) => {
   const [enteredValue, setEnteredValue] = useState("");
@@ -16,30 +16,32 @@ const TaskInput = (props) => {
   };
 
   return (
-    <tr className="FilterPage">
+    <tr className={classes.FilterPage}>
       <td>
-        <div className="FilterPage-controls">
+        <div className={classes["FilterPage-controls"]}>
           <select
             onChange={(event) => props.handleFilterSource(event.target.value)}
-            style={{ textAlign: "center", maxWidth: "150px" }}
+            style={{ textAlign: "center", maxWidth: "150px", height: "100%" }}
           >
             <option value="">Source</option>
             <option value="spacebattle">SpaceBattles</option>
             <option value="sufficentVelocity">SufficentVelocity</option>
             <option value="Archive of Our Own">Archive of Our Own</option>
           </select>
-
-          <input
-            type="text"
-            //funcion en index para pasar el enteredvalue al backend
-            onChange={inputChangeHandler}
-            value={enteredValue}
-            placeholder="Enter text"
-            className={`FilterPage-input`}
-          />
         </div>
       </td>
-      <td className="FilterPage-words">
+      <td>
+        {" "}
+        <input
+          type="text"
+          //funcion en index para pasar el enteredvalue al backend
+          onChange={inputChangeHandler}
+          value={enteredValue}
+          placeholder="Enter text"
+          className={classes[`FilterPage-input`]}
+        />
+      </td>
+      <td className={classes["FilterPage-words"]}>
         <input
           type="text"
           name="Words_filter"
@@ -47,7 +49,7 @@ const TaskInput = (props) => {
           placeholder="Words"
           //funcion en index para pasar el enteredvalue al backend
 
-          className="form-control"
+          className={classes["form-control"]}
         />
       </td>
       <td></td>
