@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import classes from "./DashBoard.module.css";
+import { useNavigate } from "react-router-dom";
+import classes from "./Fictions.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faXmark, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 
 //para verificar que lo elimina
 import Modal from "../../utils/VerifyModal/VerifyModal";
-import { Link } from "react-router-dom";
+
 import LateralNavbar from "../../utils/LateralNavbar/LateralNavbar";
 import Footer from "../../utils/Footer/Footer";
 
@@ -28,7 +29,7 @@ const getCreatedStories = async (showAllStories) => {
     const data = await response.json();
 
     if (response.ok) {
-      console.log(data);
+      //console.log(data);
       return data.data; // Retorna los datos de las historias creadas
     } else {
       console.log("Error:", data.error);
@@ -40,11 +41,13 @@ const getCreatedStories = async (showAllStories) => {
   }
 };
 
-function DashBoard() {
+function Fictions() {
   const [createdStory, setCreatedStory] = useState([]);
   const [storyToRemove, setStoryToRemove] = useState(null); // Estado para almacenar la historia a eliminar
   const [isActive, setIsActive] = useState(false);
   const [showAllStories, setShowAllStories] = useState(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -60,7 +63,7 @@ function DashBoard() {
   }, [showAllStories]);
 
   // Función para eliminar una historia de favoritos
-  const removeStory = async (storyId, userEmail) => {
+  const removeStory = async (storyId) => {
     // Realizar solicitud POST para eliminar la historia de favoritos
     try {
       const response = await fetch(
@@ -76,11 +79,9 @@ function DashBoard() {
 
       if (response.ok) {
         // Éxito: puedes manejarlo aquí
-        // Por ejemplo, puedes actualizar la lista de historias favoritas después de eliminar una
-        const updatedStories = await getCreatedStories(userEmail);
+        const updatedStories = await getCreatedStories(showAllStories);
         setCreatedStory(updatedStories);
       } else {
-        // Error: puedes mostrar un mensaje de error o realizar otras acciones
         console.log(response.status);
       }
     } catch (error) {
@@ -97,9 +98,15 @@ function DashBoard() {
       ...prev,
       [index]: !prev[index],
     }));
+    // Llama a la función handleSelectStory con la historia seleccionada
+    handleSelectStory(createdStory[index]);
   };
 
-  //console.log(storyToRemove);
+  const editStory = (story) => {
+    // Navigate to the edit form, passing the selected story as a prop
+    navigate(`/edit-story/${story._id}`);
+  };
+
   return (
     <>
       {/* Modal de confirmación */}
@@ -131,22 +138,31 @@ function DashBoard() {
             <ul className={classes.List}>
               {createdStory.length > 0 ? (
                 createdStory.map((story, index) => (
-                  <li
-                    key={index}
-                    className={classes.list}
-                    onClick={(e) => {
-                      toggle(index);
-                    }}
-                  >
+                  <li key={index} className={classes.list}>
                     {/* Renderiza los detalles de las historias aquí */}
                     {/* Icono de eliminación */}
                     {showAllStories ? (
-                      <FontAwesomeIcon
-                        icon={faXmark}
-                        className={classes.RemoveButton}
-                        style={{ position: "relative" }}
-                        onClick={() => setStoryToRemove(story)} // Establece la historia a eliminar
-                      />
+                      <div
+                        style={{
+                          display: "flex",
+                          flexDirection: "column",
+                          gap: "13px",
+                        }}
+                        id="button"
+                      >
+                        <FontAwesomeIcon
+                          icon={faXmark}
+                          className={classes.RemoveButton}
+                          style={{ position: "relative" }}
+                          onClick={() => setStoryToRemove(story)} // Establece la historia a eliminar
+                        />
+                        <FontAwesomeIcon
+                          icon={faPenToSquare}
+                          className={classes.EditButton}
+                          style={{ position: "relative" }}
+                          onClick={() => editStory(story)} //  Set the story to edit
+                        />
+                      </div>
                     ) : (
                       <div style={{ width: "5px" }}></div>
                     )}
@@ -157,6 +173,9 @@ function DashBoard() {
                     />
 
                     <div
+                      onClick={(e) => {
+                        toggle(index);
+                      }}
                       style={{
                         display: "flex",
                         flexDirection: "column",
@@ -166,9 +185,9 @@ function DashBoard() {
                         backgroundColor: "white",
                       }}
                     >
-                      <a>
-                        Title nº{index + 1}: {story.title} - {story.date}
-                      </a>
+                      <b>
+                        Title nº{index + 1}: {story.title}
+                      </b>
                       <p>{story.synopsis}</p>
                       <div
                         style={{
@@ -202,4 +221,4 @@ function DashBoard() {
   );
 }
 
-export default DashBoard;
+export default Fictions;

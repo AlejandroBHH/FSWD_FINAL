@@ -1,0 +1,138 @@
+/* CreateStoryForm.module.css */
+
+.Main {
+    font-family: Arial, sans-serif;
+    display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 4;
+  
+  }
+  
+  .Menu {
+    display: flex;
+   
+  }
+  
+  
+  .Main h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .ContainerStory form {
+    border: 1px solid rgb(227, 224, 224);
+  padding: 30px;
+  border-radius: 5px;
+  
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin: 20px;
+  margin-top: 0;
+  }
+  
+  .ImagePreviewBlank{
+     width: 200px;
+     height: 300px;
+     border: 1px solid rgb(173, 173, 173);
+     margin: 10px;
+     background-color: #e8e7e7;
+  }
+  
+  .ImagePreviewBlank:hover {
+    cursor:pointer;
+    background-color: #a8a7a7;
+  }
+  
+  .Section {
+    width: 1000px;
+  }
+  
+  
+  label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+    color: black;
+  }
+  
+  input[id="description"] {
+    width: 97%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+  
+  input[name="title"][id="title"]  {
+    width: 97%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+  
+  
+  textarea {
+    width: 97%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+  
+  textarea {
+    height: 350px;
+  }
+  
+  
+  button.SubmitButton {
+    background: #007BFF;
+    color: #000000;
+    padding: 10px 20px;
+    width: 10%;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button.SubmitButton:hover {
+    background: #0056b3;
+  }
+  
+  /* Estilo para el contenedor de la imagen */
+  .ImageContainer {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+   margin:10px
+  }
+  
+  .FormGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  /* Estilo para el icono de la estrella */
+  .IconContainer {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: rgb(255, 255, 254);
+  }
+  
+  
+  
+  /* Estilo para la imagen */
+  .ImagePreview {
+    width: 300px;
+    height: 400px;
+    /* Añade otros estilos según tus preferencias */
+  }
+  
+  
+  
+  .Container {
+    transition: all  2s; 
+    margin-top: 20px;
+  }

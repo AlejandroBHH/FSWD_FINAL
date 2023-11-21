@@ -27,5 +27,6 @@ router.post("/book", upload.single("image"), verifyToken, createBook);
 router.patch("/:id", verifyToken, updateBook);
 router.delete("/delete-books", verifyToken, deleteBook);
 router.get("/created-books", verifyToken, getCreatedBooks);
+router.put("/edit-books", upload.single("image"), verifyToken, updateBook);
 
 module.exports = router;

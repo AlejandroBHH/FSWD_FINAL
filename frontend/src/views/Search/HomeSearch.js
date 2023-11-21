@@ -80,12 +80,12 @@ function Index() {
   const handlePageChange = (newPage) => {
     if (newPage >= 1 && newPage <= totalPages) {
       if (newPage === 1) {
-        navigate(`/index/Page/${newPage}.html`);
+        navigate(`/index/Page/${newPage}`);
         setCurrentPage(newPage);
         //para subir la pantalla al pasar de páginas
         window.scrollTo({ top: -50, behavior: "smooth" });
       } else {
-        navigate(`/index/Page/${newPage}.html`);
+        navigate(`/index/Page/${newPage}`);
         setCurrentPage(newPage); // Mover setCurrentPage después de la navegación
         window.scrollTo({ top: -50, behavior: "smooth" });
       }

@@ -15,7 +15,10 @@ const loginSchema = new Schema({
     type: String,
     required: true,
   },
-
+  date: {
+    type: Date,
+    default: Date.now, // Esto establece la fecha de creación automáticamente
+  },
   role: {
     type: String,
     required: true,

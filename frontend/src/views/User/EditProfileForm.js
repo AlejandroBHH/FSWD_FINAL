@@ -1,14 +1,19 @@
 import { useState } from "react";
+import {
+  validateEmail,
+  validateName,
+  validatePassword,
+} from "../../utils/validate";
 
-import { validateEmail, validateName } from "../../utils/validate";
+import classes from "../User/css/EditProfile.module.css";
 
-import "../User/css/EditProfile.module.css";
-
-const EditProfileForm = ({ user, onSave }) => {
+const EditProfileForm = ({ user, onSave, onCancel }) => {
   const [editedUser, setEditedUser] = useState({
     name: user.name || "",
     email: user.email || "",
-    // ...otros campos
+    password: "",
+    confirmPassword: "",
+    // ...other fields
   });
 
   const handleInputChange = (e) => {
@@ -21,26 +26,53 @@ const EditProfileForm = ({ user, onSave }) => {
 
   const handleSaveClick = async (event) => {
     event.preventDefault();
-    // Realiza las validaciones aquí
+
+    // Perform validations for name
     if (!validateName(editedUser.name)) {
       console.log("Name is invalid");
       return;
     }
 
+    // Perform validations for email
     if (!validateEmail(editedUser.email)) {
       console.log("Email is invalid");
       return;
     }
 
-    // Puedes agregar más validaciones aquí, si es necesario
+    // Perform validations for password
+    if (editedUser.password !== editedUser.confirmPassword) {
+      console.log("Passwords do not match");
+      return;
+    }
+
+    /*if (!validatePassword(editedUser.password)) {
+      console.log("Password is invalid");
+      return;
+    }*/
 
     onSave(editedUser);
   };
 
+  const handleCancelClick = () => {
+    // Clear changes and close the form
+    setEditedUser({
+      name: user.name || "",
+      email: user.email || "",
+      password: "",
+      confirmPassword: "",
+      // ...other fields
+    });
+
+    onCancel();
+  };
+
   return (
     <>
-      <form className="useredit">
-        <div className="Sect">
+      <form className={classes["useredit"]}>
+        <div className={classes["Sect"]}>
+          <p>
+            <b>Personal information</b>
+          </p>
           <label>Name:</label>
           <input
             type="text"
@@ -49,7 +81,7 @@ const EditProfileForm = ({ user, onSave }) => {
             onChange={handleInputChange}
           />
         </div>
-        <div className="Sect">
+        <div className={classes["Sect"]}>
           <label>Email:</label>
           <input
             type="email"
@@ -57,10 +89,39 @@ const EditProfileForm = ({ user, onSave }) => {
             value={editedUser.email}
             onChange={handleInputChange}
           />
-          {/*console.log(editedUser)*/}
         </div>
-        {/* Agregar más campos de edición aquí */}
-        <button onClick={handleSaveClick}>Save</button>
+        <p>
+          <b>Change Password</b>
+        </p>
+        <div className={classes["Sect"]}>
+          <label>Password:</label>
+          <input
+            type="text"
+            name="password"
+            value={editedUser.password}
+            onChange={handleInputChange}
+            placeholder="insert new Password"
+          />
+        </div>
+        <div className={classes["Sect"]}>
+          <label>Confirm Password:</label>
+          <input
+            type="text"
+            name="confirmPassword"
+            value={editedUser.confirmPassword}
+            onChange={handleInputChange}
+            placeholder="confirm new password"
+          />
+        </div>
+        {/* Add more editing fields here */}
+        <div className={classes["Buttons"]}>
+          <button onClick={handleSaveClick} style={{ marginRight: "10px" }}>
+            Save
+          </button>
+          <button type="button" onClick={handleCancelClick}>
+            Cancel
+          </button>
+        </div>
       </form>
     </>
   );

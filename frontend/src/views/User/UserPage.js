@@ -44,17 +44,15 @@ const UserPage = () => {
     fetchUserData();
   }, []);
 
-  // useEffect(() => {
-  //  console.log("User after setting:", user);
-  //}, [user]);
+  const handleCancelClick = (e) => {
+    setEditing(false);
+  };
 
   const handleEditClick = (e) => {
     setEditing(true);
   };
 
   const handleSave = async (updatedUser) => {
-    //console.log(updatedUser);
-    //console.log("hola");
     try {
       // Realiza el fetch para actualizar la información del usuario
       const response = await fetch(
@@ -93,7 +91,11 @@ const UserPage = () => {
               <>
                 {editing ? (
                   /*aquí recibe los datos de user y la edición se la pasa al handlesave para guardar los cambios*/
-                  <EditProfileForm user={user} onSave={handleSave} />
+                  <EditProfileForm
+                    user={user}
+                    onSave={handleSave}
+                    onCancel={handleCancelClick}
+                  />
                 ) : (
                   <>
                     <UserProfile user={user} />

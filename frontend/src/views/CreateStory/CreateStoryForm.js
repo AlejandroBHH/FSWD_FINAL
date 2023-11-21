@@ -59,7 +59,7 @@ function CreateStoryForm() {
 
       if (response.ok) {
         // Éxito
-        navigate("/dashboard");
+        navigate("/fictions");
       } else {
         throw new Error(data.error);
       }
@@ -214,7 +214,6 @@ function CreateStoryForm() {
                 <button
                   type="submit"
                   className={classes.SubmitButton}
-                  onClick={handleSubmit}
                   disabled={!isFormValid()}
                 >
                   Create

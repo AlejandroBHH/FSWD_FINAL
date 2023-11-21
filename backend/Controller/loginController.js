@@ -184,25 +184,12 @@ const updateUserData = async (req, res) => {
   try {
     // Obtener el ID del usuario autenticado desde el token
     const userId = req.user.id;
-    const userEmail = req.user.email;
-    console.log(userId);
-    console.log(userEmail);
+
     let user;
 
     if (userId) {
       // Buscar al usuario en la base de datos por su ID
       user = await Login.findById(userId);
-
-      if (!user) {
-        return res.status(404).json({
-          status: "failed",
-          data: null,
-          error: "User not found",
-        });
-      }
-    } else if (userEmail) {
-      // Buscar al usuario en la base de datos por su email
-      user = await Login.findOne({ email: userEmail });
 
       if (!user) {
         return res.status(404).json({
@@ -227,10 +214,10 @@ const updateUserData = async (req, res) => {
       user.email = req.body.email;
     }
     // Actualizar la contraseña si se proporciona en el cuerpo de la solicitud
-    if (req.body.newPassword) {
+    if (req.body.confirmPassword) {
       // Generar el hash de la nueva contraseña utilizando bcrypt
-      const newPasswordHash = await bcrypt.hash(req.body.newPassword, 10);
-      user.password = newPasswordHash;
+      const newPasswordHash = await bcrypt.hash(req.body.confirmPassword, 10);
+      user.password = req.body.confirmPassword;
     }
 
     // Guardar los cambios en la base de datos

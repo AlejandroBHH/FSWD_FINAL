@@ -2,7 +2,7 @@ import { lazy, Suspense, useState, useEffect } from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 import "./App.css";
 import { useParams } from "react-router-dom"; // Importar useParams
-import DashBoard from "./views/DashBoard/DashBoard";
+import Fictions from "./views/Fictions/Fictions";
 
 const LoginPage = lazy(() => import("./views/Login/LoginPage"));
 const ForgotPassword = lazy(() =>
@@ -14,6 +14,7 @@ const UserPage = lazy(() => import("../src/views/User/UserPage"));
 const CreateStoryForm = lazy(() =>
   import("./views/CreateStory/CreateStoryForm")
 );
+const EditStoryForm = lazy(() => import("./views/CreateStory/EditStoryForm"));
 
 function App() {
   return (
@@ -60,7 +61,7 @@ function App() {
         }
       />
       <Route
-        path={`/index/Page/:id.html`}
+        path={`/index/Page/:id`}
         element={
           <Suspense fallback={<div>Loading...</div>}>
             <ComponentWithPagination />
@@ -79,7 +80,15 @@ function App() {
         path="/fictions"
         element={
           <Suspense fallback={<div>Loading...</div>}>
-            <DashBoard />
+            <Fictions />
+          </Suspense>
+        }
+      />
+      <Route
+        path="/edit-story/:id"
+        element={
+          <Suspense fallback={<div>Loading...</div>}>
+            <EditStories />
           </Suspense>
         }
       />
@@ -101,6 +110,12 @@ function ComponentWithPagination() {
   const { id } = useParams(); // Obtener el valor de id de la URL
   //console.log(id);
   return <Search id={id} />; // Pasar el valor de id al componente Component
+}
+
+function EditStories() {
+  const { id } = useParams(); // Obtener el valor de id de la URL
+  //console.log(id);
+  return <EditStoryForm id={id} />; // Pasar el valor de id al componente Component
 }
 
 export default App;

@@ -100,14 +100,20 @@ const createBook = async (req, res) => {
 
 const getCreatedBooks = async (req, res) => {
   try {
-    const showAllStories = req.query.showAllStories === "true";
     let createdBooks;
-
-    if (showAllStories) {
-      const author = req.user.id; // Obtain the ID of the authenticated user
-      createdBooks = await newModel.find({ author });
+    if (req.query.id) {
+      const StoryID = req.query.id; // Obtain the ID of the Story
+      createdBooks = await newModel.findById(StoryID);
+      //console.log(StoryID);
     } else {
-      createdBooks = await newModel.find();
+      const showAllStories = req.query.showAllStories === "true";
+
+      if (showAllStories) {
+        const author = req.user.id; // Obtain the ID of the authenticated user
+        createdBooks = await newModel.find({ author });
+      } else {
+        createdBooks = await newModel.find();
+      }
     }
 
     res.status(200).json({
@@ -126,33 +132,33 @@ const getCreatedBooks = async (req, res) => {
 
 const updateBook = async (req, res) => {
   try {
-    const book = await newModel.findById(req.params.id);
+    // Obtén el ID del libro a través de la solicitud
+    const { id } = req.query;
 
-    if (!book) {
+    // Verifica si el libro existe
+    const existingBook = await newModel.findById(id);
+    if (!existingBook) {
       return res.status(404).json({ error: "Book not found" });
     }
 
-    if (book.author.toString() !== req.user.id) {
+    // Verifica si el usuario tiene permisos para editar el libro
+    if (existingBook.author.toString() !== req.user.id) {
       return res
         .status(403)
         .json({ error: "You don't have permission to edit this book" });
     }
 
-    // Obtén los datos del nuevo capítulo desde el cuerpo de la solicitud (req.body)
-    const newChapter = {
-      title: req.body.chapterTitle,
-      content: req.body.chapterContent,
-      // Otros campos relacionados con el capítulo
-    };
+    // Actualiza los campos del libro
+    existingBook.title = req.body.title;
+    existingBook.synopsis = req.body.synopsis;
+    existingBook.content = req.body.content;
+    existingBook.image = req.file.path;
 
-    // Agrega el nuevo capítulo al array de capítulos
-    newModel.chapters.push(newChapter);
-
-    // Guarda el libro actualizado en la base de datos
-    const updatedBook = await newModel.save();
+    // Guarda los cambios
+    const updatedBook = await existingBook.save();
 
     res.status(200).json({
-      status: "succeeded",
+      status: "success",
       data: updatedBook,
       error: null,
     });

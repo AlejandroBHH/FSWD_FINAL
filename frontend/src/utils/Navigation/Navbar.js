@@ -66,7 +66,7 @@ function Navbar() {
               <li>
                 <NavLink
                   className={`${classes["nav-link"]}`}
-                  to="/index/Page/1.html"
+                  to="/index/Page/1"
                 >
                   Home
                 </NavLink>

@@ -3,7 +3,6 @@
    left: 0;
   height: 100%;
   transition: width 0.3s ease-in-out; /* Efecto de deslizamiento de ancho */
-  z-index: 1000; /* Asegura que esté en la parte superior */
   color: black;
   border-right: 1px solid rgb(227, 224, 224);
 }
@@ -71,6 +70,7 @@ h1 {
     text-decoration: none;
     color: black;
     display: flex;
+    align-items: center;
 }
 
 .lateral li {
@@ -83,6 +83,7 @@ h1 {
   padding: 10px;
   cursor: pointer;
   display: flex;
+  align-items: center;
 }
 
 .lateralAlternative li:hover {

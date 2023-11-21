@@ -25,9 +25,9 @@ function LateralNavbar() {
     navigate("/index");
   };
 
-  const dashboardLink = location.pathname.includes("Dashboard")
+  const dashboardLink = location.pathname.includes("fictions")
     ? "/NewStory"
-    : "/Dashboard";
+    : "/fictions";
 
   return (
     <header className={"scrolledLateral"}>
@@ -38,7 +38,12 @@ function LateralNavbar() {
               icon={navAlternative ? faBars : faXmark}
               size="xl"
               className={navAlternative ? "nav-button" : ""}
-              style={{ marginLeft: "5px", borderRadius: "3px" }}
+              style={{
+                marginLeft: "5px",
+                borderRadius: "3px",
+                display: "flex",
+                alignItems: "center",
+              }}
             />
             <strong className={navAlternative ? "hidden" : "visible"}>
               Close
