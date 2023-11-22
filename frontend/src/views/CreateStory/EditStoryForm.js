@@ -15,7 +15,7 @@ function CreateStoryForm({ id }) {
     date: "", // Hacerlo automático
     synopsis: "", // Initialize synopsis field
     content: "",
-    image: null, // Almacena la imagen seleccionada
+    image: null, // Almacena la   seleccionada
   });
 
   const [charLength, setCharLength] = useState(0);
@@ -91,9 +91,6 @@ function CreateStoryForm({ id }) {
 
   const handleChange = (e) => {
     const { name, type, files } = e.target;
-    console.log("Name:", name);
-    console.log("Type:", type);
-    console.log("Files:", files);
 
     if (type === "file" && files.length > 0) {
       const image = files[0];
@@ -123,8 +120,6 @@ function CreateStoryForm({ id }) {
       formDataToSend.append("title", formData.title);
       formDataToSend.append("synopsis", formData.synopsis);
       formDataToSend.append("content", formData.content);
-
-      console.log(formDataToSend);
 
       const endpoint = `http://localhost:8000/library/edit-books/?id=${id}`;
 
@@ -170,7 +165,7 @@ function CreateStoryForm({ id }) {
                 <div className={classes.FormGroup}>
                   <label htmlFor="image">Image</label>
 
-                  {imagePreview ? (
+                  {imagePreview !== null ? (
                     <div
                       className={classes.ImageContainer}
                       onClick={() => fileInputRef.current.click()}
@@ -194,12 +189,6 @@ function CreateStoryForm({ id }) {
                         src={`http://localhost:8000/${storyData.image}`}
                         alt="Image Preview"
                         className={classes.ImageSaved}
-                      />
-                      <img
-                        style={{ width: "200px", height: "300px" }}
-                        src={imagePreview}
-                        alt="Image Preview"
-                        className={classes.ImagePreview}
                       />
                       {hovered && (
                         <FontAwesomeIcon

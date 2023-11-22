@@ -49,6 +49,7 @@ div .FavContainer {
   .ButContainer{
     display: flex;
     justify-content: space-between;
+    gap: 15px;
   }
   
   /* Estilos para cada elemento de la lista de historias */

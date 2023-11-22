@@ -197,7 +197,10 @@ const updateBook = async (req, res) => {
     existingBook.title = req.body.title;
     existingBook.synopsis = req.body.synopsis;
     existingBook.content = req.body.content;
-    existingBook.image = req.file.path;
+    // Verifica si hay un nuevo archivo adjunto
+    if (req.file && req.file.path) {
+      existingBook.image = req.file.path;
+    }
 
     // Guarda los cambios
     const updatedBook = await existingBook.save();

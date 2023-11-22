@@ -140,7 +140,15 @@ function Fictions() {
         <LateralNavbar></LateralNavbar>
         <div className={classes.FavContainer}>
           <div className={classes.ButContainer}>
-            {showAllStories ? <p>My Stories</p> : <p>All Stories</p>}
+            {showAllStories ? (
+              <b style={{ margin: "auto" }}>My Stories</b>
+            ) : (
+              <b style={{ margin: "auto" }}>All Stories</b>
+            )}
+            <FictionSearch
+              onEnteredValueChange={handleEnteredValueChange}
+              onSearch={fetchData}
+            />
             <button
               className={classes.CreateStoryButton}
               onClick={() => {
@@ -151,10 +159,6 @@ function Fictions() {
             </button>
           </div>
           <div style={{ height: "90%", padding: "10px" }}>
-            <FictionSearch
-              onEnteredValueChange={handleEnteredValueChange}
-              onSearch={fetchData}
-            />
             <StoryButton
               current={page}
               total={totalPages}
@@ -235,6 +239,11 @@ function Fictions() {
                 ) : (
                   <p>You dont have any Story created</p>
                 )}
+                <StoryButton
+                  current={page}
+                  total={totalPages}
+                  onPageChange={handlePageChange}
+                ></StoryButton>
               </ul>
             )}
           </div>

@@ -16,19 +16,14 @@ const FictionSearch = (props) => {
   };
 
   return (
-    <tr className={classes.FilterPage}>
-      <td>
-        {" "}
-        <input
-          type="text"
-          //funcion en index para pasar el enteredvalue al backend
-          onChange={inputChangeHandler}
-          value={enteredValue}
-          placeholder="Enter text"
-          className={classes[`FilterPage-input`]}
-        />
-      </td>
-    </tr>
+    <input
+      type="text"
+      //funcion en index para pasar el enteredvalue al backend
+      onChange={inputChangeHandler}
+      value={enteredValue}
+      placeholder="Enter text"
+      className={classes[`FilterPage-input`]}
+    />
   );
 };
 
