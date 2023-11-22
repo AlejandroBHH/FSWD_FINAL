@@ -100,27 +100,72 @@ const createBook = async (req, res) => {
 
 const getCreatedBooks = async (req, res) => {
   try {
-    let createdBooks;
-    if (req.query.id) {
-      const StoryID = req.query.id; // Obtain the ID of the Story
-      createdBooks = await newModel.findById(StoryID);
-      //console.log(StoryID);
-    } else {
-      const showAllStories = req.query.showAllStories === "true";
+    const page = parseInt(req.query.page) || 1;
+    const eventsPerPage = 5;
 
-      if (showAllStories) {
-        const author = req.user.id; // Obtain the ID of the authenticated user
-        createdBooks = await newModel.find({ author });
-      } else {
-        createdBooks = await newModel.find();
-      }
+    let createdBooks;
+
+    if (req.query.id) {
+      const StoryID = req.query.id; // Obtener el ID de la historia
+      createdBooks = await newModel.findById(StoryID);
+      // Puedes querer enviar una respuesta específica para la búsqueda por ID aquí
+      res.status(200).json({
+        status: "success",
+        data: createdBooks,
+        totalPages: 1, // Puedes ajustar esto según tu lógica
+        error: null,
+      });
+      return; // Retornar temprano para evitar enviar otra respuesta más adelante
     }
 
-    res.status(200).json({
-      status: "success",
-      data: createdBooks,
-      error: null,
-    });
+    const showAllStories = req.query.showAllStories === "true";
+    const filterValue = req.query.filterValue;
+
+    let filterOption = {};
+
+    if (filterValue) {
+      filterOption.title = new RegExp(filterValue, "i");
+    }
+
+    if (showAllStories) {
+      const author = req.user.id; // Obtener el ID del usuario autenticado
+
+      const totalEvents = await newModel.countDocuments({
+        author,
+      });
+      const totalPages = Math.ceil(totalEvents / eventsPerPage);
+      const skip = (page - 1) * eventsPerPage;
+
+      createdBooks = await newModel
+        .find({ author, ...filterOption })
+        .skip(skip)
+        .limit(eventsPerPage)
+        .exec();
+
+      res.status(200).json({
+        status: "success",
+        data: createdBooks,
+        totalPages,
+        error: null,
+      });
+    } else {
+      const totalEvents = await newModel.countDocuments(filterOption);
+      const totalPages = Math.ceil(totalEvents / eventsPerPage);
+      const skip = (page - 1) * eventsPerPage;
+
+      createdBooks = await newModel
+        .find(filterOption)
+        .skip(skip)
+        .limit(eventsPerPage)
+        .exec();
+
+      res.status(200).json({
+        status: "success",
+        data: createdBooks,
+        totalPages,
+        error: null,
+      });
+    }
   } catch (error) {
     res.status(500).json({
       status: "failed",
