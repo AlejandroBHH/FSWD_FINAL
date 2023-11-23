@@ -84,7 +84,7 @@ const UserPage = () => {
   return (
     <>
       <Navbar />
-      <div style={{ display: "flex", marginTop: "20px" }}>
+      <div style={{ display: "flex", marginTop: "20px", minHeight: "80vh" }}>
         <div className="userPage">
           <div className="userWrap">
             {user && (

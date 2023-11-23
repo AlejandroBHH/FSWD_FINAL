@@ -1,0 +1,97 @@
+/* Estilos para el contenedor principal */
+div .FavContainer {
+    margin: 0px 20px 20px 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f7f7f7;
+    padding: 20px;
+    overflow: hidden;
+    flex: 1;
+    margin-top: 20px;
+    min-height: 80vh;
+  }
+  
+  svg:hover {
+    color: #2E4E7A;
+  }
+  
+  /* Estilos para el encabezado "Historias Favoritas" */
+  h3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+  
+  /* Estilos para el botón "Crear Historia" */
+  a.CreateStoryButton {
+    display: inline-block; /* Para que esté en la misma línea */
+    margin-left: 10px; /* Ajusta el margen según sea necesario */
+    padding: 10px 15px; /* Ajusta el espaciado interno */
+    background-color: #2E4E7A; /* Color de fondo del botón */
+    color: #fff; /* Color del texto del botón */
+    text-decoration: none; /* Quita la decoración de texto */
+    border-radius: 5px; /* Borde redondeado */
+    cursor: pointer; /* Cambia el cursor al pasar el mouse */
+    flex-grow: 0;
+    transition: background-color 0.3s; /* Agrega una transición de color de fondo */
+  }
+  
+  /* Estilos para el botón "Crear Historia" al pasar el mouse */
+  a.CreateStoryButton:hover {
+    background-color: #1A356E; /* Cambia el color de fondo al pasar el mouse */
+  }
+  
+  /* Estilos para la lista de historias */
+  ul.List {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .ButContainer {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+  }
+  
+  /* Estilos para cada elemento de la lista de historias */
+  ul.List li {
+    display: flex;
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    gap: 20px;
+    height: auto;
+    overflow: hidden;
+  
+    &:hover {
+      cursor: pointer;
+      background-color: #cdd0d2;
+    }
+  }
+  
+  .noActive {
+    display: none;
+  }
+  
+  .stories {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #f79256;
+    overflow: hidden;
+    padding: 0px 0px 0px 0px;
+    align-content: center;
+    flex-wrap: nowrap;
+    aspect-ratio: 1 / 1;
+    height: 100px;
+  }
+  
+  /* Estilos para el botón de eliminar historia */
+  .RemoveButton {
+    cursor: pointer;
+    color: #d9534f; /* Color rojo */
+  }
+  

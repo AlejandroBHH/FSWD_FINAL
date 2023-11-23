@@ -21,6 +21,15 @@
   border: 1px solid #ccc;
   border-radius: 4px;
 }
+.useredit .error-message {
+  display: block;
+  color: #ffffff;
+  background-color: #dd5b5b;
+  padding: 5px;
+  border: 1px solid #ff0000;
+  border-radius: 4px;
+  font-size: 14px;
+}
 .useredit button {
   background-color: #007bff;
   color: #fff;

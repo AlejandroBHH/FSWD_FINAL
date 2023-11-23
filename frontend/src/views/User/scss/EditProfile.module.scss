@@ -21,6 +21,16 @@
         border-radius: 4px;
       }
     }
+    .error-message {
+      display: block;
+      color: #ffffff;
+      background-color: #dd5b5b;
+      padding: 5px;
+      border: 1px solid #ff0000;
+      border-radius: 4px;
+      font-size: 14px;
+    
+    }
   
     /* Estilos para el botón "Save" */
     button {
