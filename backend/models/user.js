@@ -28,6 +28,6 @@ const loginSchema = new Schema({
     required: true,
   },
 });
-//por defecto mongoose pluraliza el nombre, pasando de Login a la colección logins
+//por defecto mongoose pluraliza el nombre, pasando de User a la colección logins
 //que es la que tenemos.
-module.exports = mongoose.model("Login", loginSchema);
+module.exports = mongoose.model("User", loginSchema);

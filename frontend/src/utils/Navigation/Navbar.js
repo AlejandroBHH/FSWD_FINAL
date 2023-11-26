@@ -61,41 +61,66 @@ function Navbar() {
               </li>
             )
           )}
-          {currentPath !== "/login" && currentPath !== "/register" && (
-            <>
-              <li>
-                <NavLink
-                  className={`${classes["nav-link"]}`}
-                  to="/index/Page/1"
-                >
-                  Home
-                </NavLink>
-              </li>
-              <li>
-                <NavLink className={`${classes["nav-link"]}`} to="/profile">
-                  Profile{" "}
-                </NavLink>
-              </li>
-              <li>
-                <NavLink className={`${classes["nav-link"]}`} to="/fictions">
-                  Ongoing Fictions
-                </NavLink>
-              </li>
-              <li>
-                <FontAwesomeIcon
-                  icon={faPowerOff}
-                  size="xl"
-                  className={`${classes["nav-link"]}`}
-                  onClick={handleLogout}
-                  style={{
-                    marginLeft: "5px",
-                    borderRadius: "3px",
-                    cursor: "pointer",
-                  }}
-                />
-              </li>
-            </>
+          {currentPath === "/forgotPassword" && (
+            <li>
+              <NavLink
+                className={`${classes["nav-link"]}`}
+                activeclassname={classes.active}
+                to="/login"
+              >
+                Login
+              </NavLink>
+            </li>
           )}
+          {currentPath.includes("reset-password") && (
+            <li>
+              <NavLink
+                className={`${classes["nav-link"]}`}
+                activeclassname={classes.active}
+                to="/login"
+              >
+                Login
+              </NavLink>
+            </li>
+          )}
+          {currentPath !== "/login" &&
+            currentPath !== "/register" &&
+            currentPath !== "/forgotPassword" &&
+            !currentPath.includes("/reset-password") && (
+              <>
+                <li>
+                  <NavLink
+                    className={`${classes["nav-link"]}`}
+                    to="/index/Page/1"
+                  >
+                    Home
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink className={`${classes["nav-link"]}`} to="/profile">
+                    Profile{" "}
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink className={`${classes["nav-link"]}`} to="/fictions">
+                    Ongoing Fictions
+                  </NavLink>
+                </li>
+                <li>
+                  <FontAwesomeIcon
+                    icon={faPowerOff}
+                    size="xl"
+                    className={`${classes["nav-link"]}`}
+                    onClick={handleLogout}
+                    style={{
+                      marginLeft: "5px",
+                      borderRadius: "3px",
+                      cursor: "pointer",
+                    }}
+                  />
+                </li>
+              </>
+            )}
         </ul>
       </nav>
     </header>

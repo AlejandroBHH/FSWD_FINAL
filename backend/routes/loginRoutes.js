@@ -1,24 +1,24 @@
-// Importar el loginController y generar las rutas para el registro y el inicio de sesión
-const loginController = require("../Controller/loginController");
+// Importar el auth y generar las rutas para el registro y el inicio de sesión
+const auth = require("../Controller/auth");
 const verifyToken = require("../middlewares/auth");
 const router = require("express").Router();
 
 // Endpoint para el registro de usuarios
-router.post("/signup", loginController.register);
+router.post("/signup", auth.signUp);
 
 // Endpoint para el inicio de sesión de usuarios
-router.post("/login", loginController.login);
-
-// Endpoint para refrescar el token
-router.post("/refresh", verifyToken, loginController.refreshToken);
+router.post("/login", auth.login);
 
 // Ruta para token temporal para cambio de contraseña
-router.post("/resetpassword", loginController.generateTemporaryToken);
+router.post("/resetpassword", auth.generateTemporaryToken);
 
 // Endpoint para actualizar los datos del usuario
-router.put("/update-user-data", verifyToken, loginController.updateUserData);
+router.put("/update-user-data", verifyToken, auth.updateUserData);
 
 // Endpoint para obtener los datos del usuario
-router.get("/get-user-data", verifyToken, loginController.getUserData);
+router.get("/get-user-data", verifyToken, auth.getUserData);
+
+// Endpoint para actualizar el forgotten password
+router.put("/newpassword", verifyToken, auth.updateUserPassword);
 
 module.exports = router;

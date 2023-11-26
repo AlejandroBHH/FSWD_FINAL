@@ -60,6 +60,7 @@ function LoginPage(props) {
       info.loginHeader = "Registration failed";
       info.loginMessage = "Please fill in all required fields.";
     }
+
     const isEmailValid = validateEmail(loginData.email);
     const isPasswordValid = validatePassword(loginData.password);
     const isNameValid = loginData.name ? validateName(loginData.name) : "s";
@@ -77,7 +78,7 @@ function LoginPage(props) {
       }
       if (!isNameValid) {
         info.loginMessage =
-          "Name must have at least two charachters and without numbers";
+          "Name must have at least two characters and without numbers";
       }
     } else {
       try {
@@ -97,17 +98,14 @@ function LoginPage(props) {
             role: "user",
           }),
         });
+        console.log(response);
 
         const data = await response.json();
+        console.log(data);
+
         if (response.ok) {
           localStorage.setItem("accessToken", data.data.token);
-          localStorage.setItem("refreshToken", data.data.refreshToken);
           localStorage.setItem("email", loginData.email);
-          const sessionExpirationTime = Date.now() + 10 * 1000;
-          localStorage.setItem(
-            "sessionExpirationTime",
-            sessionExpirationTime.toString()
-          );
 
           if (state) {
             setTimeout(() => {
@@ -121,15 +119,17 @@ function LoginPage(props) {
         } else {
           info.loggedIn = false;
           info.loginHeader = "Login failed";
-          info.loginMessage = "Wrong email or password";
+          info.loginMessage =
+            data.error || "An error occurred. Please try again later.";
           console.log("Login failed. Status: " + response.status);
         }
       } catch (error) {
         info.loggedIn = false;
         info.loginHeader = "Login failed";
-        info.loginMessage = "An error occurred: " + error;
+        info.loginMessage = "An error occurred: " + error.message;
       }
     }
+    console.log(info);
     setLoginInfo(info);
     setVisible(true);
   };

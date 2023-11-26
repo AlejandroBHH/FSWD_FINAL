@@ -20,9 +20,6 @@ function Modal(props) {
               <li>
                 <strong>Email:</strong> {props.data.email}
               </li>
-              <li>
-                <strong>Password:</strong> {"*******"}
-              </li>
             </ul>
             <button onClick={props.onLogin} className={classes["md-closed"]}>
               Close me!

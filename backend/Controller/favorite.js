@@ -1,8 +1,8 @@
-const Favorite = require("../Model/favoriteModel");
-const User = require("../Model/loginModel");
-const Book = require("../Model/booksModel");
-const HarryP = require("../Model/harryPModel"); // Importar el modelo HarryP
-const DC = require("../Model/DCModel");
+const Favorite = require("../models/favorite");
+const User = require("../models/user");
+const Book = require("../models/book");
+const HarryP = require("../models/harryPModel"); // Importar el modelo HarryP
+const DC = require("../models/DCModel");
 const ObjectId = require("bson").ObjectId;
 
 const markOrUnmarkFavorite = async (req, res) => {

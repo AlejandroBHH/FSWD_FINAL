@@ -2,7 +2,7 @@ const router = require("express").Router();
 const {
   markOrUnmarkFavorite,
   getFavoriteStories,
-} = require("../Controller/favoriteController");
+} = require("../Controller/favorite");
 
 const verifyToken = require("../middlewares/auth");
 

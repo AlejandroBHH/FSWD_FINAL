@@ -8,7 +8,7 @@ export const validateEmail = (mail) => {
 export const validatePassword = (password) => {
   // Usar expresiones regulares para verificar si la contraseña cumple con los requisitos
   const regex =
-    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d!@#$%^&*()_+[\]{}|;:'",.<>?~\\/-]{8,25}$/;
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d!@#$%^&*()_+[\]{}|;:'",.<>?~\\/-]{1,25}$/;
 
   return regex.test(password);
 };

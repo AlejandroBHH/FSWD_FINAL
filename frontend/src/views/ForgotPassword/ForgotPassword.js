@@ -1,6 +1,8 @@
 import { useState } from "react";
 import emailjs from "emailjs-com";
 import classes from "../ForgotPassword/ForgotPassword.module.css";
+import Navbar from "../../utils/Navigation/Navbar";
+import Footer from "../../utils/Footer/Footer";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
@@ -26,7 +28,7 @@ const ForgotPassword = () => {
       if (response.status === 200) {
         const tokenData = await response.json();
         const token = tokenData.token;
-        console.log(tokenData);
+        //console.log(tokenData);
         // Envia el correo electrónico utilizando EmailJS
         const templateParams = {
           to_email: email,
@@ -49,7 +51,6 @@ const ForgotPassword = () => {
             }
           );
 
-        console.log(tokenData);
         if (response.status === 200) {
           setIsSuccess(true);
           setMessage(
@@ -68,13 +69,14 @@ const ForgotPassword = () => {
 
   return (
     <div>
+      <Navbar></Navbar>
       <div>
         <div className={classes.container}>
           <div className={classes.formContainer}>
             <div className={classes.formWrapper}>
-              <h2>¿Olvidaste tu contraseña?</h2>
+              <h2>Forgot your password?</h2>
               <form onSubmit={handleResetPassword}>
-                <p> Ingresa tu dirección de correo electrónico:</p>
+                <p>Enter your email address:</p>
                 <div className={classes.buttons}>
                   <input
                     type="email"
@@ -96,14 +98,16 @@ const ForgotPassword = () => {
                 </p>
               )}
             </div>
-            <div className={classes.backButtonContainer}>
-              <a href=".." className={classes.backButtonLink}>
-                <span className={classes.backButtonIcon}>&larr;</span> Atrás
-              </a>
-            </div>
+            <img
+              style={{ height: "60%" }}
+              src="/images/password-1.png"
+              alt="Image description"
+              className={classes.MainImg}
+            />
           </div>
         </div>
       </div>
+      <Footer></Footer>
     </div>
   );
 };

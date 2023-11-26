@@ -1,8 +1,8 @@
 const ObjectId = require("bson").ObjectId;
-const Book = require("../Model/booksModel");
-const HarryP = require("../Model/harryPModel");
-const DC = require("../Model/DCModel");
-const newModel = require("../Model/newModel");
+const Book = require("../models/book");
+const HarryP = require("../models/harryPModel");
+const DC = require("../models/DCModel");
+const newModel = require("../models/newModel");
 
 const getBooks = async (req, res) => {
   try {

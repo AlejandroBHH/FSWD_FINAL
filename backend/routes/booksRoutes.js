@@ -5,7 +5,7 @@ const {
   updateBook,
   deleteBook,
   getCreatedBooks,
-} = require("../Controller/booksController");
+} = require("../Controller/book");
 
 const verifyToken = require("../middlewares/auth");
 
