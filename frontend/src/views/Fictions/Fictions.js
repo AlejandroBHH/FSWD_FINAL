@@ -159,11 +159,13 @@ function Fictions() {
             </button>
           </div>
           <div style={{ height: "90%", padding: "10px" }}>
-            <StoryButton
-              current={page}
-              total={totalPages}
-              onPageChange={handlePageChange}
-            ></StoryButton>
+            {totalPages > 1 && (
+              <StoryButton
+                current={page}
+                total={totalPages}
+                onPageChange={handlePageChange}
+              ></StoryButton>
+            )}
             {loading ? (
               <p>Loading...</p>
             ) : (
@@ -239,11 +241,13 @@ function Fictions() {
                 ) : (
                   <p>You dont have any Story created</p>
                 )}
-                <StoryButton
-                  current={page}
-                  total={totalPages}
-                  onPageChange={handlePageChange}
-                ></StoryButton>
+                {totalPages > 1 && (
+                  <StoryButton
+                    current={page}
+                    total={totalPages}
+                    onPageChange={handlePageChange}
+                  ></StoryButton>
+                )}
               </ul>
             )}
           </div>

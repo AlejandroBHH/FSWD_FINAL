@@ -107,6 +107,7 @@ function Index() {
   };
 
   const handleEnteredValueChange = (value) => {
+    setCurrentPage(1);
     setEnteredValue(value); // Actualizar el estado de enteredValue
     //console.log(enteredValue);
   };

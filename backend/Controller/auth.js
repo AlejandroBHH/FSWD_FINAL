@@ -16,21 +16,21 @@ const signUp = async (req, res) => {
   }
 
   try {
-    const existingUser = await User.findOne({ name });
-    if (existingUser) {
+    const existingUserByName = await User.findOne({ name });
+    const existingUserByEmail = await User.findOne({ email });
+
+    if (existingUserByName) {
       return res.status(400).json({
         error: "Username already exists",
       });
     }
 
-    const existingEmail = await User.findOne({ email });
-    if (existingEmail) {
+    if (existingUserByEmail) {
       return res.status(400).json({
         error: "Email already exists",
       });
     }
 
-    // If user does not exist, create a new user with the provided details.
     const encryptedPassword = await bcrypt.hash(password, 10);
     const newUser = new User({
       name,
@@ -50,16 +50,29 @@ const signUp = async (req, res) => {
 
     const token = generateTokens(payload, false);
 
-    // Send the response with the user, token, and refresh token
     res.status(201).json({
       status: "succeeded",
       data: { user: newUser, token },
       error: null,
     });
-  } catch (err) {
-    res.status(500).json({
-      error: `Unknown error: ${err.message}`,
-    });
+  } catch (error) {
+    if (error.code === 11000 && error.keyPattern && error.keyPattern.email) {
+      return res.status(400).json({
+        error: "Email already exists",
+      });
+    } else if (
+      error.code === 11000 &&
+      error.keyPattern &&
+      error.keyPattern.name
+    ) {
+      return res.status(400).json({
+        error: "Username already exists",
+      });
+    } else {
+      return res.status(500).json({
+        error: `Unknown error: ${error.message}`,
+      });
+    }
   }
 };
 

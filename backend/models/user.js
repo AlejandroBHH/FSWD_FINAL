@@ -30,4 +30,4 @@ const loginSchema = new Schema({
 });
 //por defecto mongoose pluraliza el nombre, pasando de User a la colección logins
 //que es la que tenemos.
-module.exports = mongoose.model("User", loginSchema);
+module.exports = mongoose.model("Login", loginSchema);

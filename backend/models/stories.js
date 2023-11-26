@@ -9,7 +9,7 @@ const eventSchema = new mongoose.Schema({
     required: true,
   },
   words: {
-    type: String,
+    type: Number,
     required: true,
   },
   date: {
@@ -28,5 +28,10 @@ const eventSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  type: {
+    type: String,
+    required: true,
+  },
 });
-module.exports = mongoose.model("story_hp", eventSchema);
+
+module.exports = mongoose.model("story_select", eventSchema);

@@ -1,26 +1,22 @@
-const ObjectId = require("bson").ObjectId;
-const Book = require("../models/book");
-const HarryP = require("../models/harryPModel");
-const DC = require("../models/DCModel");
 const newModel = require("../models/newModel");
+const Story = require("../models/stories");
 
 const getBooks = async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
     const eventsPerPage = 10;
-    const sortField = req.query.sortField || "title"; // Campo por defecto para ordenar
-    const sortOrder = req.query.sortOrder || "asc"; // Dirección por defecto de ordenación
-    const modelName = req.query.modelToQuery || "HarryP"; // Nombre del modelo dinámico
-    /*console.log(modelName);*/
-    let History;
+    const sortField = req.query.sortField || "title";
+    const sortOrder = req.query.sortOrder || "asc";
+    const modelName = req.query.modelToQuery || "HarryP";
+
+    let typehistory;
     if (modelName === "Book") {
-      History = Book;
+      typehistory = "W";
     } else if (modelName === "HarryP") {
-      History = HarryP;
+      typehistory = "HP";
     } else if (modelName === "DC") {
-      History = DC;
+      typehistory = "DC";
     } else {
-      // Manejo de un modelo no válido (puedes agregar una respuesta de error apropiada aquí)
       return res.status(400).json({
         status: "failed",
         data: null,
@@ -28,25 +24,23 @@ const getBooks = async (req, res) => {
       });
     }
 
-    //para el buscador cambiamos el valor del title
     let filterOption = {};
     if (req.query.filterValue) {
-      //filterOption.title se utiliza para buscar el valor proporcionado en req.query.filterValue en el campo title
-      //filterOption.title es el campo de consulta
       filterOption.title = new RegExp(req.query.filterValue, "i");
     }
 
-    const totalEvents = await History.countDocuments(filterOption);
-    const totalPages = Math.ceil(totalEvents / eventsPerPage);
+    // Add the type filter
+    filterOption.type = typehistory;
 
+    const totalEvents = await Story.countDocuments(filterOption);
+    const totalPages = Math.ceil(totalEvents / eventsPerPage);
     const skip = (page - 1) * eventsPerPage;
 
     let sortOption = {};
     sortOption[sortField] = sortOrder === "asc" ? 1 : -1;
 
-    //si no hay req.query.filterValue entonces  se hace el Book.find() obteniendo todos los valores
-    const data = await History.find(filterOption)
-      .sort(sortOption) // Ordenar según el campo y dirección especificados
+    const data = await Story.find(filterOption)
+      .sort(sortOption)
       .skip(skip)
       .limit(eventsPerPage)
       .exec();

@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import classes from "../Task/css/TaskInput.module.css";
+import classes from "./css/TaskInput.module.css";
 
 const TaskInput = (props) => {
   const [enteredValue, setEnteredValue] = useState("");

@@ -1,8 +1,7 @@
 const Favorite = require("../models/favorite");
 const User = require("../models/user");
-const Book = require("../models/book");
-const HarryP = require("../models/harryPModel"); // Importar el modelo HarryP
-const DC = require("../models/DCModel");
+const Story = require("../models/stories");
+
 const ObjectId = require("bson").ObjectId;
 
 const markOrUnmarkFavorite = async (req, res) => {
@@ -52,7 +51,7 @@ const markOrUnmarkFavorite = async (req, res) => {
 const getFavoriteStories = async (req, res) => {
   try {
     const id = new ObjectId(req.user.id);
-    // Buscar al usuario en la base de datos por su correo electrónico
+    // Buscar al usuario en la base de datos por su id
     const user = await User.findOne({ _id: id });
 
     if (!user) {
@@ -63,20 +62,10 @@ const getFavoriteStories = async (req, res) => {
       });
     }
 
-    // Buscar todas las historias marcadas como favoritas por el usuario en todas las colecciones
-    const favoriteStoriesHarryP = await Favorite.find({
+    // Buscar todas las historias marcadas como favoritas por el usuario
+    const favoriteStories = await Favorite.find({
       user_id: id,
-      story_id: { $in: await HarryP.find({}).distinct("_id") }, // Usar el modelo HarryP
-    });
-
-    const favoriteStoriesBook = await Favorite.find({
-      user_id: id,
-      story_id: { $in: await Book.find({}).distinct("_id") },
-    });
-
-    const favoriteStoriesDC = await Favorite.find({
-      user_id: id,
-      story_id: { $in: await DC.find({}).distinct("_id") },
+      story_id: { $in: await Story.find({}).distinct("_id") }, // Usar el modelo Story
     });
 
     // Obtener los detalles completos de las historias usando los IDs almacenados en los favoritos
@@ -88,25 +77,14 @@ const getFavoriteStories = async (req, res) => {
         _id: story._id,
         title: story.title,
         href: story.href,
-        is_dc: story.is_dc,
         // Otros campos de la historia que quieras incluir
       };
     };
 
-    for (const favorite of favoriteStoriesHarryP) {
+    for (const favorite of favoriteStories) {
       favoriteStoriesWithDetails.push(
-        await getDetails(HarryP, favorite.story_id)
+        await getDetails(Story, favorite.story_id)
       );
-    }
-
-    for (const favorite of favoriteStoriesBook) {
-      favoriteStoriesWithDetails.push(
-        await getDetails(Book, favorite.story_id)
-      );
-    }
-
-    for (const favorite of favoriteStoriesDC) {
-      favoriteStoriesWithDetails.push(await getDetails(DC, favorite.story_id));
     }
 
     return res.status(200).json({

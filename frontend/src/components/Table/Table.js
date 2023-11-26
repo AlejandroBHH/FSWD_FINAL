@@ -38,7 +38,6 @@ function Table(props) {
       const data = await response.json();
       if (response.ok) {
         // Éxito: puedes manejarlo aquí
-        // console.log(data);
         // Llamar a la función para obtener las historias favoritas después de agregar una nueva
         fetchFavoriteStories();
       } else {
@@ -103,6 +102,10 @@ function Table(props) {
     );
   };
 
+  const handleEnteredValueChangeWrapper = (value) => {
+    props.onEnteredValueChange(value);
+  };
+
   return (
     <>
       {isLoading ? (
@@ -110,7 +113,10 @@ function Table(props) {
       ) : (
         <table className={classes.TableContainer}>
           <tbody>
-            <TaskInput handleFilterSource={handleFilterSource} />
+            <TaskInput
+              handleFilterSource={handleFilterSource}
+              onEnteredValueChange={handleEnteredValueChangeWrapper}
+            />
           </tbody>
           <tbody>
             <tr className={classes.Sorters}>

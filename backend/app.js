@@ -1,82 +1,82 @@
-// Archivo principal de la aplicación, punto de entrada
-// Importar la librería express para crear el servidor
+// Main file of the application, entry point
+// Import the express library to create the server
 const express = require("express");
-// Importar la librerías dotenv para leer las variables de entorno
+// Import the dotenv library to read environment variables
 const dotenv = require("dotenv");
-// Importar la librería mongoose para conectarnos a la BBDD
+// Import the mongoose library to connect to the database
 const mongoose = require("mongoose");
-// Importar la librería cors para habilitar el acceso a la API desde cualquier origen
+// Import the cors library to enable access to the API from any origin
 const cors = require("cors");
-//importar las rutas
+// Import the routes
 const logins = require("../backend/routes/loginRoutes");
 const books = require("./routes/booksRoutes");
 const favorites = require("../backend/routes/favoriteRoutes");
 
 const fs = require("file-system");
 
-// Importa tu middleware verifyToken
+// Import your verifyToken middleware
 const verifyToken = require("../backend/middlewares/auth");
 const passport = require("passport");
 const BearerStrategy = require("passport-http-bearer").Strategy;
 
-// Configura Passport con la estrategia Bearer
+// Configure Passport with the Bearer strategy
 passport.use(
   new BearerStrategy((token, done) => {
-    // Aquí se verifica el token de portador.
-    // Luego, se utiliza el middleware verifyToken para validar el token JWT.
+    // Here, verify the bearer token.
+    // Then, use the verifyToken middleware to validate the JWT token.
     verifyToken(
-      { header: () => ({ "auth-token": token }) }, // Simulación de req para verifyToken
+      { header: () => ({ "auth-token": token }) }, // Simulated req for verifyToken
       null,
       (error, user) => {
         if (error) {
-          return done(null, false); // El token no es válido
+          return done(null, false); // Token is not valid
         } else {
-          return done(null, user); // El token es válido y proporciona el objeto de usuario si es necesario
+          return done(null, user); // Token is valid and provides the user object if needed
         }
       }
     );
   })
 );
 
-// Inicializa Passport
+// Initialize Passport
 passport.initialize();
 
-// Leer las variables de entorno
+// Read environment variables
 dotenv.config();
-// Crear el servidor
+// Create the server
 const app = express();
 
-// Habilitar el uso del json en el body
+// Enable the use of JSON in the body
 app.use(express.json());
-// Habilitar el uso de cors
+// Enable the use of cors
 app.use(cors({ origin: "http://localhost:3000" }));
 
-// Ruta para servir imágenes desde la carpeta 'uploads'
+// Route to serve images from the 'uploads' folder
 app.use("/uploads", express.static("uploads"));
 
-// Conectar a la BBDD
+// Connect to the database
 mongoose
   .connect(process.env.DATABASE_URL, {
-    // Para evitar warnings con la URL de conexión, aplica el nuevo motor de análisis de URL
+    // To avoid warnings with the connection URL, apply the new URL parser
     useNewUrlParser: true,
-    // Para evitar warnings con la topología de la BBDD, aplica el nuevo motor de detección
-    // y monitoreo de servidores
+    // To avoid warnings with the database topology, apply the new server
+    // discovery and monitoring engine
     useUnifiedTopology: true,
   })
   .then(() => console.log("Successfully connected to the database"))
   .catch((err) => console.log(err));
-// Escuchar los eventos de error para manejar errores después de la conexión
+// Listen for error events to handle errors after connection
 mongoose.connection.on("error", (err) => {
   console.log(err);
 });
-//habilitar las rutas
+// Enable the routes
 app.use("/auth", logins);
 app.use("/library", books);
 app.use("/", favorites);
 
-// Levantar el servidor
-// Escucha las conexiones para el puerto (y host) especificado
-// Devuelve un objeto http.server
+// Start the server
+// Listen for connections on the specified port (and host)
+// Returns an http.server object
 app.listen(process.env.PORT, () => {
   console.log(`Server valid at http://127.0.0.1:${process.env.PORT}`);
 });
