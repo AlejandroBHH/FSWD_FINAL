@@ -10,12 +10,14 @@ const getBooks = async (req, res) => {
     const modelName = req.query.modelToQuery || "HarryP";
 
     let typehistory;
-    if (modelName === "Book") {
+    if (modelName === "Worm") {
       typehistory = "W";
     } else if (modelName === "HarryP") {
       typehistory = "HP";
     } else if (modelName === "DC") {
       typehistory = "DC";
+    } else if (modelName === "Marvel") {
+      typehistory = "MV";
     } else {
       return res.status(400).json({
         status: "failed",
@@ -25,6 +27,10 @@ const getBooks = async (req, res) => {
     }
 
     let filterOption = {};
+    if (req.query.SourceValue) {
+      filterOption.source = new RegExp(req.query.SourceValue, "i");
+    }
+
     if (req.query.filterValue) {
       filterOption.title = new RegExp(req.query.filterValue, "i");
     }

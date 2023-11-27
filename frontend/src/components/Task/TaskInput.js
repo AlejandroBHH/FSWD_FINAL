@@ -47,8 +47,7 @@ const TaskInput = (props) => {
           name="Words_filter"
           id="Words_filter"
           placeholder="Words"
-          //funcion en index para pasar el enteredvalue al backend
-
+          onChange={(event) => props.onEnteredWordsChange(event.target.value)}
           className={classes["form-control"]}
         />
       </td>

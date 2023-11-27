@@ -7,22 +7,22 @@ import {
   faArrowDownWideShort,
   faStar,
 } from "@fortawesome/free-solid-svg-icons";
+// ... Otros imports
+
 import TaskInput from "../Task/TaskInput";
 import { Navigate, useNavigate } from "react-router-dom";
 
 function Table(props) {
-  const [filterSource, setFilterSource] = useState(""); // Estado para filtrar por source
+  const [filterWords, setFilterWords] = useState("");
   const [favoriteStories, setFavoriteStories] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
-  // Función para manejar el filtro por source
+
   const handleFilterSource = (source) => {
-    setFilterSource(source);
+    props.onEnteredSourceChange(source);
   };
 
-  // Función para manejar el agregado a favoritos
   const handleAddToFavorites = async (storyId) => {
-    // Realizar solicitud POST para agregar la historia a favoritos
     try {
       const response = await fetch("http://localhost:8000/", {
         method: "POST",
@@ -35,24 +35,18 @@ function Table(props) {
         }),
       });
 
-      const data = await response.json();
       if (response.ok) {
-        // Éxito: puedes manejarlo aquí
-        // Llamar a la función para obtener las historias favoritas después de agregar una nueva
         fetchFavoriteStories();
       } else {
-        // Error: puedes mostrar un mensaje de error o realizar otras acciones
         console.log(response.status);
       }
     } catch (error) {
-      // Error en la solicitud
       console.error("Error:", error);
       alert("Session ended");
       navigate("/login");
     }
   };
 
-  // Función para obtener las historias favoritas
   const fetchFavoriteStories = async () => {
     try {
       const authToken = localStorage.getItem("accessToken");
@@ -77,24 +71,24 @@ function Table(props) {
     } catch (error) {
       console.error("Error fetching favorite stories:", error);
     } finally {
-      setIsLoading(false); // Una vez que se completó la carga de datos, establecemos isLoading en false
+      setIsLoading(false);
     }
   };
 
   useEffect(() => {
-    // Obtener las historias favoritas al cargar el componente
     fetchFavoriteStories();
   }, []);
 
-  // Accedemos al email que guardamos en login
   const storedEmail = localStorage.getItem("email");
 
-  // Filtrar los datos según el filtro por source
-  const filteredData = filterSource
-    ? props.data.filter((component) => component.source === filterSource)
+  const filteredDataByWords = filterWords
+    ? props.data.filter((component) => {
+        const componentWords = parseInt(component.words);
+        const filterWordsValue = parseInt(filterWords);
+        return componentWords <= filterWordsValue;
+      })
     : props.data;
 
-  // Verificar si un componente está en favoritos
   const isComponentInFavorites = (component) => {
     return (
       favoriteStories.find((favorite) => favorite.href === component.href) !==
@@ -104,6 +98,10 @@ function Table(props) {
 
   const handleEnteredValueChangeWrapper = (value) => {
     props.onEnteredValueChange(value);
+  };
+
+  const handleFilterWordsChange = (value) => {
+    setFilterWords(value);
   };
 
   return (
@@ -116,13 +114,13 @@ function Table(props) {
             <TaskInput
               handleFilterSource={handleFilterSource}
               onEnteredValueChange={handleEnteredValueChangeWrapper}
+              onEnteredWordsChange={handleFilterWordsChange}
             />
           </tbody>
           <tbody>
             <tr className={classes.Sorters}>
               <td onClick={() => props.handleSort("title")}>
                 Update
-                {/* sorting by title */}
                 {props.sortBy === "title" && (
                   <FontAwesomeIcon
                     icon={
@@ -170,46 +168,55 @@ function Table(props) {
                 )}
               </td>
             </tr>
-
-            {filteredData.map((component, idx) => (
-              <tr key={idx}>
-                <td>{component.date}</td>
-                <td>
-                  <a href={component.href} target={"_blank"}>
-                    {component.description ? ( // Verify description
-                      <span
-                        className={classes.tooltip}
-                        data-text={component.description}
-                      >
-                        {component.title}
-                      </span>
-                    ) : (
-                      <span
-                        style={{ marginTop: "0" }}
-                        data-text={component.description}
-                      >
-                        {component.title}
-                      </span>
-                    )}
-                  </a>
-                  <p>by {component.author}</p>
-                </td>
-                <td>{component.words}</td>
-
-                <td>
-                  <FontAwesomeIcon
-                    icon={faStar}
-                    className={classes.AddButton}
-                    onClick={() => handleAddToFavorites(component, storedEmail)}
-                    style={
-                      isComponentInFavorites(component)
-                        ? { color: "gold", marginLeft: "15px" }
-                        : { color: "grey", marginLeft: "15px" }
-                    }
-                  />
-                </td>
+            {filteredDataByWords.length === 0 ? (
+              <tr>
+                <td></td>
+                <td>No stories found.</td>
+                <td></td>
+                <td></td>
               </tr>
-            ))}
+            ) : (
+              filteredDataByWords.map((component, idx) => (
+                <tr key={idx}>
+                  <td>{component.date}</td>
+                  <td>
+                    <a href={component.href} target={"_blank"}>
+                      {component.description ? (
+                        <span
+                          className={classes.tooltip}
+                          data-text={component.description}
+                        >
+                          {component.title}
+                        </span>
+                      ) : (
+                        <span
+                          style={{ marginTop: "0" }}
+                          data-text={component.description}
+                        >
+                          {component.title}
+                        </span>
+                      )}
+                    </a>
+                    <p>by {component.author}</p>
+                  </td>
+                  <td>{component.words}</td>
+                  <td>
+                    <FontAwesomeIcon
+                      icon={faStar}
+                      className={classes.AddButton}
+                      onClick={() =>
+                        handleAddToFavorites(component, storedEmail)
+                      }
+                      style={
+                        isComponentInFavorites(component)
+                          ? { color: "gold", marginLeft: "15px" }
+                          : { color: "grey", marginLeft: "15px" }
+                      }
+                    />
+                  </td>
+                </tr>
+              ))
+            )}
           </tbody>
         </table>
       )}

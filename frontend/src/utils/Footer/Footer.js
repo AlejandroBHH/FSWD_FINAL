@@ -13,16 +13,16 @@ function Footer() {
     <footer>
       <div className="footer">
         <div className="row">
-          <a href="#">
+          <a href="">
             <FontAwesomeIcon icon={faFacebook} size="2xl" />
           </a>
-          <a href="#">
+          <a href="">
             <FontAwesomeIcon icon={faInstagram} size="2xl" />
           </a>
-          <a href="#">
+          <a href="">
             <FontAwesomeIcon icon={faYoutube} size="2xl" />
           </a>
-          <a href="#">
+          <a href="">
             <FontAwesomeIcon icon={faTwitter} size="2xl" />
           </a>
         </div>

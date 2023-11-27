@@ -28,7 +28,7 @@ const Carrousel = (props) => {
         autoPlayStrategy="default"
       >
         <div className="sliderimg">
-          <img src={"/images/harry.jpg"} alt="Image 1" />{" "}
+          <img src={"/images/harry.jpg"} alt="cover 1" />{" "}
           <div
             className="overlay"
             onClick={() => {
@@ -37,47 +37,52 @@ const Carrousel = (props) => {
             }}
           >
             <p className="description">
-              Serie de Libros que se centran en la lucha entre Harry Potter y el
-              malvado mago lord Voldemort, quien asesinó a los padres de Harry
-              en su afán de conquistar el mundo mágico.
+              A book series centered around the battle between Harry Potter and
+              the evil wizard Lord Voldemort, who murdered Harry's parents in
+              his quest to conquer the magical world.
             </p>
           </div>
         </div>
         <div className="sliderimg">
-          <img src={"/images/worm.jpg"} alt="Image 2" />{" "}
+          <img src={"/images/worm.jpg"} alt="cover 2" />{" "}
           <div
             className="overlay"
             onClick={() => {
               props.imagenClick(); // Llama a la función existente
-              props.setModel("Book"); // Llama a la nueva función que deseas ejecutar
+              props.setModel("Worm"); // Llama a la nueva función que deseas ejecutar
             }}
           >
             <p className="description">
-              Una chica adolescente introvertida con un superpoder poco
-              convencional, Taylor sale en traje para huir de una vida de civil
-              profundamente triste y frustrante. Su primer intento de derrotar a
-              un supervillano termina con ella siendo confundida con uno,
-              lanzándola en medio del mundo de la política de los «capas»,
-              normas no escritas, y moralidad ambigua.
+              An introverted teenage girl with an unconventional superpower,
+              Taylor dons a costume to escape from a profoundly sad and
+              frustrating civilian life. Her initial attempt to defeat a
+              supervillain results in her being mistaken for one, thrusting her
+              into the complex realm of "capes" politics, unspoken rules, and
+              ambiguous morality.
             </p>
           </div>
         </div>
         <div className="sliderimg">
-          <img src={"/images/worm.jpg"} alt="Image 3" />
+          <img src={"/images/Marvel.jpg"} alt="cover 3" />
           <div
             className="overlay"
             onClick={() => {
               props.imagenClick(); // Llama a la función existente
-              props.setModel("Book"); // Llama a la nueva función que deseas ejecutar
+              props.setModel("Marvel"); // Llama a la nueva función que deseas ejecutar
             }}
           >
-            <p className="description">"Descripción de la imagen 3"</p>
+            <p className="description">
+              Marvel Comics, a powerhouse in the comic book world, is renowned
+              for its diverse characters and interconnected storytelling. From
+              Spider-Man to the Avengers, Marvel captivates with relatable
+              heroes facing personal struggles and moral dilemmas.
+            </p>
           </div>
         </div>
         <div className="sliderimg">
           <img
             src={"/images/DC.jpg"}
-            alt="Image 4"
+            alt="cover 4"
             style={{ cursor: "cursor: pointer" }}
           />{" "}
           <div
@@ -87,7 +92,13 @@ const Carrousel = (props) => {
               props.setModel("DC"); // Llama a la nueva función que deseas ejecutar
             }}
           >
-            <p className="description">"Descripción de la imagen 4"</p>
+            <p className="description">
+              DC Comics, a comic book giant, boasts legendary characters like
+              Superman and Batman. With a focus on larger-than-life conflicts
+              between good and evil, DC's stories delve into the complexities of
+              heroism and the consequences of wielding extraordinary power.
+              Timeless and iconic, DC continues to shape the superhero{" "}
+            </p>
           </div>
         </div>
       </AliceCarousel>

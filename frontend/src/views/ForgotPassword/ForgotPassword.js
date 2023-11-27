@@ -1,6 +1,6 @@
 import { useState } from "react";
 import emailjs from "emailjs-com";
-import classes from "../ForgotPassword/ForgotPassword.module.css";
+import classes from "../ForgotPassword/css/ForgotPassword.module.css";
 import Navbar from "../../utils/Navigation/Navbar";
 import Footer from "../../utils/Footer/Footer";
 
@@ -44,26 +44,30 @@ const ForgotPassword = () => {
           )
           .then(
             function (response) {
-              console.log("SUCCESS!", response.status, response.text);
+              return response;
             },
             function (error) {
-              console.log("FAILED...", error);
+              throw new Error("Error en el envío del correo electrónico");
             }
           );
 
-        if (response.status === 200) {
+        if (emailResponse.status === 200) {
           setIsSuccess(true);
           setMessage(
             "Se ha enviado un correo electrónico con instrucciones para restablecer la contraseña."
           );
         } else {
-          setMessage("Ha ocurrido un error al enviar el correo electrónico 1.");
+          setMessage(
+            "Ha ocurrido un error al enviar el correo electrónico. Por favor, inténtalo de nuevo."
+          );
         }
       } else {
         setMessage("Usuario no encontrado");
       }
     } catch (error) {
-      setMessage("Ha ocurrido un error al enviar el correo electrónico 2.");
+      setMessage(
+        "Ha ocurrido un error al enviar el correo electrónico. Por favor, inténtalo de nuevo."
+      );
     }
   };
 
@@ -99,9 +103,9 @@ const ForgotPassword = () => {
               )}
             </div>
             <img
-              style={{ height: "60%" }}
+              style={{ maxHeight: "400px" }}
               src="/images/password-1.png"
-              alt="Image description"
+              alt=""
               className={classes.MainImg}
             />
           </div>

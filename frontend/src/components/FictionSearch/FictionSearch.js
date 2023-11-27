@@ -1,27 +1,33 @@
 import { useState } from "react";
 
-import classes from "../FictionSearch/FictionSearch.module.css";
+// Importing CSS module styles
+import classes from "../FictionSearch/css/FictionSearch.module.css";
 
 const FictionSearch = (props) => {
+  // State to manage the entered input value
   const [enteredValue, setEnteredValue] = useState("");
 
+  // Handler for input change
   const inputChangeHandler = (event) => {
+    // Get the input value from the event
     const inputValue = event.target.value;
 
-    //para que aparezca en el buscador
+    // Update the enteredValue state to reflect in the search bar
     setEnteredValue(inputValue);
 
-    // Llamar a la función onEnteredValueChange para pasar el valor a Fictions
+    // Call the onEnteredValueChange function to pass the value to the parent component (Fictions)
     props.onEnteredValueChange(inputValue);
   };
 
   return (
     <input
       type="text"
-      //funcion en index para pasar el enteredvalue al backend
+      // Attach the inputChangeHandler function to the onChange event
       onChange={inputChangeHandler}
+      // Set the input value to the enteredValue state
       value={enteredValue}
       placeholder="Enter text"
+      // Apply the CSS class from the imported module
       className={classes[`FilterPage-input`]}
     />
   );

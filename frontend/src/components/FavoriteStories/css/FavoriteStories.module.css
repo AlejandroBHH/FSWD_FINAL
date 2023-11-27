@@ -1,0 +1,77 @@
+/* Styles for the main container */
+div .FavContainer {
+  margin: 0px 20px 20px 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f7f7f7;
+  padding: 20px;
+  height: auto;
+  flex: 3;
+}
+
+/* Styles for the "Favorite Stories" header */
+h3 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+/* Styles for the "Create Story" button */
+a.CreateStoryButton {
+  display: inline-block;
+  margin-left: 10px;
+  padding: 10px 15px;
+  background-color: #2E4E7A;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  cursor: pointer;
+  flex-grow: 0;
+  transition: background-color 0.3s;
+}
+
+/* Styles for the "Create Story" button on hover */
+a.CreateStoryButton:hover {
+  background-color: #1A356E;
+}
+
+/* Styles for the list of stories */
+ul.List {
+  list-style: none;
+  padding: 0;
+}
+
+/* Styles for each item in the list of stories */
+ul.List li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Styles for the "Remove Story" button */
+.RemoveButton {
+  cursor: pointer;
+  color: #d9534f;
+}
+
+/* Styles for the story link */
+a {
+  flex-grow: 1;
+  text-decoration: none;
+}
+
+/* Styles for the story link on hover */
+a:hover {
+  text-decoration: underline;
+}
+
+/* Styles for the container with buttons and header */
+.ButContainer {
+  display: flex;
+  justify-content: space-between;
+}/*# sourceMappingURL=FavoriteStories.module.css.map */

@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { validatePassword } from "../../utils/validate";
 import { useParams } from "react-router-dom";
-import classes from "./NewPassword.module.css";
+import classes from "./css/NewPassword.module.css";
 import Navbar from "../../utils/Navigation/Navbar";
 import Footer from "../../utils/Footer/Footer";
 
