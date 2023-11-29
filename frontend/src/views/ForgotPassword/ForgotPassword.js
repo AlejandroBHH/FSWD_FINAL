@@ -3,18 +3,24 @@ import emailjs from "emailjs-com";
 import classes from "../ForgotPassword/css/ForgotPassword.module.css";
 import Navbar from "../../utils/Navigation/Navbar";
 import Footer from "../../utils/Footer/Footer";
+import Spinner from "../../utils/Spinner/Spinner";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
   };
 
   const handleResetPassword = async (event) => {
+    setMessage("");
     event.preventDefault();
+
+    // Start the loading spinner
+    setIsLoading(true);
 
     try {
       const response = await fetch("http://localhost:8000/auth/resetpassword", {
@@ -32,7 +38,7 @@ const ForgotPassword = () => {
         // Send the email using EmailJS
         const templateParams = {
           to_email: email,
-          reset_link: `http://localhost:3000/reset-password/${token}`, // Change the base URL and path according to your structure
+          reset_link: `http://localhost:3000/reset-password/${token}`,
         };
 
         const emailResponse = await emailjs
@@ -62,12 +68,16 @@ const ForgotPassword = () => {
           );
         }
       } else {
+        setIsSuccess(false);
         setMessage("User not found");
       }
     } catch (error) {
       setMessage(
         "An error occurred while sending the email. Please try again."
       );
+    } finally {
+      // Stop the loading spinner, regardless of whether the request was successful or not
+      setIsLoading(false);
     }
   };
 
@@ -91,7 +101,10 @@ const ForgotPassword = () => {
                   <button type="submit">Send</button>
                 </div>
               </form>
-
+              <div style={{ marginTop: "10px" }}>
+                {isLoading && <Spinner />}{" "}
+              </div>
+              {/* Display the Spinner while loading */}
               {message && (
                 <p
                   className={`${classes.message} ${
