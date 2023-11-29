@@ -1,4 +1,4 @@
-import classes from "../Button/SubmitButton.module.css";
+import classes from "../Button/css/SubmitButton.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAnglesLeft } from "@fortawesome/free-solid-svg-icons";
 

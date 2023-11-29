@@ -1,24 +1,24 @@
-// Importar el auth y generar las rutas para el registro y el inicio de sesión
+// Import the auth controller and define routes for user registration and login
 const auth = require("../Controller/auth");
-const verifyToken = require("../middlewares/auth");
+const verifyToken = require("../middlewares/auth"); // Middleware for token verification
 const router = require("express").Router();
 
-// Endpoint para el registro de usuarios
+// Endpoint for user registration
 router.post("/signup", auth.signUp);
 
-// Endpoint para el inicio de sesión de usuarios
+// Endpoint for user login
 router.post("/login", auth.login);
 
-// Ruta para token temporal para cambio de contraseña
+// Route for generating a temporary token for password reset
 router.post("/resetpassword", auth.generateTemporaryToken);
 
-// Endpoint para actualizar los datos del usuario
+// Endpoint for updating user data (requires token verification)
 router.put("/update-user-data", verifyToken, auth.updateUserData);
 
-// Endpoint para obtener los datos del usuario
+// Endpoint for getting user data (requires token verification)
 router.get("/get-user-data", verifyToken, auth.getUserData);
 
-// Endpoint para actualizar el forgotten password
+// Endpoint for updating the forgotten password (requires token verification)
 router.put("/newpassword", verifyToken, auth.updateUserPassword);
 
 module.exports = router;

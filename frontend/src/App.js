@@ -1,7 +1,7 @@
 import { lazy, Suspense } from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 import "./App.css";
-import { useParams } from "react-router-dom"; // Importar useParams
+import { useParams } from "react-router-dom"; // Import useParams
 import Fictions from "./views/Fictions/Fictions";
 
 const LoginPage = lazy(() => import("./views/Login/LoginPage"));
@@ -96,8 +96,8 @@ function App() {
         path="*"
         element={
           <div>
-            <h1>Página no encontrada</h1>
-            <p>La URL que ingresaste no coincide con ninguna página.</p>
+            <h1>Page not found</h1>
+            <p>The URL you entered does not match any page.</p>
           </div>
         }
       />
@@ -105,17 +105,17 @@ function App() {
   );
 }
 
-// Nuevo componente para Component con paginación y useParams
+// New component for Component with pagination and useParams
 function ComponentWithPagination() {
-  const { id } = useParams(); // Obtener el valor de id de la URL
-  //console.log(id);
-  return <Search id={id} />; // Pasar el valor de id al componente Component
+  const { id } = useParams(); // Get the value of id from the URL
+  // console.log(id);
+  return <Search id={id} />; // Pass the value of id to the Component component
 }
 
 function EditStories() {
-  const { id } = useParams(); // Obtener el valor de id de la URL
-  //console.log(id);
-  return <EditStoryForm id={id} />; // Pasar el valor de id al componente Component
+  const { id } = useParams(); // Get the value of id from the URL
+  // console.log(id);
+  return <EditStoryForm id={id} />; // Pass the value of id to the Component component
 }
 
 export default App;

@@ -60,7 +60,7 @@ function Index() {
           }
         })
         .then((data) => {
-          console.log(data);
+          //console.log(data);
           setComponents(data.data);
           setTotalPages(data.totalPages);
           setUserIsLoggedIn(true);

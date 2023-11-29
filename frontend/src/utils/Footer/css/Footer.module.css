@@ -1,0 +1,67 @@
+body {
+  margin: 0;
+  overflow-x: hidden;
+}
+
+.footer {
+  background-color: #ffffff;
+  padding: 30px 0px;
+  font-family: "Play", sans-serif;
+  text-align: center;
+  border-top: 1px solid rgba(76, 76, 76, 0.1);
+  z-index: 2;
+  position: relative;
+  max-height: 10px;
+}
+
+svg {
+  margin-left: 10px;
+}
+
+.footer .row {
+  width: 100%;
+  padding: 0.6% 0%;
+  color: gray;
+  font-size: 0.8em;
+  padding-bottom: 10px;
+}
+
+.footer .row a {
+  text-decoration: none;
+  color: #1d4e89;
+  transition: 0.5s;
+  margin-left: 10px;
+}
+
+.footer .row a:hover {
+  color: #c0c0c0;
+}
+
+.footer .row ul {
+  width: 100%;
+}
+
+.footer .row ul li {
+  display: inline-block;
+  margin: 0px 30px;
+}
+
+.footer .row a i {
+  font-size: 2em;
+  margin: 0% 1%;
+}
+
+@media (max-width: 720px) {
+  .footer {
+    text-align: left;
+    padding: 5%;
+  }
+  .footer .row ul li {
+    display: block;
+    margin: 10px 0px;
+    text-align: left;
+  }
+  .footer .row a i {
+    margin: 0% 3%;
+  }
+}/*# sourceMappingURL=Footer.module.css.map */

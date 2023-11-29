@@ -9,7 +9,7 @@ import {
   faUser,
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
-import "../LateralNavbar/LateralNavbar.css";
+import "../LateralNavbar/css/LateralNavbar.css";
 
 function LateralNavbar() {
   const navigate = useNavigate();
@@ -70,9 +70,9 @@ function LateralNavbar() {
                 style={{ marginLeft: "5px", borderRadius: "3px" }}
               />
               <strong className={navAlternative ? "hidden" : "visible"}>
-                {location.pathname.includes("Dashboard")
+                {location.pathname.includes("fictions")
                   ? "NewStory"
-                  : "Dashboard"}
+                  : "Fictions"}
               </strong>
             </NavLink>
           </li>
@@ -81,7 +81,7 @@ function LateralNavbar() {
               <FontAwesomeIcon
                 icon={faUser}
                 size="xl"
-                style={{ marginLeft: "5px", borderRadius: "3px" }}
+                style={{ marginLeft: "-6px", borderRadius: "3px" }}
               />
               <strong className={navAlternative ? "hidden" : "visible"}>
                 UserPage

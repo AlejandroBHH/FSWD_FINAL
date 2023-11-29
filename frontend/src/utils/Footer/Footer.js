@@ -1,5 +1,4 @@
-import React from "react";
-import "../Footer/Footer.css";
+import classes from "../Footer/css/Footer.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFacebook,
@@ -11,23 +10,23 @@ import {
 function Footer() {
   return (
     <footer>
-      <div className="footer">
-        <div className="row">
-          <a href="">
+      <div className={classes.footer}>
+        <div className={classes.row}>
+          <span>
             <FontAwesomeIcon icon={faFacebook} size="2xl" />
-          </a>
-          <a href="">
+          </span>
+          <span>
             <FontAwesomeIcon icon={faInstagram} size="2xl" />
-          </a>
-          <a href="">
+          </span>
+          <span>
             <FontAwesomeIcon icon={faYoutube} size="2xl" />
-          </a>
-          <a href="">
+          </span>
+          <span>
             <FontAwesomeIcon icon={faTwitter} size="2xl" />
-          </a>
+          </span>
         </div>
 
-        <div className="row">
+        <div className={classes.row}>
           Copyright © 2023 AlejandroBH - All rights reserved || Designed By:
           AlejandroBH
         </div>

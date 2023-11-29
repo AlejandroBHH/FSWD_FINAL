@@ -1,7 +1,6 @@
 const bcrypt = require("bcrypt");
 const User = require("../models/user");
 
-// Importar las funciones para mockear las fechas y generar los tokens
 const { generateTokens } = require("../lib/utils");
 
 const signUp = async (req, res) => {

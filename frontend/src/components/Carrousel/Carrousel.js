@@ -83,7 +83,7 @@ const Carrousel = (props) => {
           <img
             src={"/images/DC.jpg"}
             alt="cover 4"
-            style={{ cursor: "cursor: pointer" }}
+            style={{ cursor: "pointer" }}
           />{" "}
           <div
             className="overlay"

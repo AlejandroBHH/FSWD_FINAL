@@ -36,7 +36,7 @@ function Navbar() {
   return (
     <header className={scrolled ? classes.scrolled : classes.scrolledoff}>
       <nav className={classes.navbar}>
-        <h1>FanFicVerse</h1>
+        <a href="/login">FanFicVerse</a>
         <ul>
           {currentPath === "/login" ? (
             <li>

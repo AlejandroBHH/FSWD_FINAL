@@ -10,6 +10,7 @@ const NewPassword = (props) => {
   const { token } = useParams();
 
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState(""); // New state for confirmation
   const [message, setMessage] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
 
@@ -19,10 +20,16 @@ const NewPassword = (props) => {
     setPassword(event.target.value);
   };
 
+  const handleConfirmPasswordChange = (event) => {
+    // New function for handling confirmation password change
+    setConfirmPassword(event.target.value);
+  };
+
   const handleResetPassword = async (event) => {
     event.preventDefault();
 
-    if (validatePassword(password)) {
+    if (validatePassword(password) && password === confirmPassword) {
+      // Check if passwords match
       try {
         console.log(token);
         const response = await fetch("http://localhost:8000/auth/newpassword", {
@@ -47,7 +54,7 @@ const NewPassword = (props) => {
         setMessage("An error occurred while changing the password.");
       }
     } else {
-      setMessage("Invalid password");
+      setMessage("Passwords do not match or invalid password");
     }
   };
 
@@ -55,18 +62,30 @@ const NewPassword = (props) => {
     <>
       <Navbar />
       <div className={classes.container}>
-        <h2>Cambiar contraseña olvidada</h2>
+        <h2>Change Forgotten Password</h2>
         <form onSubmit={handleResetPassword} className={classes.formContainer}>
-          <label>
-            Nueva contraseña:
-            <input
-              style={{ marginLeft: "20px" }}
-              type="password"
-              value={password}
-              onChange={handlePasswordChange}
-              required
-            />
-          </label>{" "}
+          <div>
+            <label>
+              New Password:
+              <input
+                type="password"
+                value={password}
+                onChange={handlePasswordChange}
+                required
+              />
+            </label>{" "}
+          </div>
+          <div>
+            <label>
+              Confirm New Password:
+              <input
+                type="password"
+                value={confirmPassword}
+                onChange={handleConfirmPasswordChange}
+                required
+              />
+            </label>{" "}
+          </div>
           {message && (
             <p
               className={`${classes.message} ${
@@ -77,7 +96,7 @@ const NewPassword = (props) => {
             </p>
           )}
           <button type="submit" style={{ marginTop: "20px" }}>
-            Cambiar contraseña
+            Change Password
           </button>
         </form>
       </div>

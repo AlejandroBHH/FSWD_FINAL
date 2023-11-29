@@ -13,10 +13,10 @@ const multer = require("multer");
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "uploads/"); // La carpeta donde se guardarán los archivos subidos
+    cb(null, "uploads/"); // The folder where uploaded files will be saved
   },
   filename: (req, file, cb) => {
-    cb(null, Date.now() + "-" + file.originalname); // Nombre de archivo único
+    cb(null, Date.now() + "-" + file.originalname); // Unique file name with timestamp
   },
 });
 

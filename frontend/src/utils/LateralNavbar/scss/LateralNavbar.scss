@@ -1,0 +1,98 @@
+.lateralNavbar {
+    position: relative;
+    left: 0;
+    height: 100%;
+    transition: width 0.3s ease-in-out; /* Width sliding effect */
+    color: black;
+    border-right: 1px solid rgb(227, 224, 224);
+  
+    nav {
+      padding: 20px;
+    }
+  
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+  
+    .lateral {
+      list-style: none;
+      padding: 10px;
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      gap: 80px;
+      width: 80px;
+      transition: width 0.3s ease; /* Smooth transition in width change for 0.3 seconds */
+      margin: 0 auto;
+    }
+  
+    .lateralAlternative {
+      list-style: none;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 80px;
+      transition: width 0.3s ease; /* Smooth transition in width change for 0.3 seconds */
+      margin: 0 auto;
+    }
+  
+    strong {
+      flex: 1 1;
+      display: block;
+      transition: 0.3s;
+      width: 135px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  
+    .hidden {
+      display: none;
+      opacity: 0; /* Initially hidden and completely transparent */
+    }
+  
+    .visible {
+      margin-left: 15px;
+      opacity: 1; /* Shown and completely visible */
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  
+    .nav-lateral {
+      text-decoration: none;
+      color: black;
+      display: flex;
+      align-items: center;
+  
+      li {
+        padding: 10px;
+        margin-right: 0 !important;
+      }
+    }
+  
+    .lateralAlternative {
+      li {
+        padding: 10px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+  
+        &:hover {
+          background-color: rgb(239, 239, 251);
+          border-radius: 5%;
+          transform: scale(1.2); /* Increase size by 5% */
+        }
+      }
+    }
+  
+    .nav-button {
+      text-decoration: none;
+  
+      &:hover {
+        color: blue;
+        cursor: pointer;
+      }
+    }
+  }
+  

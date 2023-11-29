@@ -4,19 +4,20 @@ const Story = require("../models/stories");
 
 const ObjectId = require("bson").ObjectId;
 
+// Mark or unmark a story as a favorite for the user
 const markOrUnmarkFavorite = async (req, res) => {
   try {
     const { story_id } = req.body;
     const id = new ObjectId(req.user.id);
 
-    // Verificar si la historia ya está marcada como favorita por el usuario
+    // Check if the story is already marked as a favorite by the user
     const existingFavorite = await Favorite.findOne({
       user_id: id,
       story_id: story_id,
     });
 
     if (existingFavorite) {
-      // Si ya existe, eliminarlo de la lista de favoritos
+      // If it already exists, remove it from the favorites list
       await Favorite.findByIdAndDelete(existingFavorite._id);
 
       return res.status(200).json({
@@ -25,7 +26,7 @@ const markOrUnmarkFavorite = async (req, res) => {
         error: null,
       });
     } else {
-      // Si no existe, agregarlo a la lista de favoritos
+      // If it doesn't exist, add it to the favorites list
       const newFavorite = new Favorite({
         user_id: id,
         story_id: story_id,
@@ -48,10 +49,11 @@ const markOrUnmarkFavorite = async (req, res) => {
   }
 };
 
+// Get favorite stories for the user
 const getFavoriteStories = async (req, res) => {
   try {
     const id = new ObjectId(req.user.id);
-    // Buscar al usuario en la base de datos por su id
+    // Find the user in the database by their id
     const user = await User.findOne({ _id: id });
 
     if (!user) {
@@ -62,13 +64,13 @@ const getFavoriteStories = async (req, res) => {
       });
     }
 
-    // Buscar todas las historias marcadas como favoritas por el usuario
+    // Find all stories marked as favorites by the user
     const favoriteStories = await Favorite.find({
       user_id: id,
-      story_id: { $in: await Story.find({}).distinct("_id") }, // Usar el modelo Story
+      story_id: { $in: await Story.find({}).distinct("_id") }, // Use the Story model
     });
 
-    // Obtener los detalles completos de las historias usando los IDs almacenados en los favoritos
+    // Get complete details of the stories using the IDs stored in favorites
     const favoriteStoriesWithDetails = [];
 
     const getDetails = async (collection, storyId) => {
@@ -77,7 +79,7 @@ const getFavoriteStories = async (req, res) => {
         _id: story._id,
         title: story.title,
         href: story.href,
-        // Otros campos de la historia que quieras incluir
+        // Other fields of the story you want to include
       };
     };
 

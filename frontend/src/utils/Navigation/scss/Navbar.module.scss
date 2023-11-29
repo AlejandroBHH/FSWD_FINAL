@@ -15,6 +15,20 @@
     position: sticky;
     top: 0;
   }
+
+  .navbar a {
+    text-decoration: none;
+    font-family: 'Your-Logo-Font', sans-serif; /* Replace 'Your-Logo-Font' with your preferred font */
+    font-size: 24px; /* Adjust the font size as needed */
+    font-weight: bold;
+    color: #1d4e89; /* Set the color to your preferred color */
+    letter-spacing: 1px;
+    padding: 0.5em;
+  }
+  
+  .navbar a:hover {
+    color: rgb(4, 62, 113); /* Change the color on hover if desired */
+  }
   
   header,
   header nav ul {
@@ -51,7 +65,7 @@
   
   // Color change on hovering over a navigation link
   .nav-link:hover {
-    color: #000000;
+    color: red;    
     text-decoration: none;
   }
   

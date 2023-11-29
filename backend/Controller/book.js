@@ -1,14 +1,17 @@
 const newModel = require("../models/newModel");
 const Story = require("../models/stories");
 
+// Get a paginated list of books based on filters
 const getBooks = async (req, res) => {
   try {
+    // Parse query parameters
     const page = parseInt(req.query.page) || 1;
     const eventsPerPage = 10;
     const sortField = req.query.sortField || "title";
     const sortOrder = req.query.sortOrder || "asc";
     const modelName = req.query.modelToQuery || "HarryP";
 
+    // Map model names to typehistory values
     let typehistory;
     if (modelName === "Worm") {
       typehistory = "W";
@@ -26,6 +29,7 @@ const getBooks = async (req, res) => {
       });
     }
 
+    // Define filter options based on query parameters
     let filterOption = {};
     if (req.query.SourceValue) {
       filterOption.source = new RegExp(req.query.SourceValue, "i");
@@ -38,13 +42,16 @@ const getBooks = async (req, res) => {
     // Add the type filter
     filterOption.type = typehistory;
 
+    // Count total events based on filter options
     const totalEvents = await Story.countDocuments(filterOption);
     const totalPages = Math.ceil(totalEvents / eventsPerPage);
     const skip = (page - 1) * eventsPerPage;
 
+    // Define sort options based on query parameters
     let sortOption = {};
     sortOption[sortField] = sortOrder === "asc" ? 1 : -1;
 
+    // Retrieve paginated books from the database
     const data = await Story.find(filterOption)
       .sort(sortOption)
       .skip(skip)
@@ -66,18 +73,19 @@ const getBooks = async (req, res) => {
   }
 };
 
+// Create a new book
 const createBook = async (req, res) => {
   try {
-    // Obtener los campos del formulario de la solicitud
+    // Get form fields from the request
     const { title, content, synopsis } = req.body;
 
-    // `req.file.path` contiene la ubicación del archivo de imagen en el servidor
+    // `req.file.path` contains the location of the image file on the server
     const image = req.file.path;
 
     const author = req.user.id;
     const status = "in review";
 
-    // Crear un nuevo libro utilizando un modelo (asegúrate de tener el modelo definido)
+    // Create a new book using a model (ensure you have the model defined)
     const new_storie = new newModel({
       title,
       synopsis,
@@ -87,37 +95,40 @@ const createBook = async (req, res) => {
       status,
     });
 
-    // Guardar el libro en la base de datos
+    // Save the book to the database
     const savedStorie = await new_storie.save();
 
     res
       .status(201)
-      .json({ message: "Libro creado con éxito", storie: savedStorie });
+      .json({ message: "Book created successfully", storie: savedStorie });
   } catch (error) {
-    res.status(500).json({ error: "Error al crear el libro" });
+    res.status(500).json({ error: "Error creating the book" });
   }
 };
 
+// Get paginated list of books created by the user
 const getCreatedBooks = async (req, res) => {
   try {
+    // Parse query parameters
     const page = parseInt(req.query.page) || 1;
     const eventsPerPage = 5;
 
     let createdBooks;
 
     if (req.query.id) {
-      const StoryID = req.query.id; // Obtener el ID de la historia
+      // Retrieve a specific book by ID
+      const StoryID = req.query.id;
       createdBooks = await newModel.findById(StoryID);
-      // Puedes querer enviar una respuesta específica para la búsqueda por ID aquí
       res.status(200).json({
         status: "success",
         data: createdBooks,
-        totalPages: 1, // Puedes ajustar esto según tu lógica
+        totalPages: 1,
         error: null,
       });
-      return; // Retornar temprano para evitar enviar otra respuesta más adelante
+      return;
     }
 
+    // Check if all stories or specific user stories are requested
     const showAllStories = req.query.showAllStories === "true";
     const filterValue = req.query.filterValue;
 
@@ -128,8 +139,8 @@ const getCreatedBooks = async (req, res) => {
     }
 
     if (showAllStories) {
-      const author = req.user.id; // Obtener el ID del usuario autenticado
-
+      // Get user's ID for retrieving specific user stories
+      const author = req.user.id;
       const totalEvents = await newModel.countDocuments({
         author,
       });
@@ -149,6 +160,7 @@ const getCreatedBooks = async (req, res) => {
         error: null,
       });
     } else {
+      // Get all stories with pagination
       const totalEvents = await newModel.countDocuments(filterOption);
       const totalPages = Math.ceil(totalEvents / eventsPerPage);
       const skip = (page - 1) * eventsPerPage;
@@ -175,34 +187,36 @@ const getCreatedBooks = async (req, res) => {
   }
 };
 
+// Update an existing book
 const updateBook = async (req, res) => {
   try {
-    // Obtén el ID del libro a través de la solicitud
+    // Get the book ID from the request
     const { id } = req.query;
 
-    // Verifica si el libro existe
+    // Check if the book exists
     const existingBook = await newModel.findById(id);
     if (!existingBook) {
       return res.status(404).json({ error: "Book not found" });
     }
 
-    // Verifica si el usuario tiene permisos para editar el libro
+    // Check if the user has permission to edit the book
     if (existingBook.author.toString() !== req.user.id) {
       return res
         .status(403)
         .json({ error: "You don't have permission to edit this book" });
     }
 
-    // Actualiza los campos del libro
+    // Update book fields
     existingBook.title = req.body.title;
     existingBook.synopsis = req.body.synopsis;
     existingBook.content = req.body.content;
-    // Verifica si hay un nuevo archivo adjunto
+
+    // Check for a new attached file
     if (req.file && req.file.path) {
       existingBook.image = req.file.path;
     }
 
-    // Guarda los cambios
+    // Save the changes
     const updatedBook = await existingBook.save();
 
     res.status(200).json({
@@ -219,6 +233,7 @@ const updateBook = async (req, res) => {
   }
 };
 
+// Delete a book
 const deleteBook = async (req, res) => {
   try {
     const book = await newModel.findOne({ author: req.user.id });
