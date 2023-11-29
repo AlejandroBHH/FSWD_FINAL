@@ -28,11 +28,11 @@ const ForgotPassword = () => {
       if (response.status === 200) {
         const tokenData = await response.json();
         const token = tokenData.token;
-        //console.log(tokenData);
-        // Envia el correo electrónico utilizando EmailJS
+
+        // Send the email using EmailJS
         const templateParams = {
           to_email: email,
-          reset_link: `http://localhost:3000/reset-password/${token}`, // Cambia la URL base y la ruta según tu estructura
+          reset_link: `http://localhost:3000/reset-password/${token}`, // Change the base URL and path according to your structure
         };
 
         const emailResponse = await emailjs
@@ -47,26 +47,26 @@ const ForgotPassword = () => {
               return response;
             },
             function (error) {
-              throw new Error("Error en el envío del correo electrónico");
+              throw new Error("Error sending the email");
             }
           );
 
         if (emailResponse.status === 200) {
           setIsSuccess(true);
           setMessage(
-            "Se ha enviado un correo electrónico con instrucciones para restablecer la contraseña."
+            "An email with instructions to reset the password has been sent."
           );
         } else {
           setMessage(
-            "Ha ocurrido un error al enviar el correo electrónico. Por favor, inténtalo de nuevo."
+            "An error occurred while sending the email. Please try again."
           );
         }
       } else {
-        setMessage("Usuario no encontrado");
+        setMessage("User not found");
       }
     } catch (error) {
       setMessage(
-        "Ha ocurrido un error al enviar el correo electrónico. Por favor, inténtalo de nuevo."
+        "An error occurred while sending the email. Please try again."
       );
     }
   };
@@ -88,7 +88,7 @@ const ForgotPassword = () => {
                     onChange={handleEmailChange}
                     required
                   />
-                  <button type="submit">Enviar</button>
+                  <button type="submit">Send</button>
                 </div>
               </form>
 

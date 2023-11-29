@@ -1,3 +1,3 @@
-## para omitir todos los node modules independiente de su profundidad:
-**/node_modules 
+ 
+node_modules 
 **/.env
