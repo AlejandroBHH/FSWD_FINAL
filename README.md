@@ -11,7 +11,7 @@ Welcome to the repository for "FSWD_FINAL." This repository contains the code an
 To get started with "FSWD_FINAL," follow these steps:
 
 1. Clone the repository to your local machine.
-   git clone https://github.com/AlejandroBHH/FSWD_FINAL.git
+  `git clone https://github.com/AlejandroBHH/FSWD_FINAL.git`
 3. Navigate to the project directory: `cd FSWD_FINAL`.
 4. Install the required dependencies for both the frontend and backend.
    - For the frontend (React), use `npm install`.
