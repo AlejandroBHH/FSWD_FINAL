@@ -43,10 +43,10 @@ const ForgotPassword = () => {
 
         const emailResponse = await emailjs
           .send(
-            "service_2xeff7t",
-            "template_rs19voj",
+            "TU_SERVICE_ID_REAL",
+            "TU_TEMPLATE_ID_REAL",
             templateParams,
-            "3aMv2ZwhFkztHTd6P"
+            "TU_TUSER_ID_REAL"
           )
           .then(
             function (response) {

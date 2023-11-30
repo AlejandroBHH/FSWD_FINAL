@@ -140,7 +140,7 @@ function CreateStoryForm() {
                     <img
                       style={{ width: "200px", height: "300px" }}
                       src={imagePreview}
-                      alt="Image Preview"
+                      alt="Preview2"
                       className={classes.ImagePreview}
                     />
                   </div>

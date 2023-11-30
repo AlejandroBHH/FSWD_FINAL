@@ -127,11 +127,7 @@ function Index() {
       <Navbar></Navbar>
       <HeaderSection></HeaderSection>
       <div className={classes.line}></div>
-      <img
-        className={classes.backimages}
-        src="/images/1768.png"
-        alt="My Image"
-      />
+      <img className={classes.backimages} src="/images/1768.png" alt="Marvel" />
       <IntermediateRows></IntermediateRows>
       <div className={classes.landContainer}>
         <span>

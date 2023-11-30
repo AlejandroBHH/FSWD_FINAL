@@ -121,7 +121,7 @@ function LoginPage(props) {
           info.loginHeader = "Login failed";
           info.loginMessage =
             data.error || "An error occurred. Please try again later.";
-          console.log("Login failed. Status: " + response.status);
+          //console.log("Login failed. Status: " + response.status);
         }
       } catch (error) {
         info.loggedIn = false;
@@ -148,11 +148,7 @@ function LoginPage(props) {
       <div className={state ? classes.container : classes.containerRegister}>
         <div className={classes.card}>
           {" "}
-          <img
-            src="/images/neon.jpg"
-            alt="Image description"
-            className={classes.MainImg}
-          />
+          <img src="/images/neon.jpg" alt="Login" className={classes.MainImg} />
         </div>
         <div className={classes.formContainer}>
           <div className={classes.MainTitle}>
