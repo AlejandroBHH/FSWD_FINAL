@@ -152,7 +152,8 @@ function Fictions() {
             <button
               className={classes.CreateStoryButton}
               onClick={() => {
-                setShowAllStories(!showAllStories), setPage(1);
+                setShowAllStories(!showAllStories);
+                setPage(1);
               }}
             >
               {showAllStories ? "All Stories" : "My Stories"}
@@ -195,7 +196,9 @@ function Fictions() {
                             onClick={() => editStory(story)}
                           />
                         </div>
-                      ) : null}
+                      ) : (
+                        <div style={{ width: "5px" }}></div>
+                      )}
                       <img
                         className={classes.stories}
                         src={`http://localhost:8000/${story.image}`}
