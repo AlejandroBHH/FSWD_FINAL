@@ -195,9 +195,7 @@ function Fictions() {
                             onClick={() => editStory(story)}
                           />
                         </div>
-                      ) : (
-                        <div style={{ width: "5px" }}></div>
-                      )}
+                      ) : null}
                       <img
                         className={classes.stories}
                         src={`http://localhost:8000/${story.image}`}
