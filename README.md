@@ -16,8 +16,10 @@ To get started with "FSWD_FINAL," follow these steps:
 4. Install the required dependencies for both the frontend and backend.
    - For the frontend (React), use `npm install`.
    - For the backend (Node.js with Express and MongoDB), use `npm install` in the relevant directories.
-5. Configure your database connection and other settings in the backend within a new .env file (include PORT, DATABASE_URL, and TOKEN_SECRET).
-6. To start the backend server, use npm run dev. For the frontend, use npm start within their respective directories.
+5. Configure your database connection and other settings in the backend within the .env file (include PORT, DATABASE_URL, and TOKEN_SECRET).
+6. To start the backend server, use `npm run dev`. For the frontend, use `npm start` within their respective directories.
+
+*You can download the database collections into BBDD.tar.gz*
 
 ## Setting Up Email.js
 
