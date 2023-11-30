@@ -28,6 +28,7 @@ To get started with "FSWD_FINAL," follow these steps:
 - MongoDB
 
 ##Setting Up Email.js
+
 #Step 1: Sign Up on Email.js
 Go to the Email.js website and sign up for an account.
 Log in to your Email.js account.
