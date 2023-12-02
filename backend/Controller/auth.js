@@ -110,15 +110,12 @@ const login = async (req, res) => {
     const payload = { id: user._id, email: user.email, role: user.role };
     const token = generateTokens(payload, false);
 
-    // Generate the refresh token
-    const refreshToken = generateTokens(payload, true);
-
     await user.save();
 
     // Send the token
     res.status(200).json({
       status: "succeeded",
-      data: { user, token, refreshToken },
+      data: { user, token },
       error: null,
     });
   } catch (err) {

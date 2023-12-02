@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import classes from "./CreateStoryForm.module.css";
+import classes from "./css/CreateStoryForm.module.css";
 import LateralNavbar from "../../utils/LateralNavbar/LateralNavbar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileLines, faCirclePlus } from "@fortawesome/free-solid-svg-icons";

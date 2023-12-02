@@ -12,35 +12,6 @@ const logins = require("../backend/routes/loginRoutes");
 const books = require("./routes/booksRoutes");
 const favorites = require("../backend/routes/favoriteRoutes");
 
-const fs = require("file-system");
-
-// Import your verifyToken middleware
-const verifyToken = require("../backend/middlewares/auth");
-const passport = require("passport");
-const BearerStrategy = require("passport-http-bearer").Strategy;
-
-// Configure Passport with the Bearer strategy
-passport.use(
-  new BearerStrategy((token, done) => {
-    // Here, verify the bearer token.
-    // Then, use the verifyToken middleware to validate the JWT token.
-    verifyToken(
-      { header: () => ({ "auth-token": token }) }, // Simulated req for verifyToken
-      null,
-      (error, user) => {
-        if (error) {
-          return done(null, false); // Token is not valid
-        } else {
-          return done(null, user); // Token is valid and provides the user object if needed
-        }
-      }
-    );
-  })
-);
-
-// Initialize Passport
-passport.initialize();
-
 // Read environment variables
 dotenv.config();
 // Create the server
