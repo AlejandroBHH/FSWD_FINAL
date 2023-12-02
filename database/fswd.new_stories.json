@@ -1,0 +1,75 @@
+[{
+  "_id": {
+    "$oid": "6568d7c84e0bca59bd162d2f"
+  },
+  "title": "1",
+  "author": "65675a26ab8bce82950acf9e",
+  "synopsis": "2",
+  "content": "3",
+  "status": "in review",
+  "image": "uploads/1701370226818-1900x920-8-beneficios-de-usar-imagenes-en-nuestros-sitios-web.webp",
+  "date": {
+    "$date": "2023-11-30T18:43:20.005Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6568d7d74e0bca59bd162d35"
+  },
+  "title": "title",
+  "author": "65675a26ab8bce82950acf9e",
+  "synopsis": "1",
+  "content": "2",
+  "status": "in review",
+  "image": "uploads/1701369815150-arreglo-bloc-notas-vacio-escritorio_23-2148854582.avif",
+  "date": {
+    "$date": "2023-11-30T18:43:35.154Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6568d7e64e0bca59bd162d3b"
+  },
+  "title": "ainss",
+  "author": "65675a26ab8bce82950acf9e",
+  "synopsis": "1",
+  "content": "2",
+  "status": "in review",
+  "image": "uploads/1701369830995-JPS65B3TXVABDFBG26OGYEYML4.avif",
+  "date": {
+    "$date": "2023-11-30T18:43:50.999Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6568d7f14e0bca59bd162d41"
+  },
+  "title": "dummy",
+  "author": "65675a26ab8bce82950acf9e",
+  "synopsis": "1",
+  "content": "2",
+  "status": "in review",
+  "image": "uploads/1701369841922-346h.jpg",
+  "date": {
+    "$date": "2023-11-30T18:44:01.926Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6568d8034e0bca59bd162d47"
+  },
+  "title": "Another",
+  "author": "65675a26ab8bce82950acf9e",
+  "synopsis": "1",
+  "content": "2",
+  "status": "in review",
+  "image": "uploads/1701369859940-JPS65B3TXVABDFBG26OGYEYML4.avif",
+  "date": {
+    "$date": "2023-11-30T18:44:19.944Z"
+  },
+  "__v": 0
+}]

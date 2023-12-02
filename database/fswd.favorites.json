@@ -1,0 +1,104 @@
+[{
+  "_id": {
+    "$oid": "6537fe4277f837e53a11b63d"
+  },
+  "story_id": "650f26157ae43883c58d808b",
+  "user_id": "650e2cf9f3857e319600c0e7",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6537fe4b77f837e53a11b66b"
+  },
+  "story_id": "652d783e8f9d2089024257d6",
+  "user_id": "650e2cf9f3857e319600c0e7",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6537fe5177f837e53a11b675"
+  },
+  "story_id": "652d78398f9d208902425797",
+  "user_id": "650e2cf9f3857e319600c0e7",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6538000d26f33a108ed99ca7"
+  },
+  "story_id": "652d783c8f9d2089024257c7",
+  "user_id": "650e2cf9f3857e319600c0e7",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "653801d63e7ebc525e7c4cca"
+  },
+  "story_id": "650f26137ae43883c58d8046",
+  "user_id": "650e2cf9f3857e319600c0e7",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6567736fab8bce82950ad000"
+  },
+  "story_id": "65637da920d9db46970cb40e",
+  "user_id": "65675a26ab8bce82950acf9e",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6567a98f97ee3a50e211ccb6"
+  },
+  "story_id": "65637dab20d9db46970cb419",
+  "user_id": "65675a26ab8bce82950acf9e",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6567a99097ee3a50e211ccbf"
+  },
+  "story_id": "65637daf20d9db46970cb44c",
+  "user_id": "65675a26ab8bce82950acf9e",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6568d9384e0bca59bd162dbb"
+  },
+  "story_id": "65677206ba7b4b29933111ed",
+  "user_id": "65675a26ab8bce82950acf9e",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6568d9e94e0bca59bd162e29"
+  },
+  "story_id": "65637da920d9db46970cb40e",
+  "user_id": "6568d8a24e0bca59bd162d7c",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6568d9ea4e0bca59bd162e30"
+  },
+  "story_id": "65677206ba7b4b29933111ed",
+  "user_id": "6568d8a24e0bca59bd162d7c",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6568d9eb4e0bca59bd162e38"
+  },
+  "story_id": "65637dad20d9db46970cb436",
+  "user_id": "6568d8a24e0bca59bd162d7c",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6568da2e4e0bca59bd162e87"
+  },
+  "story_id": "6567714eef5efbdedfd42be2",
+  "user_id": "6568d8a24e0bca59bd162d7c",
+  "__v": 0
+}]

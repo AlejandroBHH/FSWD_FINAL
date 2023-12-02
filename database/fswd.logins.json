@@ -1,0 +1,42 @@
+[{
+  "_id": {
+    "$oid": "65675a26ab8bce82950acf9e"
+  },
+  "name": "Alejandro",
+  "email": "kalep99@gmail.com",
+  "password": "$2b$10$nO.D6cTc59XGOcO64yR7n.dAzrx7PSwwkivlx3r5nqy7/ZB2DZ9EK",
+  "role": "user",
+  "isActive": false,
+  "date": {
+    "$date": "2023-11-29T15:35:02.832Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6568d8744e0bca59bd162d77"
+  },
+  "name": "Kyle",
+  "email": "janet@gmail.com",
+  "password": "$2b$10$dpCn4hOT9Jg4pSlY/9utau83OZJW.T092crtNYH47pvBctsqYOqlW",
+  "role": "user",
+  "isActive": false,
+  "date": {
+    "$date": "2023-11-30T18:46:12.011Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6568d8a24e0bca59bd162d7c"
+  },
+  "name": "Pata",
+  "email": "abc@gmail.com",
+  "password": "$2b$10$WTlE8fkLAjRfV0JDpdtfK.raHo2PisL5Gp7MkCuc1Z/Xz6BUwx3cq",
+  "role": "user",
+  "isActive": false,
+  "date": {
+    "$date": "2023-11-30T18:46:58.865Z"
+  },
+  "__v": 0
+}]
