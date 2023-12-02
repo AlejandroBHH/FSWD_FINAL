@@ -19,7 +19,17 @@ To get started with "FSWD_FINAL," follow these steps:
 5. Configure your database connection and other settings in the backend within the .env file (include PORT, DATABASE_URL, and TOKEN_SECRET).
 6. To start the backend server, use `npm run dev`. For the frontend, use `npm start` within their respective directories.
 
-*You can download the database collections into BBDD.tar.gz*
+## Importing Database Collections
+
+To import the database collections, follow these steps:
+1. Ensure that you have MongoDB installed on your system.
+2. Open a terminal and navigate to the project directory.
+3. Run the following command to import each JSON file into the new database:
+
+`find ./FSWD_FINAL/database -type f -name "*.json" -exec bash -c 'mongoimport --db=nombre_nueva_basedatos --collection=$(basename {} .json) --file={} --jsonArray' \;`
+
+Make sure to replace `new_database_name` with the actual name you want to give to your new MongoDB database.
+
 
 ## Setting Up Email.js
 
